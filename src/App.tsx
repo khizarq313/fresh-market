@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider, useDispatch } from "react-redux";
+import Header from "./components/Header/Header";
+import AppRoutes from "./routes/AppRoutes";
+import Footer from "./components/Footer/Footer";
+import Login from "./pages/Login/Login";
+import Cart from "./pages/Cart/Cart";
+import { store } from "./store";
+import { setProducts } from "./features/products/productsSlice";
+import { products, cartProducts } from "./productsData";
+import "./styles/App.scss";
 
-function App() {
+const AppContent: React.FC = () => {
+  const [showLoginPage, setShowLoginPage] = useState<boolean>(false);
+  const [showCartPage, setShowCartPage] = useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setProducts({products:products, cart: cartProducts}));
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <section className={showLoginPage ? "hide" : "App"}>
+        <Header setShowLoginPage={setShowLoginPage} setShowCartPage={setShowCartPage} />
+        <AppRoutes />
+        <Footer />
+      </section>
+      {showLoginPage && <Login setShowLoginPage={setShowLoginPage} />}
+      {showCartPage && <Cart setShowCartPage={setShowCartPage} />}
+    </Router>
   );
-}
+};
+
+const App: React.FC = () => (
+  <Provider store={store}>
+    <AppContent />
+  </Provider>
+);
 
 export default App;

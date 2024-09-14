@@ -1,0 +1,23 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    background-color: #FBF9F1;
+    width: 100%;
+}
+
+.cart-btn {
+    background-color: transparent;
+    border: none;
+    height: 2.5rem;
+
+    text {
+        font-size: 5rem;
+        font-weight: 600;
+    }
+
+}

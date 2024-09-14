@@ -1,0 +1,49 @@
+@font-face {
+    font-family: "Helvetica-bold";
+    src: url("../assets/fonts/helvetica-bold.ttf");
+}
+
+@font-face {
+    font-family: "Helvetica-light";
+    src: url("../assets/fonts/helvetica-light.ttf");
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: Helvetica-light, sans-serif;
+}
+
+body {
+    height: 100dvh;
+    width: 100vw;
+    color:#575757;
+}
+
+a:hover{color:#646464}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+.App {
+    height: 100%;
+    width: 100%;
+    // background-color: #135700 #0B2118 #191919 #FFFFFF;
+    color: #2A6049;
+    background-color: #FBF9F1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.hide {
+    opacity: 0;
+}

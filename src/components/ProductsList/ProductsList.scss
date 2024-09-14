@@ -1,0 +1,140 @@
+.discount-products, .quick-deals {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-bottom: 1px solid black;
+}
+
+.quick-deals {
+	border: none;
+	margin: 2rem;
+	padding: 5rem;
+	background-color: #FFFFFF;
+}
+
+.discount-products-container {
+	display: flex;
+	align-items: center;
+}
+
+.discount-products-list {
+	max-width: 80rem;
+	display: flex;
+	overflow: hidden;
+}
+
+.quick-deals-list {
+	max-width: 80rem;
+	display: flex;
+  	flex-wrap: wrap; 
+}
+
+.product-card {
+	position: relative;
+	margin: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	img {
+		height: 19rem;
+		width: 19rem;
+		object-position: center;
+		object-fit: contain;
+		background-color: #FFFFFF;
+	}
+
+	h3 {
+		font-size: 18px;
+		font-weight: 100;
+	}
+
+	p {
+		font-size: 14px;
+		font-weight: 100;
+	}
+
+	button {
+		padding: 0.5rem 3rem;
+		font-size: 14px;
+		font-weight: 100;
+		width: 19rem;
+		background-color: #FFFFFF;
+		border: 1px solid #000000;
+		transition: ease 0.4s;
+	}
+}
+
+.animate-left {
+	animation: scrollLeft 0.4s linear;
+}
+
+.animate-right {
+	animation: scrollRight 0.4s linear;
+}
+
+.discount-tag {
+	position: absolute;
+	left: 0;
+	width: 10rem;
+	font-size: 14px;
+	padding: 4px;
+	background-color: rgba(42, 96, 73, 0.9);
+	color: #FFFFFF;
+} 
+
+.quantity-btn {
+	display: flex;
+	justify-content: center;
+	border: 1px solid #000000;
+	width: 19rem;
+	margin-bottom: 0.5rem;
+
+	button {
+		border: none;
+		width: 5rem;
+		padding: 0;
+		font-size: 24px;
+	}
+
+	input {
+		width: 9rem;
+		font-size: 1.8rem;
+		text-align: center;
+		border: none;
+		outline: none;
+	}
+}
+
+.add-to-cart-btn:hover {
+	transition: ease 0.4s;
+	opacity: 0.6;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+@keyframes scrollLeft {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+
+@keyframes scrollRight {
+	from {
+		transform: translateX(0%);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}

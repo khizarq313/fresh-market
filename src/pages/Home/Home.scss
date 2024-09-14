@@ -1,0 +1,79 @@
+.home {
+	
+}
+
+.welcome-section {
+    position: relative;
+	overflow: hidden;
+	max-width: 100rem;
+}
+
+.welcome-txt { 
+    position: absolute;
+    z-index: 10;
+}
+
+.welcome-bg {
+	overflow: hidden;
+	white-space: nowrap;
+
+    img {
+		width: 100rem;
+		animation: scroll 15s 0s linear forwards;
+    }
+}
+
+.benifits-section {
+	display: flex;
+	max-width: 100rem;
+
+	hr {
+		border: 1px solid #2A6049;
+	}
+
+	div {
+		padding: 2rem;
+		margin: 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	h2 {
+		padding: 1rem;
+		font-size: 1.6rem;
+	}
+
+	p {
+		font-size: 1.2rem;
+	}
+
+	svg {
+		height: 5rem;
+	}
+}
+
+@keyframes  scroll {
+	0% {
+		transform: translateX(0);
+	}
+	20% {
+		transform: translateX(0);
+	}
+	30% {
+		transform: translateX(-100%);
+	}
+	50% {
+		transform: translateX(-100%);
+	}
+	60% {
+		transform: translateX(-200%);
+	}
+	80% {
+		transform: translateX(-200%);
+	}
+	100% {
+		transform: translateX(-100);
+	}
+}
