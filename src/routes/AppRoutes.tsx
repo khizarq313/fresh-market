@@ -9,21 +9,26 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { ProductType } from "../features/products/productsSlice";
 
-const AppRoutes: React.FC = () => {
+type PropsType = {
+  setProgress: React.Dispatch<React.SetStateAction<number>>
+}
+
+const AppRoutes: React.FC<PropsType> = (props) => {
+  const {setProgress} = props;
 
   const allProducts = useSelector((state: RootState) => state.products);
   const products: ProductType[] = allProducts.products;
 
   return (
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/" element={<Home setProgress={setProgress} />} />
+        <Route path="/shop" element={<Shop setProgress={setProgress} />} />
+        <Route path="/about" element={<About setProgress={setProgress} />} />
+        <Route path="/contact" element={<Contact setProgress={setProgress} />} />
         {
-          products.map((product: ProductType) => {
+          products.map((product: ProductType, index: number) => {
             return(
-              <Route path={`/product-${product.id}`} element={<Product productDetails={product} />} />
+              <Route key={index} path={`/product-${product.id}`} element={<Product productDetails={product} />} />
             )
           })
         }

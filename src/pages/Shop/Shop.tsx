@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Shop: React.FC = () => {
+type PropsType = {
+  setProgress: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Shop: React.FC<PropsType> = (props) => {
+  const {setProgress} = props;
+  
+  useEffect(() => {
+    setProgress(70);
+    setTimeout(() => {
+      setProgress(100);
+    }, 1000)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   return (
     <main>Shop</main>
   )

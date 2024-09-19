@@ -4,14 +4,13 @@ import CartIcon from "../../assets/icons/Cart";
 import "./Header.scss"
 
 type PropsType = {
-    setShowLoginPage: Dispatch<SetStateAction<boolean>>
     setShowCartPage: Dispatch<SetStateAction<boolean>>
 }
 
 const Header: React.FC<PropsType> = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => navigate("/"), []);
-  const { setShowLoginPage, setShowCartPage} = props;  const navigate = useNavigate();
+  const { setShowCartPage} = props;  const navigate = useNavigate();
 
   return (
     <header>
@@ -26,7 +25,7 @@ const Header: React.FC<PropsType> = (props) => {
         <input type="text" />
         <button className="search-btn"></button>
       </div>
-      <button className="login-btn" onClick={() => setShowLoginPage(true)}>
+      <button className="login-btn">
         Log in
       </button>
       <button className="cart-btn"  onClick={() => setShowCartPage(true)}>

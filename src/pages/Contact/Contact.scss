@@ -1,0 +1,26 @@
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 5rem;
+    margin: 2rem;
+}
+
+.contact-hr {
+    width: 50rem;
+    margin: 1rem;
+}
+
+.contact-details {
+    display: flex;
+
+    span {
+        margin: 1rem;
+    }
+
+    h1 {
+        margin-bottom: 2rem;
+    }
+}

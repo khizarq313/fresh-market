@@ -31,11 +31,11 @@ const Footer: React.FC = () => {
         </div>
         <form className="" onSubmit={subscribeEmail}>
           <h1>GET IT FRESH</h1>
-          <label htmlFor="email" id="email-label">Email*</label>
-          <input type="mail" id="email" required/>
+          <label htmlFor="email-input">Email*</label>
+          <input type="mail" id="email-input" required/>
           <span className="subscribe-toggle">
             <input type="checkbox" id="checkbox" />
-            <label htmlFor="checkbox" id="checkbox-label">Yes, subscribe me to your newsletter.</label>
+            <label htmlFor="checkbox">Yes, subscribe me to your newsletter.</label>
           </span>
           <button type="submit">SUBSCRIBE NOW</button>
         </form>

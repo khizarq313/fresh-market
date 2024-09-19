@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductsList from "../../components/ProductsList/ProductsList";
 import { Banner1, Banner2, Banner3 } from "../../assets/images/All-Images";
@@ -7,8 +7,21 @@ import Man from "../../assets/icons/Man";
 import Van from "../../assets/icons/Van";
 import "./Home.scss";
 
-const Home: React.FC = () => {
+type PropsType = {
+  setProgress: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Home: React.FC<PropsType> = (props) => {
+  const {setProgress} = props;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setProgress(70);
+    setTimeout(() => {
+      setProgress(100);
+    }, 1000)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="home">
