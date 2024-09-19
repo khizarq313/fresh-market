@@ -1,0 +1,47 @@
+footer {
+    background-color: #2A6049;
+    color: #FFFFFF;
+    padding: 4rem;
+    margin-bottom: 5rem;
+}
+
+.additional-links {
+    display: flex;
+
+    div, form {
+        display: flex;
+        flex-direction: column;
+        margin: 5rem;
+    }
+
+    h1 {
+        margin-bottom: 2rem;
+    }
+
+    h1, p, label {
+        font-size: 1.4rem;
+        font-weight: 100;
+    }
+}
+
+.subscribe-toggle {
+    display: flex;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: end;
+}
+
+.contact-btn {
+    border-radius: 100%;
+    border: none;
+    background-color: transparent;
+    line-height: 0;
+    margin: 0.5rem;
+
+    svg {
+        height: 2.4rem;
+        width: 2.4rem;
+    }
+}

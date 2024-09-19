@@ -179,15 +179,15 @@ const ProductsList: React.FC<PropsType> = (props) => {
                     src={product.image}
                     alt={product.name}
                     className="product-image"
-                    onClick={() => navigate(`/shop/${product.id}`)}/>
+                    onClick={() => navigate(`/product-${product.id}`)}/>
                   <h3
                     className="product-name"
-                    onClick={() => navigate(`/shop/${product.id}`)}>
+                    onClick={() => navigate(`/product-${product.id}`)}>
                     {product.name}
                   </h3>
                   <p
                     className="discount-price"
-                    onClick={() => navigate(`/shop/${product.id}`)}>
+                    onClick={() => navigate(`/product-${product.id}`)}>
                     {product.discount > 0 && <del> ₹{product.price}</del>} ₹
                     {product.price - product.discount}
                   </p>
