@@ -15,8 +15,7 @@ const About: React.FC<PropsType> = (props) => {
     setTimeout(() => {
       setProgress(100);
     }, 1000)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setProgress]);
 
   return (
     <main className="about">
