@@ -37,9 +37,9 @@ const Home: React.FC<PropsType> = (props) => {
         </div>
       </section>
 
-      <ProductsList ListName="discount-products"/>
+      <ProductsList ListName="discount-products" PriceRange={1000}/>
 
-      <ProductsList ListName="quick-deals" />
+      <ProductsList ListName="quick-deals" PriceRange={1000}/>
 
       <section className="benifits-section">
         <div>

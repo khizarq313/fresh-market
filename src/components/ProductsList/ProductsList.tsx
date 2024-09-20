@@ -6,7 +6,8 @@ import { ProductType, updateCart } from "../../features/products/productsSlice";
 import "./ProductsList.scss";
 
 type PropsType = {
-    ListName: string
+    ListName: string,
+    PriceRange: number 
 }
 
 type TempQuantitiesType = {
@@ -15,7 +16,7 @@ type TempQuantitiesType = {
 }
 
 const ProductsList: React.FC<PropsType> = (props) => {
-    const {ListName} = props;
+    const {ListName, PriceRange} = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const allProducts = useSelector((state: RootState) => state.products);
@@ -26,6 +27,7 @@ const ProductsList: React.FC<PropsType> = (props) => {
     const [animateRight, setAnimateRight] = useState<boolean>(false);
     const [componentMounted, setComponentMounted] = useState<boolean>(false);
     const [updateValues, setUpdateValues] = useState<boolean>(true);
+    const [shopPage, setShopPage] = useState<boolean>(false);
     
     useEffect(() => {
       switch(ListName) {
@@ -35,11 +37,31 @@ const ProductsList: React.FC<PropsType> = (props) => {
           case "quick-deals":
             setCurrentList(products.slice(0, 8));
             break;
+          case "all-items":
+            setCurrentList(products.filter((product: ProductType) => (product.price-product.discount < PriceRange)));
+            setShopPage(true);
+            break;
+          case "produce-items":
+            setCurrentList(products.filter((product: ProductType) => (product.category === "produce" && product.price-product.discount < PriceRange)));
+            setShopPage(true);
+            break;
+          case "dairy-items":
+            setCurrentList(products.filter((product: ProductType) => (product.category === "dairy-eggs" && product.price-product.discount < PriceRange)));
+            setShopPage(true);
+            break;
+          case "bread-items":
+            setCurrentList(products.filter((product: ProductType) => (product.category === "bread-grains" && product.price-product.discount < PriceRange)));
+            setShopPage(true);
+            break;
+          case "household-items":
+            setCurrentList(products.filter((product: ProductType) => (product.category === "household" && product.price-product.discount < PriceRange)));
+            setShopPage(true);
+            break;
         default:
           setCurrentList([]);
           break;
       }
-    }, [ListName, products]);
+    }, [ListName, PriceRange, products]);
 
     useEffect(() => {
       if(updateValues) {
@@ -156,10 +178,14 @@ const ProductsList: React.FC<PropsType> = (props) => {
 
     return (
       <section className={ListName}>
-        <h1>Exciting Offers</h1>
-        <h2>
-          Find amazing deals on a variety of products. Discover new favorites and save on your essentials.
-        </h2>
+        { !shopPage && 
+          <>
+            <h1>Exciting Offers</h1>
+            <h2>
+              Find amazing deals on a variety of products. Discover new favorites and save on your essentials.
+            </h2>
+          </>
+        }
         <div className={`${ListName}-container`}>
           {
             ListName === "discount-products" && 
