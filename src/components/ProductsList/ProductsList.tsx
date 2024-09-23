@@ -28,40 +28,60 @@ const ProductsList: React.FC<PropsType> = (props) => {
     const [componentMounted, setComponentMounted] = useState<boolean>(false);
     const [updateValues, setUpdateValues] = useState<boolean>(true);
     const [shopPage, setShopPage] = useState<boolean>(false);
-    
+    const [startLimit, setStartLimit] = useState<number>(0);
+    const [lastLimit, setLastLimit] = useState<number>(0);
+    const [pageNumber, setPageNumber] = useState<number>(1);
+    const [sortingOrder, setSortingOrder] = useState<string>("default");
+
     useEffect(() => {
+      setStartLimit(0);
+      setLastLimit(0);
+      setPageNumber(1);
+    }, [ListName, PriceRange]);
+
+    useEffect(() => {
+      const filterFunction = function(product: ProductType, category: string) {
+        return (product.category === category && product.price-product.discount < PriceRange)
+      }
       switch(ListName) {
         case "discount-products":
           setCurrentList(products.filter((product: ProductType) => product.discount > 0));
+          setLastLimit(Infinity);
           break;
           case "quick-deals":
-            setCurrentList(products.slice(0, 8));
+            setCurrentList([...products]);
+            setLastLimit(7);
             break;
           case "all-items":
             setCurrentList(products.filter((product: ProductType) => (product.price-product.discount < PriceRange)));
+            setLastLimit(startLimit+15);
             setShopPage(true);
             break;
           case "produce-items":
-            setCurrentList(products.filter((product: ProductType) => (product.category === "produce" && product.price-product.discount < PriceRange)));
+            setCurrentList(products.filter((product: ProductType) => filterFunction(product, "produce")));
+            setLastLimit(startLimit+15);
             setShopPage(true);
             break;
           case "dairy-items":
-            setCurrentList(products.filter((product: ProductType) => (product.category === "dairy-eggs" && product.price-product.discount < PriceRange)));
+            setCurrentList(products.filter((product: ProductType) => filterFunction(product, "dairy-eggs")));
+            setLastLimit(startLimit+15);
             setShopPage(true);
             break;
           case "bread-items":
-            setCurrentList(products.filter((product: ProductType) => (product.category === "bread-grains" && product.price-product.discount < PriceRange)));
+            setCurrentList(products.filter((product: ProductType) => filterFunction(product, "bread-grains")));
+            setLastLimit(startLimit+15);
             setShopPage(true);
             break;
           case "household-items":
-            setCurrentList(products.filter((product: ProductType) => (product.category === "household" && product.price-product.discount < PriceRange)));
+            setCurrentList(products.filter((product: ProductType) => filterFunction(product, "household")));
+            setLastLimit(startLimit+15);
             setShopPage(true);
             break;
         default:
           setCurrentList([]);
           break;
       }
-    }, [ListName, PriceRange, products]);
+    }, [ListName, PriceRange, startLimit, products]);
 
     useEffect(() => {
       if(updateValues) {
@@ -175,6 +195,45 @@ const ProductsList: React.FC<PropsType> = (props) => {
       }
     }
 
+    const openNextPage = function() {
+      setStartLimit(startLimit+16);
+      setLastLimit(lastLimit+16);
+      setPageNumber(pageNumber+1);
+    }
+
+    const openPreviousPage = function() {
+      setStartLimit(startLimit-16);
+      setLastLimit(lastLimit-16);
+      setPageNumber(pageNumber-1);
+    }
+
+    const sortTheList = function(e: React.FormEvent<HTMLSelectElement>) {
+      const type: string = e.currentTarget.value;
+      if(sortingOrder !== type) {
+        setSortingOrder(type);
+        switch(type) {
+          case "Sort by":
+            break;
+          case "Newest":
+            currentList.reverse();
+            break;
+          case "Price (low to high)":
+            currentList.sort((a,b) => ((a.price-a.discount) - (b.price-b.discount)));
+            break;
+          case "Price (high to low)":
+            currentList.sort((a,b) => ((b.price-b.discount) - (a.price-a.discount) ));
+            break;
+          case "Name A-Z":
+            currentList.sort((a,b) => (a.name.localeCompare(b.name)));
+            break;
+          case "Name Z-A":
+            currentList.sort((a,b) => (b.name.localeCompare(a.name)));
+            break;
+          default:
+            break;
+        }
+      }
+    }
 
     return (
       <section className={ListName}>
@@ -186,6 +245,18 @@ const ProductsList: React.FC<PropsType> = (props) => {
             </h2>
           </>
         }
+        { shopPage &&
+          <div>
+            <select id="sorting-options" onChange={(e: React.FormEvent<HTMLSelectElement>) => sortTheList(e)}>
+              <option value="Sort by">Sort by</option>
+              <option value="Newest">Newest</option>
+              <option value="Price (low to high)">Price (low to high)</option>
+              <option value="Price (high to low)">Price (high to low)</option>
+              <option value="Name A-Z">Name A-Z</option>
+              <option value="Name Z-A">Name Z-A</option>
+            </select>
+          </div>
+        }
         <div className={`${ListName}-container`}>
           {
             ListName === "discount-products" && 
@@ -196,44 +267,45 @@ const ProductsList: React.FC<PropsType> = (props) => {
           {componentMounted && <div className={`${ListName}-list`}>
             {currentList.map((product: ProductType, index: number) => {
               const tempIndex:number = tempQuantities.findIndex((tempProduct: TempQuantitiesType) => tempProduct.id === product.id);
-              return (
+              return ( 
+                index >= startLimit && index <= lastLimit && 
                 <div key={index} className={scrollDirection()}>
-                  {product.discount > 0 && (
-                    <h4 className="discount-tag">Special Price</h4>
-                  )}
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="product-image"
-                    onClick={() => navigate(`/product-${product.id}`)}/>
-                  <h3
-                    className="product-name"
-                    onClick={() => navigate(`/product-${product.id}`)}>
-                    {product.name}
-                  </h3>
-                  <p
-                    className="discount-price"
-                    onClick={() => navigate(`/product-${product.id}`)}>
-                    {product.discount > 0 && <del> ₹{product.price}</del>} ₹
-                    {product.price - product.discount}
-                  </p>
-                  <span className="quantity-btn">
-                    <button className="decrement-btn" disabled={tempQuantities[tempIndex].quantity === 1}
-                    onClick={() => handleDecrement(tempIndex)}>-</button>
-                    { tempQuantities.length > 0 &&
-                    <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
-                        value={tempQuantities[tempIndex].quantity} min="1" max="20"
-                        onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
-                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
-                        onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/>}
-                    <button className="increment-btn" onClick={() => handleIncrement(tempIndex)}>+</button>
-                  </span>
-                  <button
-                    className="add-to-cart-btn"
-                    onClick={() => handleCart(product.id, tempQuantities[tempIndex].quantity, tempIndex)}>
-                    Add to Cart
-                  </button>
-                </div>
+                {product.discount > 0 && (
+                  <h4 className="discount-tag">Special Price</h4>
+                )}
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="product-image"
+                  onClick={() => navigate(`/product-${product.id}`)}/>
+                <h3
+                  className="product-name"
+                  onClick={() => navigate(`/product-${product.id}`)}>
+                  {product.name}
+                </h3>
+                <p
+                  className="discount-price"
+                  onClick={() => navigate(`/product-${product.id}`)}>
+                  {product.discount > 0 && <del> ₹{product.price}</del>} ₹
+                  {product.price - product.discount}
+                </p>
+                <span className="quantity-btn">
+                  <button className="decrement-btn" disabled={tempQuantities[tempIndex].quantity === 1}
+                  onClick={() => handleDecrement(tempIndex)}>-</button>
+                  { tempQuantities.length > 0 &&
+                  <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
+                      value={tempQuantities[tempIndex].quantity} min="1" max="20"
+                      onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
+                      onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
+                      onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/>}
+                  <button className="increment-btn" onClick={() => handleIncrement(tempIndex)}>+</button>
+                </span>
+                <button
+                  className="add-to-cart-btn"
+                  onClick={() => handleCart(product.id, tempQuantities[tempIndex].quantity, tempIndex)}>
+                  Add to Cart
+                </button>
+              </div>
               );
             })}
           </div>
@@ -245,6 +317,23 @@ const ProductsList: React.FC<PropsType> = (props) => {
             </button>
           }
         </div>
+        {shopPage && 
+          <div>
+            <button disabled={startLimit===0} onClick={openPreviousPage}>Previous</button>
+            { startLimit!==0 &&
+              <button onClick={openPreviousPage}>{pageNumber-1}</button>
+            }
+            <h1>{pageNumber}</h1>
+            {currentList.length-1 > lastLimit && 
+              <button onClick={openNextPage}>{pageNumber + 1}</button>
+            }
+            {
+              currentList.length-1 > lastLimit+16 && 
+              <p>...</p>
+            }
+            <button disabled={currentList.length-1 <= lastLimit} onClick={openNextPage}>Next</button>
+          </div>
+        }
       </section>
     )
 }
