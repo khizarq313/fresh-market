@@ -1,0 +1,45 @@
+.faq {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 5rem;
+    width: 110rem;
+}
+
+
+.styled summary::-webkit-details-marker {
+    display: none;
+}
+   
+.styled summary {
+    list-style: none;
+    padding: 1em;
+    cursor: default;
+    background: #fafafa;
+    padding-right: 1.5em;
+    position: relative;
+  
+    &::after {
+        content: '';
+        border-right: 1px solid;
+        border-bottom: 1px solid;
+        position: absolute;
+        right: 0.5rem;
+        height: 0.5rem;
+        width: 0.5rem;
+        transform: rotate(45deg) translatey(-.1em);
+    }
+    
+    &:focus {
+        outline: 2px solid;
+        outline-offset: 1px;
+    }
+}
+
+details[open].styled > summary::after {
+    transform: rotate(-135deg) translatey(-.3em);
+}
+   

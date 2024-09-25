@@ -3,8 +3,10 @@ import facebookIcon from "../../assets/icons/facebook-icon.webp";
 import instagramIcon from "../../assets/icons/instagram-icon.webp";
 import youtubeIcon from "../../assets/icons/youtube-icon.webp";
 import "./Footer.scss"
+import { useNavigate } from "react-router-dom";
 
 const Footer: React.FC = () => {
+  const navigate = useNavigate();
 
   const subscribeEmail = function(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -14,10 +16,10 @@ const Footer: React.FC = () => {
       <section className="additional-links">
         <div className="">
           <h1>STORE</h1>
-          <button>Shop All</button>
-          <button>Shipping & Returns</button>
-          <button>Store Policy</button>
-          <button>FAQ</button>
+          <button onClick={() => navigate("/shop")}>Shop All</button>
+          <button onClick={() => navigate("/shipping-and-returns")}>Shipping & Returns</button>
+          <button onClick={() => navigate("/store-policy")}>Store Policy</button>
+          <button onClick={() => navigate("/faq")}>FAQ</button>
         </div>
         <div className="">
           <h1>ADDRESS</h1>
