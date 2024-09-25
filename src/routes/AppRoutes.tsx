@@ -24,6 +24,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
 
   return (
       <Routes>
+        <Route path="*" element={<Home setProgress={setProgress} />} />
         <Route path="/" element={<Home setProgress={setProgress} />} />
         <Route path="/shop" element={<Shop setProgress={setProgress} />} />
         <Route path="/about" element={<About setProgress={setProgress} />} />
@@ -34,7 +35,16 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         {
           products.map((product: ProductType, index: number) => {
             return(
-              <Route key={index} path={`/product-${product.id}`} element={<Product productDetails={product} />} />
+              <Route key={`home-${index}`} path={`/product-${product.id}`} 
+              element={<Product setProgress={setProgress} productDetails={product} parentLocation="home"/>} />
+            )
+          })
+        }
+        {
+          products.map((product: ProductType, index: number) => {
+            return(
+              <Route key={`shop-${index}`} path={`/shop/product-${product.id}`} 
+              element={<Product setProgress={setProgress} productDetails={product} parentLocation="shop"/>} />
             )
           })
         }

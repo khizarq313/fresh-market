@@ -32,6 +32,7 @@ const ProductsList: React.FC<PropsType> = (props) => {
     const [lastLimit, setLastLimit] = useState<number>(0);
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [sortingOrder, setSortingOrder] = useState<string>("default");
+    const [productPath, setProductPath] = useState<string>("");
 
     useEffect(() => {
       setStartLimit(0);
@@ -47,35 +48,42 @@ const ProductsList: React.FC<PropsType> = (props) => {
         case "discount-products":
           setCurrentList(products.filter((product: ProductType) => product.discount > 0));
           setLastLimit(Infinity);
+          setProductPath("");
           break;
           case "quick-deals":
             setCurrentList([...products]);
             setLastLimit(7);
+            setProductPath("");
             break;
           case "all-items":
             setCurrentList(products.filter((product: ProductType) => (product.price-product.discount < PriceRange)));
             setLastLimit(startLimit+15);
             setShopPage(true);
+            setProductPath("shop/");
             break;
           case "produce-items":
             setCurrentList(products.filter((product: ProductType) => filterFunction(product, "produce")));
             setLastLimit(startLimit+15);
             setShopPage(true);
+            setProductPath("shop/");
             break;
           case "dairy-items":
             setCurrentList(products.filter((product: ProductType) => filterFunction(product, "dairy-eggs")));
             setLastLimit(startLimit+15);
             setShopPage(true);
+            setProductPath("shop/");
             break;
           case "bread-items":
             setCurrentList(products.filter((product: ProductType) => filterFunction(product, "bread-grains")));
             setLastLimit(startLimit+15);
             setShopPage(true);
+            setProductPath("shop/");
             break;
           case "household-items":
             setCurrentList(products.filter((product: ProductType) => filterFunction(product, "household")));
             setLastLimit(startLimit+15);
             setShopPage(true);
+            setProductPath("shop/");
             break;
         default:
           setCurrentList([]);
@@ -189,7 +197,7 @@ const ProductsList: React.FC<PropsType> = (props) => {
       }
     }
 
-    const handleBlueEvent = function(e: React.FocusEvent<HTMLInputElement>, tempIndex: number) {
+    const handleBlurEvent = function(e: React.FocusEvent<HTMLInputElement>, tempIndex: number) {
       if(e.target.value === "") {
         e.target.value = "1";
       }
@@ -277,15 +285,15 @@ const ProductsList: React.FC<PropsType> = (props) => {
                   src={product.image}
                   alt={product.name}
                   className="product-image"
-                  onClick={() => navigate(`/product-${product.id}`)}/>
+                  onClick={() => navigate(`/${productPath}product-${product.id}`)}/>
                 <h3
                   className="product-name"
-                  onClick={() => navigate(`/product-${product.id}`)}>
+                  onClick={() => navigate(`/${productPath}product-${product.id}`)}>
                   {product.name}
                 </h3>
                 <p
                   className="discount-price"
-                  onClick={() => navigate(`/product-${product.id}`)}>
+                  onClick={() => navigate(`/${productPath}product-${product.id}`)}>
                   {product.discount > 0 && <del> ₹{product.price}</del>} ₹
                   {product.price - product.discount}
                 </p>
@@ -294,9 +302,9 @@ const ProductsList: React.FC<PropsType> = (props) => {
                   onClick={() => handleDecrement(tempIndex)}>-</button>
                   { tempQuantities.length > 0 &&
                   <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
-                      value={tempQuantities[tempIndex].quantity} min="1" max="20"
+                      value={tempQuantities[tempIndex].quantity} min="1" max="20" className="quantity-input"
                       onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
-                      onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
+                      onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlurEvent(e, tempIndex)}
                       onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/>}
                   <button className="increment-btn" onClick={() => handleIncrement(tempIndex)}>+</button>
                 </span>

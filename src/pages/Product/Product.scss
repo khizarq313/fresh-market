@@ -1,0 +1,18 @@
+.product-page {display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 5rem;
+    width: 110rem;
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.nav-btns {
+    background-color: transparent;
+    border: none;
+}
