@@ -8,6 +8,7 @@ import Shop from "../pages/Shop/Shop";
 import ShippingAndReturns from "../pages/ShippingAndReturns/ShippingAndReturns";
 import StorePolicy from "../pages/StorePolicy/StorePolicy";
 import FAQ from "../pages/FAQ/FAQ";
+import DetailedCart from "../pages/DetailedCart/DetailedCart";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { ProductType } from "../features/products/productsSlice";
@@ -32,6 +33,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route path="/shipping-and-returns" element={<ShippingAndReturns setProgress={setProgress} />} />
         <Route path="/store-policy" element={<StorePolicy setProgress={setProgress} />} />
         <Route path="/faq" element={<FAQ setProgress={setProgress} />} />
+        <Route path="/cart" element={<DetailedCart setProgress={setProgress} />} />
         {
           products.map((product: ProductType, index: number) => {
             return(

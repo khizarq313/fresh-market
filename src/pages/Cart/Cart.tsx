@@ -65,6 +65,11 @@ const Cart: React.FC<PropsType> = (props) => {
       }, 400)
     }
 
+    const openDetailedCart = function() {
+      closeCart();
+      navigate("cart");
+    }
+
   return (
     <section className="cart-page">
         <div className={closeCartAnimation? "overlay overlay-closed": "overlay"} onClick={closeCart}></div>
@@ -118,7 +123,7 @@ const Cart: React.FC<PropsType> = (props) => {
             <h1>Subtotal</h1>
             <h1>₹{totalCartPrice}</h1>
             <hr />
-            <button>View Cart</button>
+            <button onClick={openDetailedCart}>View Cart</button>
           </div>
         </div>
     </section>

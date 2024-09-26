@@ -10,6 +10,7 @@ type ProductType = {
   category: string,
   description: string;
   info: string;
+  delivery: number;
 }
 
 type StoreType = {
