@@ -15,7 +15,8 @@ type ProductType = {
 
 type StoreType = {
   products: ProductType[];
-  cart: ProductType[]
+  cart: ProductType[];
+  searchProducts: ProductType[]
 }
 
 type UpdateCartType = {
@@ -29,9 +30,14 @@ type HandleCartItemsType = {
   quantity: number
 }
 
+type UpdateSearchItemsType = {
+  searchedProducts: ProductType[]
+}
+
 const initialState: StoreType = {
   products: [],
-  cart: []
+  cart: [],
+  searchProducts: []
 };
 
 const storeSlice = createSlice({
@@ -66,10 +72,14 @@ const storeSlice = createSlice({
         state.cart.splice(index, 1);
       }
     },
+    updateSearchItems: (state, action: PayloadAction<UpdateSearchItemsType>) => {
+      const {searchedProducts} = action.payload;
+      state.searchProducts = searchedProducts;
+    }
   },
 });
 
-export const { setProducts, updateCart, handleCartItems } = storeSlice.actions;
+export const { setProducts, updateCart, handleCartItems, updateSearchItems } = storeSlice.actions;
 
 export default storeSlice.reducer;
 export type { StoreType, ProductType };

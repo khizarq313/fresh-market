@@ -7,7 +7,8 @@ import "./ProductsList.scss";
 
 type PropsType = {
     ListName: string,
-    PriceRange: number 
+    PriceRange: number,
+    Page: string
 }
 
 type TempQuantitiesType = {
@@ -16,11 +17,12 @@ type TempQuantitiesType = {
 }
 
 const ProductsList: React.FC<PropsType> = (props) => {
-    const {ListName, PriceRange} = props;
+    const {ListName, PriceRange, Page} = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const allProducts = useSelector((state: RootState) => state.products);
     const products: ProductType[] = allProducts.products;
+    const [currentListProducts, setCurrentListProducts] = useState<ProductType[]>([]);
     const [currentList, setCurrentList] = useState<ProductType[]>([]);
     const [tempQuantities, setTempQuantities] = useState<TempQuantitiesType[]>([]);
     const [animateLeft, setAnimateLeft] = useState<boolean>(false);
@@ -31,8 +33,16 @@ const ProductsList: React.FC<PropsType> = (props) => {
     const [startLimit, setStartLimit] = useState<number>(0);
     const [lastLimit, setLastLimit] = useState<number>(0);
     const [pageNumber, setPageNumber] = useState<number>(1);
-    const [sortingOrder, setSortingOrder] = useState<string>("default");
+    const [sortingOrder, setSortingOrder] = useState<string>("Sort by");
     const [productPath, setProductPath] = useState<string>("");
+
+    useEffect(() => {
+      if(Page === "search-results") {
+        setCurrentListProducts([...allProducts.searchProducts]);
+      } else {
+        setCurrentListProducts([...products]);
+      }
+    },[Page, allProducts.searchProducts, products])
 
     useEffect(() => {
       setStartLimit(0);
@@ -44,52 +54,76 @@ const ProductsList: React.FC<PropsType> = (props) => {
       const filterFunction = function(product: ProductType, category: string) {
         return (product.category === category && product.price-product.discount < PriceRange)
       }
+      let tempArray: ProductType[] = [];
       switch(ListName) {
         case "discount-products":
-          setCurrentList(products.filter((product: ProductType) => product.discount > 0));
+          tempArray = currentListProducts.filter((product: ProductType) => product.discount > 0);
           setLastLimit(Infinity);
           setProductPath("");
           break;
           case "quick-deals":
-            setCurrentList([...products]);
+            tempArray = [...currentListProducts];
             setLastLimit(7);
             setProductPath("");
             break;
           case "all-items":
-            setCurrentList(products.filter((product: ProductType) => (product.price-product.discount < PriceRange)));
+            tempArray = currentListProducts.filter((product: ProductType) => (product.price-product.discount < PriceRange));
             setLastLimit(startLimit+15);
             setShopPage(true);
             setProductPath("shop/");
             break;
           case "produce-items":
-            setCurrentList(products.filter((product: ProductType) => filterFunction(product, "produce")));
+            tempArray = currentListProducts.filter((product: ProductType) => filterFunction(product, "produce"));
             setLastLimit(startLimit+15);
             setShopPage(true);
             setProductPath("shop/");
             break;
           case "dairy-items":
-            setCurrentList(products.filter((product: ProductType) => filterFunction(product, "dairy-eggs")));
+            tempArray = currentListProducts.filter((product: ProductType) => filterFunction(product, "dairy-eggs"));
             setLastLimit(startLimit+15);
             setShopPage(true);
             setProductPath("shop/");
             break;
           case "bread-items":
-            setCurrentList(products.filter((product: ProductType) => filterFunction(product, "bread-grains")));
+            tempArray = currentListProducts.filter((product: ProductType) => filterFunction(product, "bread-grains"));
             setLastLimit(startLimit+15);
             setShopPage(true);
             setProductPath("shop/");
             break;
           case "household-items":
-            setCurrentList(products.filter((product: ProductType) => filterFunction(product, "household")));
+            tempArray = currentListProducts.filter((product: ProductType) => filterFunction(product, "household"));
             setLastLimit(startLimit+15);
             setShopPage(true);
             setProductPath("shop/");
             break;
         default:
-          setCurrentList([]);
+          tempArray = currentListProducts.slice();
           break;
       }
-    }, [ListName, PriceRange, startLimit, products]);
+      switch(sortingOrder) {
+        case "Sort by":
+          setCurrentList(tempArray.slice());
+          break;
+        case "Newest":
+          setCurrentList(tempArray.reverse());
+          break;
+        case "Price (low to high)":
+          setCurrentList(tempArray.sort((a,b) => ((a.price-a.discount) - (b.price-b.discount))));
+          break;
+        case "Price (high to low)":
+          setCurrentList(tempArray.sort((a,b) => ((b.price-b.discount) - (a.price-a.discount) )));
+          break;
+        case "Name A-Z":
+          setCurrentList(tempArray.sort((a,b) => (a.name.localeCompare(b.name))));
+          break;
+        case "Name Z-A":
+          setCurrentList(tempArray.sort((a,b) => (b.name.localeCompare(a.name))));
+          break;
+        default:
+          setCurrentList(tempArray.slice());
+          break;
+      }
+    }, [ListName, PriceRange, products, currentListProducts, startLimit, sortingOrder]);
 
     useEffect(() => {
       if(updateValues) {
@@ -217,30 +251,10 @@ const ProductsList: React.FC<PropsType> = (props) => {
 
     const sortTheList = function(e: React.FormEvent<HTMLSelectElement>) {
       const type: string = e.currentTarget.value;
-      if(sortingOrder !== type) {
-        setSortingOrder(type);
-        switch(type) {
-          case "Sort by":
-            break;
-          case "Newest":
-            currentList.reverse();
-            break;
-          case "Price (low to high)":
-            currentList.sort((a,b) => ((a.price-a.discount) - (b.price-b.discount)));
-            break;
-          case "Price (high to low)":
-            currentList.sort((a,b) => ((b.price-b.discount) - (a.price-a.discount) ));
-            break;
-          case "Name A-Z":
-            currentList.sort((a,b) => (a.name.localeCompare(b.name)));
-            break;
-          case "Name Z-A":
-            currentList.sort((a,b) => (b.name.localeCompare(a.name)));
-            break;
-          default:
-            break;
-        }
-      }
+      setSortingOrder(type);
+      setStartLimit(0);
+      setLastLimit(15);
+      setPageNumber(1);
     }
 
     return (
@@ -255,7 +269,7 @@ const ProductsList: React.FC<PropsType> = (props) => {
         }
         { shopPage &&
           <div>
-            <select id="sorting-options" onChange={(e: React.FormEvent<HTMLSelectElement>) => sortTheList(e)}>
+            <select id="sorting-options" value={sortingOrder} onChange={(e: React.FormEvent<HTMLSelectElement>) => sortTheList(e)}>
               <option value="Sort by">Sort by</option>
               <option value="Newest">Newest</option>
               <option value="Price (low to high)">Price (low to high)</option>
@@ -316,6 +330,10 @@ const ProductsList: React.FC<PropsType> = (props) => {
               </div>
               );
             })}
+            { 
+              shopPage && currentList.length === 0 && 
+              <h1>No results found!</h1>
+            }
           </div>
           }
           {

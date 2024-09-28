@@ -3,23 +3,30 @@ import ProductsList from "../../components/ProductsList/ProductsList";
 import "./Shop.scss"
 
 type PropsType = {
-  setProgress: React.Dispatch<React.SetStateAction<number>>
+  setProgress: React.Dispatch<React.SetStateAction<number>>,
+  type: string
 }
 
 const Shop: React.FC<PropsType> = (props) => {
-  const {setProgress} = props;
+  const {setProgress, type} = props;
   const [showCategoryBtn, setShowCategoryBtn] = useState<boolean>(false);
   const [showRangeBtn, setShowRangeBtn] = useState<boolean>(false);
   const [showClearBtn, setShowClearBtn] = useState<boolean>(false);
   const [currentShopItems, setCurrentShopItems] = useState<string>("all-items");
+  const [currentPage, setCurrentPage] = useState<string>("shop");
   const [rangeValue, setRangeValue] = useState<string>("10");
 
   useEffect(() => {
+    if(type === "shop") {
+      setCurrentPage("shop");
+    } else {
+      setCurrentPage("search-results");
+    }
     setProgress(70);
     setTimeout(() => {
       setProgress(100);
     }, 1000)
-  }, [setProgress]);
+  }, [setProgress, type]);
 
   const addFilter = function(filterType: string) {
     setCurrentShopItems(`${filterType}-items`);
@@ -47,8 +54,18 @@ const Shop: React.FC<PropsType> = (props) => {
   
   return (
     <main className="shop">
-      <h1>Shop</h1>
-      <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+      { currentPage === "shop" &&
+        <>
+          <h1>Shop</h1>
+          <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+        </>
+      }
+      { currentPage === "search-results" &&
+        <>
+          <h1>Search Results</h1>
+          <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+        </>
+      }
       <section className="shop-content">
         <div className="filter-box">
           <h1>Filter by</h1>
@@ -76,7 +93,7 @@ const Shop: React.FC<PropsType> = (props) => {
             <button onClick={removeFilter}>Clear Filter</button>
           }
         </div>
-        <ProductsList ListName={currentShopItems} PriceRange={Number(rangeValue)*100}/>
+        <ProductsList ListName={currentShopItems} PriceRange={Number(rangeValue)*100} Page={currentPage}/>
       </section>
     </main>
   )

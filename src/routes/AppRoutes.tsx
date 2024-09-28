@@ -27,7 +27,8 @@ const AppRoutes: React.FC<PropsType> = (props) => {
       <Routes>
         <Route path="*" element={<Home setProgress={setProgress} />} />
         <Route path="/" element={<Home setProgress={setProgress} />} />
-        <Route path="/shop" element={<Shop setProgress={setProgress} />} />
+        <Route path="/shop" element={<Shop setProgress={setProgress} type="shop"/>} />
+        <Route path="/search-results" element={<Shop setProgress={setProgress} type="search-results"/>} />
         <Route path="/about" element={<About setProgress={setProgress} />} />
         <Route path="/contact" element={<Contact setProgress={setProgress} />} />
         <Route path="/shipping-and-returns" element={<ShippingAndReturns setProgress={setProgress} />} />

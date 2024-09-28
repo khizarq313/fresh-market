@@ -8,7 +8,7 @@ import Footer from "./components/Footer/Footer";
 import Cart from "./pages/Cart/Cart";
 import { store } from "./store";
 import { setProducts } from "./features/products/productsSlice";
-import { products, cartProducts } from "./productsData";
+import { products, cartProducts, searchProducts } from "./productsData";
 import "./styles/App.scss";
 
 const AppContent: React.FC = () => {
@@ -17,7 +17,7 @@ const AppContent: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProducts({products:products, cart: cartProducts}));
+    dispatch(setProducts({products:products, cart: cartProducts, searchProducts: searchProducts}));
   }, [dispatch]);
 
   return (
