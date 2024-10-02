@@ -8,7 +8,8 @@ import "./ProductsList.scss";
 type PropsType = {
     ListName: string,
     PriceRange: number,
-    Page: string
+    Page: string,
+    setCurrentPageHeading: React.Dispatch<React.SetStateAction<string>>,
 }
 
 type TempQuantitiesType = {
@@ -17,7 +18,7 @@ type TempQuantitiesType = {
 }
 
 const ProductsList: React.FC<PropsType> = (props) => {
-    const {ListName, PriceRange, Page} = props;
+    const {ListName, PriceRange, Page, setCurrentPageHeading} = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const allProducts = useSelector((state: RootState) => state.products);
@@ -299,15 +300,24 @@ const ProductsList: React.FC<PropsType> = (props) => {
                   src={product.image}
                   alt={product.name}
                   className="product-image"
-                  onClick={() => navigate(`/${productPath}product-${product.id}`)}/>
+                  onClick={() => {
+                    setCurrentPageHeading(`/${productPath}product-${product.id}`);
+                    navigate(`/${productPath}product-${product.id}`)}
+                    }/>
                 <h3
                   className="product-name"
-                  onClick={() => navigate(`/${productPath}product-${product.id}`)}>
+                  onClick={() => {
+                    setCurrentPageHeading(`/${productPath}product-${product.id}`);
+                    navigate(`/${productPath}product-${product.id}`)}
+                    }>
                   {product.name}
                 </h3>
                 <p
                   className="discount-price"
-                  onClick={() => navigate(`/${productPath}product-${product.id}`)}>
+                  onClick={() => {
+                    setCurrentPageHeading(`/${productPath}product-${product.id}`);
+                    navigate(`/${productPath}product-${product.id}`)}
+                    }>
                   {product.discount > 0 && <del> ₹{product.price}</del>} ₹
                   {product.price - product.discount}
                 </p>

@@ -2,22 +2,141 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 3rem;
     position: sticky;
     top: 0;
     z-index: 50;
     background-color: #FBF9F1;
     width: 110rem;
+
+    button {
+        border: none;
+        background-color: transparent;
+        margin: .5rem;
+    }
+}
+
+nav {
+    margin-top: 1rem;
+    margin-right: 2rem;
+
+    button {
+        padding:0 .5rem;
+    }
+
+    button:hover {
+        color: rgb(71, 158, 121);
+    }
+}
+
+.logo {
+    height: 2.5rem;
+    width: 20rem;
+    display: flex;
+    justify-content: center;
+    cursor: default;
+
+    h1 {
+        font-size: 2rem;
+        padding: .5rem;
+    }
+}
+
+.search-input {
+    display: inline-block;
+    border-bottom: 1px solid #000000;
+    margin-top: .5rem;
+    margin-left: 6rem;
+    width: 17rem;
+
+    input {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        width: 14.8rem;
+        padding: 1rem 0;
+    }
+}
+
+.search-btn {
+    height: 1.2rem;
+    width: 1.2rem;
+    position: relative;
 }
 
 .cart-btn {
     background-color: transparent;
     border: none;
     height: 2.5rem;
+    margin-top: 1rem;
 
     text {
         font-size: 5rem;
         font-weight: 600;
     }
 
+}
+
+.login-btn {
+    display: flex;
+    align-items: center;
+    width: 7rem;
+    margin: 0 1.5rem;
+    margin-top: 1rem;
+
+    svg {
+        width: 2rem;
+        margin-right: 1rem;
+    }
+}
+
+.current-panel {
+    color: rgb(71, 158, 121);
+}
+
+.search-results-list {
+    position: absolute;
+    list-style-type: none;
+    padding: 1rem;
+    background-color: rgba(251, 249, 241, 0.8);
+    backdrop-filter: blur(10px);
+    overflow-y: scroll;
+    width: 17rem;
+    max-height: 27rem;
+
+    li {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        margin: 4px;
+    }
+
+    img {
+        height: 4rem;
+        width: 4rem;
+        margin: 2px;
+    }
+}
+
+.clear-search-btn {
+    background-color: #dad7d7;
+    border-radius: 100%;
+    height: 1.6rem;
+    width: 1.6rem;
+    position: absolute;
+    transform: translate(-2.4rem,3px);
+}
+
+.search-results-list::-webkit-scrollbar,.note-content::-webkit-scrollbar {
+    width: 1px;
+}
+ 
+.search-results-list::-webkit-scrollbar-track,.note-content::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 4px transparent;
+}
+ 
+.search-results-list::-webkit-scrollbar-thumb,.note-content::-webkit-scrollbar-thumb {
+    background-color: grey;
+    outline: solid 1px gray;
+    border-radius: 1rem;
 }

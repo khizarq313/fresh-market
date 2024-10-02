@@ -6,7 +6,9 @@ import { ProductType, handleCartItems } from "../../features/products/productsSl
 import "./Cart.scss"
 
 type PropsType = {
-    setShowCartPage: Dispatch<SetStateAction<boolean>>
+    setShowCartPage: Dispatch<SetStateAction<boolean>>,
+    currentPageHeading: string,
+    setCurrentPageHeading: React.Dispatch<React.SetStateAction<string>>,
 }
 
 type TempQuantitiesType = {
@@ -15,7 +17,7 @@ type TempQuantitiesType = {
 }
 
 const Cart: React.FC<PropsType> = (props) => {
-    const {setShowCartPage} = props;
+    const {setShowCartPage, currentPageHeading , setCurrentPageHeading} = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cartProducts = useSelector((state: RootState) => state.products.cart);
@@ -67,7 +69,15 @@ const Cart: React.FC<PropsType> = (props) => {
 
     const openDetailedCart = function() {
       closeCart();
-      navigate("cart");
+      openThePage("/cart");
+    }
+
+
+    const openThePage = function(pageName: string) {
+      if(pageName !== currentPageHeading) {
+        navigate(pageName);
+        setCurrentPageHeading(pageName);
+      }
     }
 
   return (
@@ -89,16 +99,16 @@ const Cart: React.FC<PropsType> = (props) => {
                         src={product.image}
                         alt={product.name}
                         className="product-image"
-                        onClick={() => navigate(`/shop/${product.id}`)}/>
+                        onClick={() => openThePage(`/shop/${product.id}`)}/>
                         <span className="product-details">
                           <h3
                             className="product-name"
-                            onClick={() => navigate(`/shop/${product.id}`)}>
+                            onClick={() => openThePage(`/shop/${product.id}`)}>
                             {product.name}
                           </h3>
                           <p
                             className="discount-price"
-                            onClick={() => navigate(`/shop/${product.id}`)}>
+                            onClick={() => openThePage(`/shop/${product.id}`)}>
                             {product.discount > 0 && <del> ₹{product.price}</del>} ₹
                             {product.price - product.discount}
                           </p>

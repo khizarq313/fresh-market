@@ -16,7 +16,7 @@ type ProductType = {
 type StoreType = {
   products: ProductType[];
   cart: ProductType[];
-  searchProducts: ProductType[]
+  searchProducts: ProductType[];
 }
 
 type UpdateCartType = {

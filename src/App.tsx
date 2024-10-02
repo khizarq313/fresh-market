@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider, useDispatch } from "react-redux";
 import LoadingBar from 'react-top-loading-bar';
-import Header from "./components/Header/Header";
 import AppRoutes from "./routes/AppRoutes";
-import Footer from "./components/Footer/Footer";
 import Cart from "./pages/Cart/Cart";
 import { store } from "./store";
 import { setProducts } from "./features/products/productsSlice";
@@ -14,6 +12,7 @@ import "./styles/App.scss";
 const AppContent: React.FC = () => {
   const [progress, setProgress] = useState<number>(0);
   const [showCartPage, setShowCartPage] = useState<boolean>(false);
+  const [currentPageHeading, setCurrentPageHeading] = useState<string>("/");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,12 +22,12 @@ const AppContent: React.FC = () => {
   return (
     <Router>
       <LoadingBar color='#2A6049' height={6} progress={progress} onLoaderFinished={() => setProgress(0)}/>
-      <section className="App">
-        <Header setShowCartPage={setShowCartPage} />
-        <AppRoutes  setProgress={setProgress} />
-        <Footer />
+      <section className={"App"}>
+        <AppRoutes setProgress={setProgress} currentPageHeading={currentPageHeading} 
+          setCurrentPageHeading={setCurrentPageHeading} setShowCartPage={setShowCartPage}/>
       </section>
-      {showCartPage && <Cart setShowCartPage={setShowCartPage} />}
+      {showCartPage && <Cart setShowCartPage={setShowCartPage}  currentPageHeading={currentPageHeading} 
+        setCurrentPageHeading={setCurrentPageHeading}/>}
     </Router>
   );
 };

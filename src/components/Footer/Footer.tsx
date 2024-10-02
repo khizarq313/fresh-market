@@ -5,21 +5,35 @@ import youtubeIcon from "../../assets/icons/youtube-icon.webp";
 import "./Footer.scss"
 import { useNavigate } from "react-router-dom";
 
-const Footer: React.FC = () => {
+type PropsType = {
+  currentPageHeading: string,
+  setCurrentPageHeading: React.Dispatch<React.SetStateAction<string>>,
+}
+
+const Footer: React.FC<PropsType> = (props) => {
+  const {currentPageHeading, setCurrentPageHeading} = props;
   const navigate = useNavigate();
 
   const subscribeEmail = function(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
+
+  const openThePage = function(pageName: string) {
+    if(pageName !== currentPageHeading) {
+      navigate(pageName);
+      setCurrentPageHeading(pageName);
+    }
+  }
+
   return (
     <footer>
       <section className="additional-links">
         <div className="">
           <h1>STORE</h1>
-          <button onClick={() => navigate("/shop")}>Shop All</button>
-          <button onClick={() => navigate("/shipping-and-returns")}>Shipping & Returns</button>
-          <button onClick={() => navigate("/store-policy")}>Store Policy</button>
-          <button onClick={() => navigate("/faq")}>FAQ</button>
+          <button onClick={() => openThePage("/shop")}>Shop All</button>
+          <button onClick={() => openThePage("/shipping-and-returns")}>Shipping & Returns</button>
+          <button onClick={() => openThePage("/store-policy")}>Store Policy</button>
+          <button onClick={() => openThePage("/faq")}>FAQ</button>
         </div>
         <div className="">
           <h1>ADDRESS</h1>
