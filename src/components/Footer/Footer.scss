@@ -25,6 +25,16 @@ footer {
     }
 }
 
+.store-nav-btns {
+    button {
+        background-color: transparent;
+        border: none;
+        text-align: left;
+        color: #FFFFFF;
+        margin-top: .5rem;
+    }
+}
+
 .subscribe-toggle {
     display: flex;
 }

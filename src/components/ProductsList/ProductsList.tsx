@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { ProductType, updateCart } from "../../features/products/productsSlice";
+import Arrow from "../../assets/icons/Arrow";
 import "./ProductsList.scss";
 
 type PropsType = {
@@ -260,10 +261,19 @@ const ProductsList: React.FC<PropsType> = (props) => {
 
     return (
       <section className={ListName}>
-        { !shopPage && 
+        { !shopPage && ListName === "discount-products" &&
           <>
-            <h1>Exciting Offers</h1>
-            <h2>
+            <h1 className="discount-products-heading">Exciting Offers</h1>
+            <h2  className="discount-products-txt">
+              Find amazing deals on a variety of products. Discover new favorites and save on your essentials.
+            </h2>
+          </>
+        }
+
+        { !shopPage && ListName === "quick-deals" &&
+          <>
+            <h1 className="quick-deals-heading">Exciting Offers</h1>
+            <h2  className="quick-deals-txt">
               Find amazing deals on a variety of products. Discover new favorites and save on your essentials.
             </h2>
           </>
@@ -283,8 +293,8 @@ const ProductsList: React.FC<PropsType> = (props) => {
         <div className={`${ListName}-container`}>
           {
             ListName === "discount-products" && 
-            <button className="scroll-left-btn" disabled={animateLeft} onClick={scrollLeft}>
-              left
+            <button className="left-arrow-btn" disabled={animateLeft} onClick={scrollLeft}>
+              <Arrow />
             </button>
           }
           {componentMounted && <div className={`${ListName}-list`}>
@@ -348,8 +358,8 @@ const ProductsList: React.FC<PropsType> = (props) => {
           }
           {
             ListName === "discount-products" && 
-            <button className="scroll-right-btn" disabled={animateRight} onClick={scrollRight}>
-              right
+            <button className="right-arrow-btn" disabled={animateRight} onClick={scrollRight}>
+              <Arrow />
             </button>
           }
         </div>
@@ -369,6 +379,10 @@ const ProductsList: React.FC<PropsType> = (props) => {
             }
             <button disabled={currentList.length-1 <= lastLimit} onClick={openNextPage}>Next</button>
           </div>
+        }
+        {
+          ListName === "discount-products" &&
+          <span className="end-line"> </span>
         }
       </section>
     )

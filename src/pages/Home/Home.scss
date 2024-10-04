@@ -2,9 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5rem;
-	padding-bottom: 0;
-    width: 110rem;
 }
 
 .welcome-section {
@@ -15,7 +12,59 @@
 
 .welcome-txt { 
     position: absolute;
+	padding: 5rem;
+	padding-top: 10rem;
+	font-size: 3rem;
     z-index: 10;
+
+	h1 {
+		font-size: 5rem;
+	}
+
+	h2 {
+		font-weight: 100;
+		margin-top: 1.5rem;
+	}
+
+	button {
+		border: none;
+		background-color: #6aac56;
+		color: #000000;
+		padding: 1rem;
+		margin-top: 1.5rem;
+	}
+}
+
+.img-carousel-btns {
+	padding: 1rem;
+	position: absolute;
+	z-index: 15;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+
+	button {
+		border: none;
+		background-color: transparent;
+	}
+
+	svg {
+		fill: #FFFFFF;
+	}
+}
+
+.left-arrow {
+	position: absolute;
+	left: 10px;
+	svg {
+		transform: scaleX(-1) scale(1);
+	}
+}
+
+.right-arrow {
+	position: absolute;
+	right: 10px;
 }
 
 .welcome-bg {
@@ -24,13 +73,13 @@
 
     img {
 		width: 100rem;
-		animation: scroll 15s 0s linear forwards;
     }
 }
 
 .benifits-section {
 	display: flex;
 	max-width: 100rem;
+	margin: 5rem;
 
 	hr {
 		border: 1px solid #2A6049;
@@ -56,29 +105,5 @@
 
 	svg {
 		height: 5rem;
-	}
-}
-
-@keyframes  scroll {
-	0% {
-		transform: translateX(0);
-	}
-	20% {
-		transform: translateX(0);
-	}
-	30% {
-		transform: translateX(-100%);
-	}
-	50% {
-		transform: translateX(-100%);
-	}
-	60% {
-		transform: translateX(-200%);
-	}
-	80% {
-		transform: translateX(-200%);
-	}
-	100% {
-		transform: translateX(-100);
 	}
 }

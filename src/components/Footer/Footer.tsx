@@ -28,7 +28,7 @@ const Footer: React.FC<PropsType> = (props) => {
   return (
     <footer>
       <section className="additional-links">
-        <div className="">
+        <div className="store-nav-btns">
           <h1>STORE</h1>
           <button onClick={() => openThePage("/shop")}>Shop All</button>
           <button onClick={() => openThePage("/shipping-and-returns")}>Shipping & Returns</button>
