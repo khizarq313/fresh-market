@@ -1,10 +1,18 @@
-.product-page {display: flex;
+.product-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100rem;
+}
+
+.product-page-content {
+    display: flex;
     align-items: center;
     text-align: center;
     background-color: #FFFFFF;
     color: #000000;
     padding: 5rem;
-    width: 110rem;
+    width: 100%;
 
     div {
         display: flex;

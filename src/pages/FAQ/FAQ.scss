@@ -2,11 +2,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    background-color: #FFFFFF;
+}
+
+.faq-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    background-color: transparent;
     color: #000000;
-    padding: 5rem;
-    width: 110rem;
+    width: 90rem;
+    margin: 5rem;
+
+    h1 {
+        color: #2A6049;
+        font-size: 2.2rem;
+        margin: 2rem;
+    }
+    
+    p, summary {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    button {
+        background: transparent;
+        border: none;
+        padding: 1rem;
+    }
+}
+
+.styled {
+    padding: 1rem;
+    width: 90rem;
 }
 
 
@@ -16,9 +45,7 @@
    
 .styled summary {
     list-style: none;
-    padding: 1em;
     cursor: default;
-    background: #fafafa;
     padding-right: 1.5em;
     position: relative;
   
@@ -32,14 +59,30 @@
         width: 0.5rem;
         transform: rotate(45deg) translatey(-.1em);
     }
-    
-    &:focus {
-        outline: 2px solid;
-        outline-offset: 1px;
-    }
 }
 
 details[open].styled > summary::after {
     transform: rotate(-135deg) translatey(-.3em);
 }
+
+.faq-nav-btns {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+}
    
+.faq-horizontal-line {
+    display: inline-block;
+    margin: 1rem 0;
+    border-bottom: 1px solid rgba(42, 96, 73, 0.2);
+    width: 100%
+}
+
+.current-faq-btn {
+    color: rgb(42, 96, 73);
+    font-weight: 800;
+}
+
+.normal-faq-btn {
+    font-weight: 100;
+}

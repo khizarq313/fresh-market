@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import facebookIcon from "../../assets/icons/facebook-icon.webp";
 import instagramIcon from "../../assets/icons/instagram-icon.webp";
 import youtubeIcon from "../../assets/icons/youtube-icon.webp";
+import Checked from "../../assets/icons/Checked";
 import "./Footer.scss"
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +14,7 @@ type PropsType = {
 const Footer: React.FC<PropsType> = (props) => {
   const {currentPageHeading, setCurrentPageHeading} = props;
   const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
   const subscribeEmail = function(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,25 +37,27 @@ const Footer: React.FC<PropsType> = (props) => {
           <button onClick={() => openThePage("/store-policy")}>Store Policy</button>
           <button onClick={() => openThePage("/faq")}>FAQ</button>
         </div>
-        <div className="">
+        <div className="footer-address">
           <h1>ADDRESS</h1>
           <p>500 Terry Francine Street <br />San Francisco, CA 94158</p>
         </div>
-        <div className="">
+        <div className="opening-hours">
           <h1>OPENING HOURS</h1>
           <p>Mon - Fri: 7am - 10pm</p>
           <p>Saturday: 8am - 10pm</p>
           <p>Sunday: 8am - 11pm</p>
         </div>
-        <form className="" onSubmit={subscribeEmail}>
+        <form className="footer-form" onSubmit={subscribeEmail}>
           <h1>GET IT FRESH</h1>
           <label htmlFor="email-input">Email*</label>
-          <input type="mail" id="email-input" required/>
+          <input type="mail" id="email-input" className="footer-email" required/>
           <span className="subscribe-toggle">
-            <input type="checkbox" id="checkbox" />
-            <label htmlFor="checkbox">Yes, subscribe me to your newsletter.</label>
+            <span className="footer-checkbox" onClick={() => setIsChecked(!isChecked)}>
+              {isChecked && <Checked />}
+            </span>
+            <p>Yes, subscribe me to your newsletter.</p>
           </span>
-          <button type="submit">SUBSCRIBE NOW</button>
+          <button type="submit" className="footer-submit-btn">SUBSCRIBE NOW</button>
         </form>
       </section>
       <div className="contact-links">

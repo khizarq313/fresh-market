@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import "./Demo.scss";
 import { useNavigate } from 'react-router-dom';
+import Wrong from '../../assets/icons/Wrong';
 
 type PropsType = {
     setProgress: React.Dispatch<React.SetStateAction<number>>,
@@ -31,8 +32,9 @@ const Demo: React.FC<PropsType> = (props) => {
     
   return (
     <main className='demo-page'>
-        <button className='close-btn' onClick={closeDemoPage}>close</button>
+        <button className='close-btn' onClick={closeDemoPage}><Wrong /></button>
         <h1>Demo Mode</h1>
+        <p>This is just a demo version</p>
         <button className='ok-btn' onClick={closeDemoPage}>OK</button>
     </main>
   )

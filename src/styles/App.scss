@@ -12,6 +12,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Helvetica, sans-serif, Arial;
 }
 
 html {
@@ -26,6 +27,10 @@ body {
 }
 
 a:hover{color:#646464}
+
+button {
+    cursor: pointer;
+}
 
 #root {
     height: 100%;
@@ -44,6 +49,26 @@ a:hover{color:#646464}
     overflow-y: scroll;
 }
 
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .hide {
     opacity: 0;
+}
+
+.App::-webkit-scrollbar {
+    width: 4px;
+}
+ 
+.App::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 4px transparent;
+}
+ 
+.App::-webkit-scrollbar-thumb {
+    background-color: grey;
+    outline: solid 1px gray;
+    border-radius: 1rem;
 }

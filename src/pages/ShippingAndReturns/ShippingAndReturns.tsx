@@ -22,13 +22,13 @@ const ShippingAndReturns: React.FC<PropsType>  = (props) => {
       }, [setProgress]);
 
   return (
-    <>
+    <section className='shipping-returns'>
       <Header 
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       setShowCartPage={setShowCartPage} 
       />
-      <main className='shipping-returns'>
+      <main className='shipping-returns-content'>
           <h1>Shipping & Returns</h1>
           <section>
               <h1>Shipping Policy</h1>
@@ -43,7 +43,7 @@ const ShippingAndReturns: React.FC<PropsType>  = (props) => {
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       />
-    </>
+    </section>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
@@ -7,6 +7,9 @@ import Lock from '../../assets/icons/Lock';
 import "./DetailedCart.scss"
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import Delete from '../../assets/icons/Delete';
+import Tag from '../../assets/icons/Tag';
+import Note from '../../assets/icons/Note';
 
 type PropsType = {
     setProgress: React.Dispatch<React.SetStateAction<number>>,
@@ -28,6 +31,8 @@ const DetailedCart: React.FC<PropsType> = (props) => {
     const cartProducts = useSelector((state: RootState) => state.products.cart);
     const totalCartPrice = cartProducts.reduce((total, product) => total + (product.price - product.discount) * product.quantity, 0);
     const totalDeliveryCharges = cartProducts.reduce((total, product) => total + product.delivery, 0);
+    const [promoCode, setPromoCode] = useState<boolean>(false);
+    const [note, setNote] = useState<boolean>(false);
 
     useEffect(() => {
         setProgress(70);
@@ -82,28 +87,29 @@ const DetailedCart: React.FC<PropsType> = (props) => {
       }
     
   return (
-    <>
+    <section className='detailed-cart'>
       <Header 
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       setShowCartPage={setShowCartPage} 
       />
-      <main className='detailed-cart'>
+      <main className='detailed-cart-content'>
         { cartProducts.length >= 1 &&
           <>
             <div className="cart-products-list">
               <h1>My cart</h1>
-              <div className="cart-products-container">
+              <div className="detailed-cart-products-container">
                 {cartProducts.map((product: ProductType, index: number) => {
                   const tempIndex:number = cartProducts.findIndex((tempProduct: TempQuantitiesType) => tempProduct.id === product.id);
                   return (
-                    <div className="cart-item" key={index}>
+                    <div className="detailed-cart-item" key={index}>
+                      <span className='product-info'>
                       <img
                         src={product.image}
                         alt={product.name}
                         className="product-image"
                         onClick={() => openThePage(`/shop/${product.id}`)}/>
-                        <span className="product-details">
+                      <span>
                           <h3
                             className="product-name"
                             onClick={() => openThePage(`/shop/${product.id}`)}>
@@ -115,59 +121,89 @@ const DetailedCart: React.FC<PropsType> = (props) => {
                             {product.discount > 0 && <del> ₹{product.price}</del>} ₹
                             {product.price - product.discount}
                           </p>
-                          <span className="quantity-btn">
-                            <button className="decrement-btn" disabled={cartProducts[tempIndex].quantity === 1}
-                            onClick={() => decrementCartItem(tempIndex)}>-</button>
-                            { cartProducts.length > 0 && 
-                            <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
-                            value={cartProducts[tempIndex].quantity} min="1" max="20"
-                            onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
-                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
-                            onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/> }
-                            <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}>+</button>
-                          </span>
                         </span>
-                        <button className="cart-delete-btn" onClick={() => deleteCartItem(tempIndex)}>
-                          delete
+                      </span>
+                      <span className='product-control-btns'>
+                        <span className="cart-quantity-btn no-margin">
+                          <button className="decrement-btn" disabled={cartProducts[tempIndex].quantity === 1}
+                          onClick={() => decrementCartItem(tempIndex)}>-</button>
+                          { cartProducts.length > 0 && 
+                          <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
+                          value={cartProducts[tempIndex].quantity} min="1" max="20" className='cart-quantity-input'
+                          onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
+                          onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
+                          onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/> }
+                          <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}>+</button>
+                        </span>
+                        <p
+                          className="discount-price"
+                          onClick={() => openThePage(`/shop/${product.id}`)}>
+                          ₹{product.price - product.discount}
+                        </p>
+                        <button className="cart-delete-btn">
+                          <span onClick={() => deleteCartItem(tempIndex)}>
+                            <Delete />
+                          </span>
                         </button>
+                      </span>
                     </div>
                   )
                 })}
               </div>
+              <div className='additional-details'>
+                <span onClick={() => setPromoCode(!promoCode)}>
+                  <Tag /> 
+                  <p>Enter a promo code</p>
+                </span>
+                { promoCode && 
+                <span className='promo-code'>
+                  <input type="text" placeholder='Enter a promo code'/>
+                  <button>Apply</button>
+                </span>}
+                <span onClick={() => setNote(!note)}>
+                  <Note /> 
+                  <p>Add a note</p>
+                </span>
+                { note && 
+                <textarea maxLength={250} placeholder="Instructions? Special requests? Add them here"></textarea>}
+              </div>
             </div>
             <div className='order-summary'>
                 <h1>Order summary</h1>
-                <span>
+                <span className='cart-subtotal-span'>
                     <p>Subtotal</p>
                     <p>₹{totalCartPrice}</p>
                 </span>
                 <span>
                     <p>Delivery charges</p>
                     {totalDeliveryCharges > 0 && 
-                        <p>{totalDeliveryCharges}</p>
+                        <p>₹{totalDeliveryCharges}</p>
                     }
                     {totalDeliveryCharges === 0 && 
                         <p>Free</p>
                     }
                 </span>
                 <span className='border-bottom'>
-                    <p>Estimate Delivery</p>
-                    <p>8hrs</p>
+                    <p><u>Estimate Delivery</u></p>
+                    <p>2hrs</p>
                 </span>
-                <span>
+                <span className='cart-total-span'>
                     <p>Total</p>
+                    <p>₹{totalCartPrice}</p>
                 </span>
-                <button onClick={() => openThePage("/demo-version")}>Checkout</button>
-                <p><Lock />Secure Checkout</p>
+                <span className='checkout-btn'>
+                  <button onClick={() => openThePage("/demo-version")}>Checkout</button>
+                  <span className='checkout-description'><Lock /><p>Secure Checkout</p></span>
+                </span>
             </div>
           </>
         }
         { cartProducts.length === 0 &&
-          <div>
+          <div className='empty-detailed-cart'>
             <h1>My cart</h1>
             <span>
-              <h1>Cart is empty</h1>
-              <button onClick={() => openThePage("/shop")}>Continue Browsing</button>
+              <h2>Cart is empty</h2>
+              <button onClick={() => openThePage("/shop")}><u>Continue Browsing</u></button>
             </span>
           </div>
         }
@@ -176,7 +212,7 @@ const DetailedCart: React.FC<PropsType> = (props) => {
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       />
-    </>
+    </section>
   )
 }
 

@@ -22,13 +22,13 @@ const StorePolicy: React.FC<PropsType>  = (props) => {
       }, [setProgress]);
 
   return (
-    <>
+    <section className='store-policy'>
         <Header 
         currentPageHeading={currentPageHeading} 
         setCurrentPageHeading={setCurrentPageHeading} 
         setShowCartPage={setShowCartPage} 
         />
-        <main className='store-policy'>
+        <main className='store-policy-content'>
             <h1>Store Policy</h1>
             <section>
                 <h1>Customer Care</h1>
@@ -53,7 +53,7 @@ const StorePolicy: React.FC<PropsType>  = (props) => {
         currentPageHeading={currentPageHeading} 
         setCurrentPageHeading={setCurrentPageHeading} 
       />
-    </>
+    </section>
   )
 }
 

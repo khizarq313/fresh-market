@@ -10,4 +10,32 @@
     align-items: center;
     justify-content: center;
     background-color: #FFFFFF;
+
+    h1 {
+        font-size: 4.8rem;
+        font-weight: 400;
+        color: #000000;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.close-btn {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: 5rem;
+    top: 5rem;
+}
+
+.ok-btn {
+    width: 15rem;
+    background-color: #2a6049;
+    color: #FFFFFF;
+    border: none;
+    padding: 1rem;
 }

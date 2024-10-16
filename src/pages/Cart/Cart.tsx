@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../store";
 import { ProductType, handleCartItems } from "../../features/products/productsSlice";
+import Arrow from "../../assets/icons/Arrow";
+import Delete from "../../assets/icons/Delete";
 import "./Cart.scss"
 
 type PropsType = {
@@ -85,7 +87,7 @@ const Cart: React.FC<PropsType> = (props) => {
         <div className={closeCartAnimation? "overlay overlay-closed": "overlay"} onClick={closeCart}></div>
         <div className={closeCartAnimation? "cart-content cart-closed": "cart-content"}>
           <div className="cart-header">
-            <button className="cart-close-btn" onClick={closeCart}>Close</button>
+            <button className="cart-close-btn" onClick={closeCart}><Arrow /></button>
             <h1>CART</h1>
           </div>
           { cartProducts.length >= 1 &&
@@ -112,36 +114,39 @@ const Cart: React.FC<PropsType> = (props) => {
                             {product.discount > 0 && <del> ₹{product.price}</del>} ₹
                             {product.price - product.discount}
                           </p>
-                          <span className="quantity-btn">
+                          <span className="cart-quantity-btn">
                             <button className="decrement-btn" disabled={cartProducts[tempIndex].quantity === 1}
                             onClick={() => decrementCartItem(tempIndex)}>-</button>
                             { cartProducts.length > 0 && 
                             <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
-                            value={cartProducts[tempIndex].quantity} min="1" max="20"
+                            value={cartProducts[tempIndex].quantity} min="1" max="20" className="quantity-input"
                             onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
                             onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/> }
                             <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}>+</button>
                           </span>
                         </span>
-                        <button className="cart-delete-btn" onClick={() => deleteCartItem(tempIndex)}>
-                          delete
+                        <button className="cart-delete-btn">
+                          <span onClick={() => deleteCartItem(tempIndex)}>
+                            <Delete />
+                          </span>
                         </button>
                     </div>
                   )
                 })}
               </div>
               <div className="cart-footer">
-                <h1>Subtotal</h1>
-                <h1>₹{totalCartPrice}</h1>
-                <hr />
-                <button onClick={openDetailedCart}>View Cart</button>
+                <h1 className="cart-price-title">Subtotal</h1>
+                <h1 className="cart-price">₹{totalCartPrice}</h1>
+                <span>
+                  <button onClick={openDetailedCart}>View Cart</button>
+                </span>
               </div>
             </>
           }
           {
             cartProducts.length === 0 && 
-            <h1>Cart is empty</h1>
+            <h1 className="cart-empty-msg">Cart is empty</h1>
           }
         </div>
     </section>

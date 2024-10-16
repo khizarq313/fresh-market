@@ -70,7 +70,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
               />
             </motion.div>
           }
-        />
+        /> 
         <Route
           path="/shop"
           element={

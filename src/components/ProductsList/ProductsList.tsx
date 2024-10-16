@@ -5,6 +5,7 @@ import { RootState } from "../../store";
 import { ProductType, updateCart } from "../../features/products/productsSlice";
 import Arrow from "../../assets/icons/Arrow";
 import "./ProductsList.scss";
+import Checked from "../../assets/icons/Checked";
 
 type PropsType = {
     ListName: string,
@@ -16,6 +17,12 @@ type PropsType = {
 type TempQuantitiesType = {
   id: number,
   quantity: number
+}
+
+type AnimationIdList = {
+  id: number,
+  pulse: boolean,
+  tick: boolean
 }
 
 const ProductsList: React.FC<PropsType> = (props) => {
@@ -37,6 +44,7 @@ const ProductsList: React.FC<PropsType> = (props) => {
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [sortingOrder, setSortingOrder] = useState<string>("Sort by");
     const [productPath, setProductPath] = useState<string>("");
+    const [animationIdList, setAnimationIdList] = useState<AnimationIdList[]>([]);
 
     useEffect(() => {
       if(Page === "search-results") {
@@ -168,6 +176,8 @@ const ProductsList: React.FC<PropsType> = (props) => {
         return "product-card animate-left"
       } else if(animateRight) {
         return "product-card animate-right"
+      } else if(Page === "shop" || Page === "search-results") {
+        return"shop-product";
       } else {
         return "product-card"
       }
@@ -194,8 +204,26 @@ const ProductsList: React.FC<PropsType> = (props) => {
     }
 
     const handleCart = function(id: number, currentQuantity: number, tempIndex: number) {
-      dispatch(updateCart({ id: id, quantity: currentQuantity }));
-      tempQuantities[tempIndex].quantity = 1;
+      const tempId: AnimationIdList = {
+        id: id,
+        pulse: true,
+        tick: false
+      } 
+      const tempId2 = {
+        id: id,
+        pulse: false,
+        tick: true
+      }
+      setAnimationIdList([tempId, ...animationIdList]);
+      setTimeout(() => {
+        setAnimationIdList(animationIdList.filter((product: AnimationIdList) => (product.id !== tempId.id)));
+        setAnimationIdList([tempId2, ...animationIdList]);
+      }, 600);
+      setTimeout(() => {
+        setAnimationIdList(animationIdList.filter((product: AnimationIdList) => (product.id !== tempId2.id)));
+        dispatch(updateCart({ id: id, quantity: currentQuantity }));
+        tempQuantities[tempIndex].quantity = 1;
+      }, 1200);
     }
 
 
@@ -259,6 +287,24 @@ const ProductsList: React.FC<PropsType> = (props) => {
       setPageNumber(1);
     }
 
+    const animationOff = function(id: number) {
+      return animationIdList.filter((tempProduct: AnimationIdList) => tempProduct.id === id).length !== 1;
+    }
+
+    const animationOn = function(id: number) {
+      return animationIdList.filter((tempProduct: AnimationIdList) => 
+        {return tempProduct.id === id && tempProduct.pulse && !tempProduct.tick}).length === 1;
+    }
+
+    const tickAnimation = function(id: number) {
+      return animationIdList.filter((tempProduct: AnimationIdList) => 
+        {return tempProduct.id === id && !tempProduct.pulse && tempProduct.tick}).length === 1;
+    }
+
+    const disableBtn = function() {
+      return animationIdList.length > 0;
+    }
+
     return (
       <section className={ListName}>
         { !shopPage && ListName === "discount-products" &&
@@ -279,14 +325,20 @@ const ProductsList: React.FC<PropsType> = (props) => {
           </>
         }
         { shopPage &&
-          <div>
+          <div className="sorting-list">
             <select id="sorting-options" value={sortingOrder} onChange={(e: React.FormEvent<HTMLSelectElement>) => sortTheList(e)}>
-              <option value="Sort by">Sort by</option>
-              <option value="Newest">Newest</option>
-              <option value="Price (low to high)">Price (low to high)</option>
-              <option value="Price (high to low)">Price (high to low)</option>
-              <option value="Name A-Z">Name A-Z</option>
-              <option value="Name Z-A">Name Z-A</option>
+              <option className={sortingOrder === "Sort by" ? "checked-option" : "options"} 
+                value="Sort by">Sort by</option>
+              <option className={sortingOrder === "Newest" ? "checked-option" : "options"} 
+                value="Newest">Newest</option>
+              <option className={sortingOrder === "Price (low to high)" ? "checked-option" : "options"} 
+                value="Price (low to high)">Price (low to high)</option>
+              <option className={sortingOrder === "Price (high to low)" ? "checked-option" : "options"} 
+                value="Price (high to low)">Price (high to low)</option>
+              <option className={sortingOrder === "Name A-Z" ? "checked-option" : "options"} 
+                value="Name A-Z">Name A-Z</option>
+              <option className={sortingOrder === "Name Z-A" ? "checked-option" : "options"} 
+                value="Name Z-A">Name Z-A</option>
             </select>
           </div>
         }
@@ -297,65 +349,72 @@ const ProductsList: React.FC<PropsType> = (props) => {
               <Arrow />
             </button>
           }
-          {componentMounted && <div className={`${ListName}-list`}>
-            {currentList.map((product: ProductType, index: number) => {
-              const tempIndex:number = tempQuantities.findIndex((tempProduct: TempQuantitiesType) => tempProduct.id === product.id);
-              return ( 
-                index >= startLimit && index <= lastLimit && 
-                <div key={index} className={scrollDirection()}>
-                {product.discount > 0 && (
-                  <h4 className="discount-tag">Special Price</h4>
-                )}
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="product-image"
-                  onClick={() => {
-                    setCurrentPageHeading(`/${productPath}product-${product.id}`);
-                    navigate(`/${productPath}product-${product.id}`)}
-                    }/>
-                <h3
-                  className="product-name"
-                  onClick={() => {
-                    setCurrentPageHeading(`/${productPath}product-${product.id}`);
-                    navigate(`/${productPath}product-${product.id}`)}
-                    }>
-                  {product.name}
-                </h3>
-                <p
-                  className="discount-price"
-                  onClick={() => {
-                    setCurrentPageHeading(`/${productPath}product-${product.id}`);
-                    navigate(`/${productPath}product-${product.id}`)}
-                    }>
-                  {product.discount > 0 && <del> ₹{product.price}</del>} ₹
-                  {product.price - product.discount}
-                </p>
-                <span className="quantity-btn">
-                  <button className="decrement-btn" disabled={tempQuantities[tempIndex].quantity === 1}
-                  onClick={() => handleDecrement(tempIndex)}>-</button>
-                  { tempQuantities.length > 0 &&
-                  <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
-                      value={tempQuantities[tempIndex].quantity} min="1" max="20" className="quantity-input"
-                      onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
-                      onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlurEvent(e, tempIndex)}
-                      onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/>}
-                  <button className="increment-btn" onClick={() => handleIncrement(tempIndex)}>+</button>
-                </span>
-                <button
-                  className="add-to-cart-btn"
-                  onClick={() => handleCart(product.id, tempQuantities[tempIndex].quantity, tempIndex)}>
-                  Add to Cart
-                </button>
+          {componentMounted && 
+            <div className={`${ListName}-list`}>
+              { currentList.length === 0 && <h1 className="no-results">No Results Found!</h1> }
+              {currentList.map((product: ProductType, index: number) => {
+                const tempIndex:number = tempQuantities.findIndex((tempProduct: TempQuantitiesType) => tempProduct.id === product.id);
+                return ( 
+                  index >= startLimit && index <= lastLimit &&
+                  <div
+                    key={index}
+                    className={scrollDirection()}>
+                    {product.discount > 0 && (
+                      <h4 className="discount-tag">Special Price</h4>
+                    )}
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="product-image"
+                      onClick={() => {
+                        setCurrentPageHeading(`/${productPath}product-${product.id}`);
+                        navigate(`/${productPath}product-${product.id}`)}
+                        }/>
+                    <h3
+                      className="product-name"
+                      onClick={() => {
+                        setCurrentPageHeading(`/${productPath}product-${product.id}`);
+                        navigate(`/${productPath}product-${product.id}`)}
+                        }>
+                      {product.name}
+                    </h3>
+                    <p
+                      className="discount-price"
+                      onClick={() => {
+                        setCurrentPageHeading(`/${productPath}product-${product.id}`);
+                        navigate(`/${productPath}product-${product.id}`)}
+                        }>
+                      {product.discount > 0 && <del> ₹{product.price}</del>} ₹
+                      {product.price - product.discount}
+                    </p>
+                    <span className="quantity-btn">
+                      <button className="decrement-btn" disabled={tempQuantities[tempIndex].quantity === 1}
+                      onClick={() => handleDecrement(tempIndex)}>-</button>
+                      { tempQuantities.length > 0 &&
+                      <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
+                          value={tempQuantities[tempIndex].quantity} min="1" max="20" className="quantity-input"
+                          onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
+                          onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlurEvent(e, tempIndex)}
+                          onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/>}
+                      <button className="increment-btn" onClick={() => handleIncrement(tempIndex)}>+</button>
+                    </span>
+                    <button
+                      className="add-to-cart-btn"
+                      disabled={disableBtn()}
+                      onClick={() => handleCart(product.id, tempQuantities[tempIndex].quantity, tempIndex)}>
+                      { animationOff(product.id) && <>Add to Cart</>}
+                      { animationOn(product.id) && <div className="dot-pulse"></div>}
+                      { tickAnimation(product.id) && <Checked />}
+                    </button>
+                    { 
+                      shopPage && currentList.length === 0 && 
+                      <h1>No results found!</h1>
+                    }
+                  </div>
+                  )})
+                }
               </div>
-              );
-            })}
-            { 
-              shopPage && currentList.length === 0 && 
-              <h1>No results found!</h1>
             }
-          </div>
-          }
           {
             ListName === "discount-products" && 
             <button className="right-arrow-btn" disabled={animateRight} onClick={scrollRight}>
@@ -363,13 +422,14 @@ const ProductsList: React.FC<PropsType> = (props) => {
             </button>
           }
         </div>
-        {shopPage && 
-          <div>
-            <button disabled={startLimit===0} onClick={openPreviousPage}>Previous</button>
+        {shopPage && currentList.length > 0 &&
+          <div className="page-control-btns">
+            <button disabled={startLimit===0} onClick={openPreviousPage} 
+              className="previous-arrow-btn"><Arrow /></button>
             { startLimit!==0 &&
               <button onClick={openPreviousPage}>{pageNumber-1}</button>
             }
-            <h1>{pageNumber}</h1>
+            <button><u>{pageNumber}</u></button>
             {currentList.length-1 > lastLimit && 
               <button onClick={openNextPage}>{pageNumber + 1}</button>
             }
@@ -377,7 +437,8 @@ const ProductsList: React.FC<PropsType> = (props) => {
               currentList.length-1 > lastLimit+16 && 
               <p>...</p>
             }
-            <button disabled={currentList.length-1 <= lastLimit} onClick={openNextPage}>Next</button>
+            <button disabled={currentList.length-1 <= lastLimit} onClick={openNextPage} 
+              className="next-arrow-btn"><Arrow /></button>
           </div>
         }
         {

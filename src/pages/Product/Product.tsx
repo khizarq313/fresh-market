@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
+import Checked from "../../assets/icons/Checked";
 
 type PropsType = {
   setProgress: React.Dispatch<React.SetStateAction<number>>,
@@ -15,6 +16,12 @@ type PropsType = {
   parentLocation: string,
 }
 
+type AnimationIdList = {
+  id: number,
+  pulse: boolean,
+  tick: boolean
+}
+
 const Product: React.FC<PropsType> = (props) => {
 
   const {setProgress, currentPageHeading, setCurrentPageHeading, setShowCartPage, productDetails, parentLocation} = props;
@@ -23,6 +30,7 @@ const Product: React.FC<PropsType> = (props) => {
   const [productQuantity, setProductQuantity] = useState<number>(1);
   const [openDetails, setOpenDetails] = useState<number>(1);
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [animationIdList, setAnimationIdList] = useState<AnimationIdList[]>([]);
   
   useEffect(() => {
     setProgress(70);
@@ -54,8 +62,26 @@ const Product: React.FC<PropsType> = (props) => {
   }
 
   const handleCart = function(id: number, currentQuantity: number) {
-    dispatch(updateCart({ id: id, quantity: currentQuantity }));
-    setProductQuantity(1);
+    const tempId: AnimationIdList = {
+      id: id,
+      pulse: true,
+      tick: false
+    } 
+    const tempId2 = {
+      id: id,
+      pulse: false,
+      tick: true
+    }
+    setAnimationIdList([tempId, ...animationIdList]);
+    setTimeout(() => {
+      setAnimationIdList(animationIdList.filter((product: AnimationIdList) => (product.id !== tempId.id)));
+      setAnimationIdList([tempId2, ...animationIdList]);
+    }, 600);
+    setTimeout(() => {
+      setAnimationIdList(animationIdList.filter((product: AnimationIdList) => (product.id !== tempId2.id)));
+      dispatch(updateCart({ id: id, quantity: currentQuantity }));
+      setProductQuantity(1);
+    }, 1200);
   }
 
   const toggleDetails = function(e: React.MouseEvent<HTMLDetailsElement>, n: number) {
@@ -74,15 +100,33 @@ const Product: React.FC<PropsType> = (props) => {
       setCurrentPageHeading(pageName);
     }
   }
+
+  const animationOff = function(id: number) {
+    return animationIdList.filter((tempProduct: AnimationIdList) => tempProduct.id === id).length !== 1;
+  }
+
+  const animationOn = function(id: number) {
+    return animationIdList.filter((tempProduct: AnimationIdList) => 
+      {return tempProduct.id === id && tempProduct.pulse && !tempProduct.tick}).length === 1;
+  }
+
+  const tickAnimation = function(id: number) {
+    return animationIdList.filter((tempProduct: AnimationIdList) => 
+      {return tempProduct.id === id && !tempProduct.pulse && tempProduct.tick}).length === 1;
+  }
+
+  const disableBtn = function() {
+    return animationIdList.length > 0;
+  }
   
   return (
-    <>
+    <section className="product-page">
       <Header 
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       setShowCartPage={setShowCartPage} 
       />
-      <main className="product-page">
+      <main className="product-page-content">
         <div>
           <span>
             <button className="nav-btns" onClick={() => openThePage("/home")}>Home/</button>
@@ -113,8 +157,11 @@ const Product: React.FC<PropsType> = (props) => {
           onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value))}/>
           <button
             className="add-to-cart-btn"
+            disabled={disableBtn()}
             onClick={() => handleCart(productDetails.id, productQuantity)}>
-            Add to Cart
+            { animationOff(productDetails.id) && <>Add to Cart</>}
+            { animationOn(productDetails.id) && <div className="dot-pulse"></div>}
+            { tickAnimation(productDetails.id) && <Checked />}
           </button>
           <button>Buy Now</button>
           <details className='styled' open={openDetails === 1 && isOpen} 
@@ -138,7 +185,7 @@ const Product: React.FC<PropsType> = (props) => {
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       />
-    </>
+    </section>
   )
 }
 

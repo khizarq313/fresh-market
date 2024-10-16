@@ -3,6 +3,8 @@ import ProductsList from "../../components/ProductsList/ProductsList";
 import "./Shop.scss"
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import Minus from "../../assets/icons/Minus";
+import Plus from "../../assets/icons/Plus";
 
 type PropsType = {
   setProgress: React.Dispatch<React.SetStateAction<number>>,
@@ -14,7 +16,7 @@ type PropsType = {
 
 const Shop: React.FC<PropsType> = (props) => {
   const {setProgress, type, currentPageHeading, setCurrentPageHeading, setShowCartPage} = props;
-  const [showCategoryBtn, setShowCategoryBtn] = useState<boolean>(false);
+  const [showCategoryBtn, setShowCategoryBtn] = useState<boolean>(true);
   const [showRangeBtn, setShowRangeBtn] = useState<boolean>(false);
   const [showClearBtn, setShowClearBtn] = useState<boolean>(false);
   const [currentShopItems, setCurrentShopItems] = useState<string>("all-items");
@@ -33,22 +35,20 @@ const Shop: React.FC<PropsType> = (props) => {
     }, 1000)
   }, [setProgress, type]);
 
-  const addFilter = function(filterType: string) {
-    setCurrentShopItems(`${filterType}-items`);
-    if(filterType === "all" && Number(rangeValue) === 10) {
+  useEffect(() => {
+    if(currentShopItems === "all-items" && Number(rangeValue) === 10) {
       setShowClearBtn(false);
     } else {
       setShowClearBtn(true);
-    }
+    } 
+  }, [currentShopItems, rangeValue])
+
+  const addFilter = function(filterType: string) {
+    setCurrentShopItems(`${filterType}-items`);
   }
 
   const changeRange = function(e: React.ChangeEvent<HTMLInputElement>) {
     setRangeValue(e.currentTarget.value);
-    if(Number(rangeValue) >= 9) {
-      setShowClearBtn(true);
-    } else if(Number(rangeValue) === 10 && currentShopItems === "all-items") {
-      setShowClearBtn(false);
-    }
   }
 
   const removeFilter = function() {
@@ -58,7 +58,7 @@ const Shop: React.FC<PropsType> = (props) => {
   }
   
   return (
-    <>
+    <section className="app-container">
       <Header 
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
@@ -67,41 +67,53 @@ const Shop: React.FC<PropsType> = (props) => {
       <main className="shop">
         { currentPage === "shop" &&
           <>
-            <h1>Shop</h1>
-            <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+            <h1 className="shop-heading">Shop</h1>
+            <p className="shop-txt">I'm a paragraph. Click here to add your own text and edit me.</p>
           </>
         }
         { currentPage === "search-results" &&
           <>
-            <h1>Search Results</h1>
-            <p>I'm a paragraph. Click here to add your own text and edit me.</p>
+            <h1 className="shop-heading">Search Results</h1>
+            <p className="shop-txt">I'm a paragraph. Click here to add your own text and edit me.</p>
           </>
         }
         <section className="shop-content">
           <div className="filter-box">
             <h1>Filter by</h1>
-            <hr />
-            <button onClick={() => setShowCategoryBtn(!showCategoryBtn)}>Category</button>
+            <span className="horizontal-line"></span>
+            <button onClick={() => setShowCategoryBtn(!showCategoryBtn)} className="heading-btn">
+              <p>Category</p> {!showCategoryBtn && <Plus />}{showCategoryBtn && <Minus />}
+            </button>
             { showCategoryBtn && 
-              <span>
-                <button onClick={() => addFilter("all")}>All</button>
-                <button onClick={() => addFilter("produce")}>Produce</button>
-                <button onClick={() => addFilter("dairy")}>Dairy & Eggs</button>
-                <button onClick={() => addFilter("bread")}>Bread & Grains</button>
-                <button onClick={() => addFilter("household")}>Household Goods</button>
+              <span className="filter-btns-container">
+                <button onClick={() => addFilter("all")} 
+                  className={currentShopItems === "all-items"? "current-category" : "optional-category"}>All</button>
+                <button onClick={() => addFilter("produce")} 
+                  className={currentShopItems === "produce-items"? "current-category" : "optional-category"}>Produce</button>
+                <button onClick={() => addFilter("dairy")} 
+                  className={currentShopItems === "dairy-items"? "current-category" : "optional-category"}>Dairy & Eggs</button>
+                <button onClick={() => addFilter("bread")} 
+                  className={currentShopItems === "bread-items"? "current-category" : "optional-category"}>Bread & Grains</button>
+                <button onClick={() => addFilter("household")} 
+                  className={currentShopItems === "household-items"? "current-category" : "optional-category"}>Household Goods</button>
               </span>
             }
-            <hr />
-            <button onClick={() => setShowRangeBtn(!showRangeBtn)}>Price</button>
+            <span className="horizontal-line"></span>
+            <button onClick={() => setShowRangeBtn(!showRangeBtn)} className="heading-btn">
+              <p>Price</p> {!showRangeBtn && <Plus />}{showRangeBtn && <Minus />}
+            </button>
             { showRangeBtn && 
               <span>
                 <input type="range" name="range-btn" id="range-btn" 
                   min="1" max="10" value={rangeValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeRange(e)}/>
-                <p>{Number(rangeValue)*100}</p>
+                <span className="price-range-container">
+                  <p>100₹</p>
+                  <p>{Number(rangeValue)*100}₹</p>
+                </span>
               </span>
             }
             { showClearBtn && 
-              <button onClick={removeFilter}>Clear Filter</button>
+              <button onClick={removeFilter}>Clear Filters X</button>
             }
           </div>
           <ProductsList ListName={currentShopItems} PriceRange={Number(rangeValue)*100} Page={currentPage} setCurrentPageHeading={setCurrentPageHeading}/>
@@ -111,7 +123,7 @@ const Shop: React.FC<PropsType> = (props) => {
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       />
-    </>
+    </section>
     
   )
 }

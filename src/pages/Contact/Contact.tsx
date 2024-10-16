@@ -26,53 +26,63 @@ const Contact: React.FC<PropsType> = (props) => {
   }
 
   return (
-    <>
+    <section className="contact">
       <Header 
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       setShowCartPage={setShowCartPage} 
       />
-      <main className="contact">
+      <main className="contact-content">
         <h1>Contact Us</h1>
-        <p>I'm a paragraph. Click here to add your own text and edit me. It's easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. </p>
-        <hr className="contact-hr"/>
+        <p className="contact-description">I'm a paragraph. Click here to add your own text and edit me. It's easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. </p>
+        <span className="contact-hr"></span>
         <div className="contact-details">
           <span>
-            <h1>CONTACT</h1>
+            <h2>CONTACT</h2>
             <p>Tel: 123-456-7890</p>
             <p>Email: info@mysite.com</p>
           </span>
           <span>
-            <h1>ADDRESS</h1>
+            <h2>ADDRESS</h2>
             <p>500 Terry Francine Street</p>
             <p>San Francisco, CA 94158</p>
           </span>
           <span>
-            <h1>OPENING HOURS</h1>
+            <h2>OPENING HOURS</h2>
             <p>Mon - Fri: 7am - 10pm</p>
             <p>Saturday: 8am - 10pm</p>
             <p>Sunday: 8am - 11pm</p>
           </span>
         </div>
-        <form onSubmit={submitUserMessage}>
+        <form onSubmit={submitUserMessage} className="contact-form">
+          <span>
             <label htmlFor="first-name">First name*</label>
-            <input type="text" id="first-name" required/>
             <label htmlFor="last-name">Last name*</label>
+          </span>
+          <span>
+            <input type="text" id="first-name" required/>
             <input type="text" id="last-name" required/>
+          </span>
+          <span>
             <label htmlFor="contact-email">Email*</label>
-            <input type="text" id="contact-email" required/>
             <label htmlFor="subject">Subject</label>
+          </span>
+          <span>
+            <input type="text" id="contact-email" required/>
             <input type="text" id="subject" />
-            <label htmlFor="message">Type your message here...</label>
-            <textarea id="message"/>
+          </span>
+          <label htmlFor="message">Type your message here...</label>
+          <textarea id="message"/>
+          <span className="submit-btn">
             <button type="submit">Submit</button>
+          </span>
         </form>
       </main>
       <Footer 
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       />
-    </>
+    </section>
   )
 }
 

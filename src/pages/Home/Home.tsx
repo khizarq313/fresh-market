@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import ProductsList from "../../components/ProductsList/ProductsList";
@@ -37,12 +37,13 @@ const Home: React.FC<PropsType> = (props) => {
     }, 1000)
   }, [setProgress]);
 
-  useLayoutEffect(() => {
-    if (isManualScroll) {
-      return;
-    }
-    const autoScroll = () => {
-      const timeout = setTimeout(() => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!isManualScroll) {
         if (currentImage === 1) {
           controls.start({ x: "-100%", transition: { duration: 1 } });
           setCurrentImage(2);
@@ -50,16 +51,14 @@ const Home: React.FC<PropsType> = (props) => {
           controls.start({ x: "-200%", transition: { duration: 1 } });
           setCurrentImage(3);
         }
-      }, 2000);
-      return () => clearTimeout(timeout);
-    };
+      }
+    }, 3000);
 
-    if (currentImage < 3) {
-      autoScroll();
-    }
+    return () => clearTimeout(timeout);
   }, [currentImage, controls, isManualScroll]);
 
-  const handleBack = function() {
+  const handleBack = function(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.stopPropagation();
     setIsManualScroll(true); 
     if (currentImage > 1) {
       const newImageIndex = currentImage - 1;
@@ -71,7 +70,8 @@ const Home: React.FC<PropsType> = (props) => {
     }
   };
 
-  const handleFront = function() {
+  const handleFront = function(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.stopPropagation();
     setIsManualScroll(true); 
     if (currentImage < 3) {
       const newImageIndex = currentImage + 1;
@@ -83,33 +83,45 @@ const Home: React.FC<PropsType> = (props) => {
     }
   };
 
-  const openThePage = function(pageName: string) {
-    navigate(pageName);
+  const openThePage = function(pageName: string) 
+  {if(pageName !== currentPageHeading) {
+    if(pageName !== "/demo-page"){
+      setCurrentPageHeading(pageName);
+      setTimeout(() => {
+        navigate(pageName);
+      }, 300);
+    } else {
+      setCurrentPageHeading(currentPageHeading);
+      setTimeout(() => {
+        navigate(pageName);
+      }, 300);
+    }
+  }
   }
 
   return (
-    <section className="home">
+    <section className="app-container">
       <Header 
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       setShowCartPage={setShowCartPage} 
       />
-      <main>
-        <section className="welcome-section">
+      <main className="home">
+        <section className="welcome-section" onClick={() => openThePage("/shop")}>
           <div className="welcome-txt">
             <h1 className="welcome-bold-heading">FRESH MARKET</h1>
             <h2 className="welcome-light-heading">GET EVERYTHING <br /> DELIVERED <br /> TO YOUR DOORSTEP</h2>
-            <button className="welcome-shop-btn" onClick={() => openThePage("/shop")}>ORDER NOW</button>
+            <button className="welcome-shop-btn">ORDER NOW</button>
           </div>
           <div className="welcome-bg">
           <div className="img-carousel-btns">
             { currentImage !== 1 && 
-              <button className="left-arrow" onClick={handleBack}>
+              <button className="left-arrow" onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleBack(e)}>
                 <Arrow />
               </button>
             }
             { currentImage !== 3 &&
-              <button className="right-arrow" onClick={handleFront}>
+              <button className="right-arrow" onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleFront(e)}>
                 <Arrow />
               </button>
             }
