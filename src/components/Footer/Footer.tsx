@@ -55,7 +55,7 @@ const Footer: React.FC<PropsType> = (props) => {
             <span className="footer-checkbox" onClick={() => setIsChecked(!isChecked)}>
               {isChecked && <Checked />}
             </span>
-            <p>Yes, subscribe me to your newsletter.</p>
+            <p className="subscribe-txt">Yes, subscribe me to your newsletter.</p>
           </span>
           <button type="submit" className="footer-submit-btn">SUBSCRIBE NOW</button>
         </form>

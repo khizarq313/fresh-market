@@ -1,9 +1,9 @@
 footer {
     background-color: #2A6049;
     color: #FFFFFF;
-    padding: 1.5rem 4rem;
+    padding: 4rem;
     margin: 5rem;
-    width: 100rem;
+    width: 110rem;
 }
 
 .additional-links {
@@ -16,11 +16,11 @@ footer {
     }
 
     h1 {
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
 
     h1, p, label {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         font-weight: 100;
     }
 }
@@ -32,6 +32,7 @@ footer {
         text-align: left;
         color: #FFFFFF;
         margin-bottom: .8rem;
+        font-size: 1.4rem;
     }
 }
 
@@ -39,9 +40,14 @@ footer {
     display: flex;
 }
 
+.subscribe-txt {
+    font-size: 1.3rem !important;
+}
+
 .contact-links {
     display: flex;
     justify-content: end;
+    padding-right: 3rem;
 }
 
 .contact-btn {
@@ -73,7 +79,7 @@ footer {
     width: 24rem;
     display: flex;
     flex-direction: column;
-    margin: 5rem 0rem;
+    margin: 5rem 3rem;
 }
 
 .footer-email {

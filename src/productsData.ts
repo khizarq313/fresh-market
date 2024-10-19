@@ -5,8 +5,8 @@ export const products: ProductType[] = [
   {
     id: 1,
     name: "Apple",
-    price: 150,
-    discount: 0,
+    price: 250,
+    discount: 100,
     quantity: 1,
     image: Apple,
     category: "produce",

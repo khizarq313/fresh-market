@@ -365,13 +365,11 @@ const ProductsList: React.FC<PropsType> = (props) => {
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="product-image"
                       onClick={() => {
                         setCurrentPageHeading(`/${productPath}product-${product.id}`);
                         navigate(`/${productPath}product-${product.id}`)}
                         }/>
                     <h3
-                      className="product-name"
                       onClick={() => {
                         setCurrentPageHeading(`/${productPath}product-${product.id}`);
                         navigate(`/${productPath}product-${product.id}`)}
@@ -379,7 +377,6 @@ const ProductsList: React.FC<PropsType> = (props) => {
                       {product.name}
                     </h3>
                     <p
-                      className="discount-price"
                       onClick={() => {
                         setCurrentPageHeading(`/${productPath}product-${product.id}`);
                         navigate(`/${productPath}product-${product.id}`)}

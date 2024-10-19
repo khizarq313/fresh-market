@@ -2,16 +2,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100rem;
+    width: 110rem;
 }
 
 .product-page-content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     text-align: center;
     background-color: #FFFFFF;
     color: #000000;
-    padding: 5rem;
+    padding: 5rem 10rem 15rem 10rem;
     width: 100%;
 
     div {
@@ -20,7 +21,241 @@
     }
 }
 
+.nav-btns-container {
+    display: flex;
+}
+
 .nav-btns {
     background-color: transparent;
     border: none;
 }
+
+.img-container {
+    width: 50rem;
+    text-align: left;
+    font-size: 1.4rem;
+}
+
+.product-additionals {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 35rem;
+}
+
+.product-image {
+    width: 50rem;
+}
+
+.product-name {
+    font-size: 1.8rem;
+}
+
+.product-price {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+}
+
+.quantity-label {
+    font-size: 1.4rem;
+    font-weight: 100;
+    margin-top: 1.5rem;
+}
+
+.product-quantity-container {
+    margin-top: .5rem;
+    margin-bottom: 2rem;
+    border: 1px solid #000000;
+    display: flex;
+    align-items: center;
+    width: 7rem;
+    height: 4rem;
+
+    button {
+        background-color: transparent;
+        border: none;
+    }
+
+    svg {
+        height: 1rem;
+        width: 1rem;
+    }
+}
+
+.quantity-btns {
+    display: inline-flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: 0.4s ease-out;
+}
+
+.product-quantity-container:hover {
+    span {
+        opacity: 1;
+        transition: 0.4s ease-out;
+    }
+}
+
+.quantity-increment-btn {
+    padding: .2rem;
+    padding-left: .4rem;
+    svg {
+        transform: rotate(270deg);
+    }
+}
+
+.quantity-decrement-btn {
+    padding: .2rem;
+    svg {
+        transform: rotate(90deg);
+    }
+}
+
+.product-quantity {
+    border: none;
+    outline: none;
+    font-size: 1.6rem;
+    padding-left: 1.4rem;
+    width: 4.5rem;    
+}
+
+.product-quantity::-webkit-outer-spin-button,
+.product-quantity::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.product-quantity[type=number] {
+	-moz-appearance: textfield;
+}
+
+.product-cart-btn, .product-buy-btn {
+    width: 100%;
+    height: 3.6rem;
+    background-color: #2A6049;
+    color: #FFFFFF;
+    border: none;
+    padding: 1rem;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+        height: 3rem;
+    }
+}
+
+.product-buy-btn {
+    margin-bottom: 1rem;
+}
+
+.details-tag {
+    font-size: 1.4rem;
+    width: 100%;
+    padding: 1rem 0;
+    transition: 0.4s ease-out;
+}
+
+.details-tag summary::-webkit-details-marker {
+    display: none;
+}
+   
+.details-tag summary {
+    list-style: none;
+    cursor: default;
+    position: relative;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    transition: 0.4s ease-out;
+  
+    &::after {
+        content: '+';
+        position: absolute;
+        right: 0;
+        font-size: 2rem;
+        font-weight: 100;
+    }
+}
+
+details[open].details-tag > summary::after {
+    content: "-";
+    transform: translateY(-10%);
+}
+
+.top-bottom-border {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+
+.dot-pulse-2 {
+	position: relative;
+	left: -9999px;
+	width: 8px;
+	height: 8px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	color: #FFFFFF;
+	box-shadow: 9999px 0 0 -5px;
+	animation: dot-pulse-2 1.5s infinite linear;
+	animation-delay: 0.25s;
+  }
+  .dot-pulse-2::before, .dot-pulse-2::after {
+	content: "";
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	width: 8px;
+	height: 8px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	color: #FFFFFF;
+  }
+  .dot-pulse-2::before {
+	box-shadow: 9984px 0 0 -5px;
+	animation: dot-pulse-2-before 1.5s infinite linear;
+	animation-delay: 0s;
+  }
+  .dot-pulse-2::after {
+	box-shadow: 10014px 0 0 -5px;
+	animation: dot-pulse-2-after 1.5s infinite linear;
+	animation-delay: 0.5s;
+  }
+  
+  @keyframes dot-pulse-2-before {
+	0% {
+	  box-shadow: 9984px 0 0 -5px;
+	}
+	30% {
+	  box-shadow: 9984px 0 0 2px;
+	}
+	60%, 100% {
+	  box-shadow: 9984px 0 0 -5px;
+	}
+  }
+  @keyframes dot-pulse-2 {
+	0% {
+	  box-shadow: 9999px 0 0 -5px;
+	}
+	30% {
+	  box-shadow: 9999px 0 0 2px;
+	}
+	60%, 100% {
+	  box-shadow: 9999px 0 0 -5px;
+	}
+  }
+  @keyframes dot-pulse-2-after {
+	0% {
+	  box-shadow: 10014px 0 0 -5px;
+	}
+	30% {
+	  box-shadow: 10014px 0 0 2px;
+	}
+	60%, 100% {
+	  box-shadow: 10014px 0 0 -5px;
+	}
+  }

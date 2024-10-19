@@ -1,22 +1,27 @@
 @font-face {
     font-family: "Helvetica-bold";
-    src: url("../assets/fonts/helvetica-bold.ttf");
+    src: url("../assets/fonts/helvatica/helvetica-bold.ttf");
 }
 
 @font-face {
     font-family: "Helvetica-light";
-    src: url("../assets/fonts/helvetica-light.ttf");
+    src: url("../assets/fonts/helvatica/helvetica-light.ttf");
+}
+
+@font-face {
+    font-family: "futura";
+    src: url("../assets/fonts/futura/Futura.ttf");
 }
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Helvetica, sans-serif, Arial;
 }
 
 html {
     font-size: 62.5%;
+    font-family: Helvetica, sans-serif, Arial;
     // font-family: Helvetica-light, sans-serif;
 }
 

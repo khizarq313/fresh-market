@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: "futura";
 }
 
 .detailed-cart-content {
@@ -29,6 +30,7 @@
 
 .order-summary {
     width: 30%;
+    font-weight: 100;
 
     h1 {
         border-bottom: 1px solid #000000;
@@ -43,7 +45,6 @@
 
     p {
         font-size: 1.6rem;
-        font-weight: 100;
     }
 }
 
@@ -55,7 +56,7 @@
     padding-top: 1rem;
 
     p {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 }
 
