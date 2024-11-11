@@ -2,60 +2,76 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3rem;
+    padding: 4rem;
     position: sticky;
     top: 0;
+    width: 100vw;
     z-index: 50;
     background-color: #FBF9F1;
-    width: 110rem;
 
     button {
         border: none;
         background-color: transparent;
-        margin: .5rem;
         font-size: 1.4rem;
     }
 }
 
+.logo {
+    height: 3rem;
+    display: flex;
+    cursor: default;
+
+    svg {
+        transform: translateY(-0.7rem);
+    }
+
+    h1 {
+        font-size: 2.4rem;
+        margin: 0 3rem 0 0.5rem;
+    }
+}
+
 nav {
-    margin-top: 1rem;
     margin-right: 2rem;
 
     button {
-        padding:0 .5rem;
+        margin-right: 2rem;
+        transition: .4s ease;
     }
 
     button:hover {
         color: rgb(71, 158, 121);
-    }
-}
-
-.logo {
-    height: 2.5rem;
-    width: 20rem;
-    display: flex;
-    justify-content: center;
-    cursor: default;
-
-    h1 {
-        font-size: 2rem;
-        padding: .5rem;
+        transition: .4s ease;
     }
 }
 
 .search-input {
     display: inline-block;
     border-bottom: 1px solid #000000;
-    margin-top: .5rem;
     margin-left: 6rem;
+    margin-right: 1rem;
     width: 17rem;
 
     input {
         background-color: transparent;
         outline: none;
         border: none;
-        width: 14.8rem;
-        padding: 1rem 0;
+        min-width: 14.8rem;
+        padding: 1.2rem 0;
+        font-size: 1.4rem;
+    }
+}
+
+.search-box:focus-within ~ .login-btn {
+    display: none;
+}
+
+.search-box:focus-within .search-input {
+    border: none;
+    width: 27rem;
+
+    input {
+        width: 25.5rem;
     }
 }
 
@@ -68,8 +84,8 @@ nav {
 .cart-btn {
     background-color: transparent;
     border: none;
-    height: 2.5rem;
-    margin-top: 1rem;
+    height: 2.8rem;
+    margin-left: 1rem;
 
     text {
         font-size: 5rem;
@@ -83,7 +99,6 @@ nav {
     align-items: center;
     width: 7rem;
     margin: 0 1.5rem;
-    margin-top: 1rem;
 
     svg {
         width: 2rem;
@@ -98,26 +113,49 @@ nav {
 .search-results-list {
     position: absolute;
     list-style-type: none;
-    padding: 1rem;
     margin-left: 6rem;
-    background-color: rgba(251, 249, 241, 0.8);
-    backdrop-filter: blur(10px);
+    background-color: #FBF9F1;
     overflow-y: scroll;
-    width: 17rem;
-    max-height: 27rem;
+    width: 27rem;
+    max-height: 31rem;
+
+    h1 {
+        font-size: 1.4rem;
+        font-weight: 100;
+        padding: 1rem;
+    }
 
     li {
         display: flex;
         align-items: center;
         overflow: hidden;
-        margin: 4px;
+        padding: 0.2rem 1rem;
+        background-color: #FBF9F1;
+        width: calc(100%);
     }
+}
+
+.search-img-container {
+    display: inline-flex;
+    padding: .5rem;
+    margin-right: 1rem;
+    margin: 0.4rem;
+    background-color: #FFFFFF;
+    height: 5.5rem;
 
     img {
-        height: 4rem;
-        width: 4rem;
-        margin: 2px;
+		object-position: center;
+		aspect-ratio: 1/1;
+		object-fit: contain;
     }
+}
+
+.search-heading {
+    padding: 1rem 1rem 1rem 0;
+}
+
+.searched-items:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .clear-search-btn {
@@ -126,19 +164,19 @@ nav {
     height: 1.6rem;
     width: 1.6rem;
     position: absolute;
-    transform: translate(-2.4rem,3px);
+    transform: translate(-2.4rem, 11px);
 }
 
 .search-results-list::-webkit-scrollbar,.note-content::-webkit-scrollbar {
-    width: 1px;
+    width: 0px;
 }
  
 .search-results-list::-webkit-scrollbar-track,.note-content::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 4px transparent;
+    box-shadow: inset 0 0 0px transparent;
 }
  
 .search-results-list::-webkit-scrollbar-thumb,.note-content::-webkit-scrollbar-thumb {
-    background-color: grey;
-    outline: solid 1px gray;
+    background-color: transparent;
+    outline: solid 0px transparent;
     border-radius: 1rem;
 }

@@ -97,40 +97,43 @@ const Cart: React.FC<PropsType> = (props) => {
                   const tempIndex:number = cartProducts.findIndex((tempProduct: TempQuantitiesType) => tempProduct.id === product.id);
                   return (
                     <div className="cart-item" key={index}>
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="product-image"
-                        onClick={() => openThePage(`/shop/${product.id}`)}/>
-                        <span className="product-details">
-                          <h3
-                            className="product-name"
-                            onClick={() => openThePage(`/shop/${product.id}`)}>
-                            {product.name}
-                          </h3>
-                          <p
-                            className="discount-price"
-                            onClick={() => openThePage(`/shop/${product.id}`)}>
-                            {product.discount > 0 && <del> ₹{product.price}</del>} ₹
-                            {product.price - product.discount}
-                          </p>
-                          <span className="cart-quantity-btn">
-                            <button className="decrement-btn" disabled={cartProducts[tempIndex].quantity === 1}
-                            onClick={() => decrementCartItem(tempIndex)}>-</button>
-                            { cartProducts.length > 0 && 
-                            <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
-                            value={cartProducts[tempIndex].quantity} min="1" max="20" className="quantity-input"
-                            onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
-                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
-                            onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/> }
-                            <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}>+</button>
-                          </span>
+                      <span className="cart-img-container">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="product-image"
+                          draggable={false}
+                          onClick={() => openThePage(`/shop/${product.id}`)}/>
+                      </span>
+                      <span className="product-details">
+                        <h3
+                          className="product-name"
+                          onClick={() => openThePage(`/shop/${product.id}`)}>
+                          {product.name}
+                        </h3>
+                        <p
+                          className="discount-price"
+                          onClick={() => openThePage(`/shop/${product.id}`)}>
+                          {product.discount > 0 && <del> ₹{product.price}</del>} ₹
+                          {product.price - product.discount}
+                        </p>
+                        <span className="cart-quantity-btn">
+                          <button className="decrement-btn" disabled={cartProducts[tempIndex].quantity === 1}
+                          onClick={() => decrementCartItem(tempIndex)}>-</button>
+                          { cartProducts.length > 0 && 
+                          <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
+                          value={cartProducts[tempIndex].quantity} min="1" max="20" className="quantity-input"
+                          onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
+                          onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
+                          onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/> }
+                          <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}>+</button>
                         </span>
-                        <button className="cart-delete-btn">
-                          <span onClick={() => deleteCartItem(tempIndex)}>
-                            <Delete />
-                          </span>
-                        </button>
+                      </span>
+                      <button className="cart-delete-btn">
+                        <span onClick={() => deleteCartItem(tempIndex)}>
+                          <Delete />
+                        </span>
+                      </button>
                     </div>
                   )
                 })}

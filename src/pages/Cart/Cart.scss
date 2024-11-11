@@ -68,15 +68,6 @@
     border-top: 1px solid #000000;
     width: 90%;
 
-    img {
-        height: 8rem;
-		width: 8rem;
-        margin-right: 1rem;
-		object-position: center;
-		object-fit: contain;
-		background-color: #FFFFFF;
-    }
-
     h3 {
         font-size: 1.6rem;
         font-weight: 100;
@@ -89,6 +80,21 @@
 
     del {
         font-weight: 100;
+    }
+}
+
+.cart-img-container {
+    height: 8rem;
+    width: 8rem;
+    background-color: #FFFFFF;
+    margin-right: 1.5rem;
+
+    img {
+        height: 100%;
+        width: 100%;
+		object-position: center;
+		object-fit: contain;
+		background-color: #FFFFFF;
     }
 }
 
@@ -190,7 +196,6 @@
 .cart-products-container > div:first-child {
     border: none;
 }
-
 
 .overlay {
     position: absolute;

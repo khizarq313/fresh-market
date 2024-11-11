@@ -22,7 +22,7 @@ const Home: React.FC<PropsType> = (props) => {
   const {setProgress, currentPageHeading, setCurrentPageHeading, setShowCartPage} = props;
   const navigate = useNavigate();
   const controls = useAnimation();
-  const [currentImage, setCurrentImage] = useState(1); 
+  const [currentImage, setCurrentImage] = useState(1);
   const [isManualScroll, setIsManualScroll] = useState(false);
   const images = [
     { id: 1, src: Banner1, altText: "Banner 1" },
@@ -57,8 +57,7 @@ const Home: React.FC<PropsType> = (props) => {
     return () => clearTimeout(timeout);
   }, [currentImage, controls, isManualScroll]);
 
-  const handleBack = function(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.stopPropagation();
+  const handleBack = function() {
     setIsManualScroll(true); 
     if (currentImage > 1) {
       const newImageIndex = currentImage - 1;
@@ -70,8 +69,7 @@ const Home: React.FC<PropsType> = (props) => {
     }
   };
 
-  const handleFront = function(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.stopPropagation();
+  const handleFront = function() {
     setIsManualScroll(true); 
     if (currentImage < 3) {
       const newImageIndex = currentImage + 1;
@@ -107,21 +105,21 @@ const Home: React.FC<PropsType> = (props) => {
       setShowCartPage={setShowCartPage} 
       />
       <main className="home">
-        <section className="welcome-section" onClick={() => openThePage("/shop")}>
+        <section className="welcome-section">
           <div className="welcome-txt">
             <h1 className="welcome-bold-heading">FRESH MARKET</h1>
             <h2 className="welcome-light-heading">GET EVERYTHING <br /> DELIVERED <br /> TO YOUR DOORSTEP</h2>
-            <button className="welcome-shop-btn">ORDER NOW</button>
+            <button className="welcome-shop-btn" onClick={() => openThePage("/shop")}>ORDER NOW</button>
           </div>
           <div className="welcome-bg">
           <div className="img-carousel-btns">
             { currentImage !== 1 && 
-              <button className="left-arrow" onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleBack(e)}>
+              <button className="left-arrow" onClick={handleBack}>
                 <Arrow />
               </button>
             }
             { currentImage !== 3 &&
-              <button className="right-arrow" onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => handleFront(e)}>
+              <button className="right-arrow" onClick={handleFront}>
                 <Arrow />
               </button>
             }
@@ -129,7 +127,7 @@ const Home: React.FC<PropsType> = (props) => {
           <motion.div
             animate={controls}>
             {images.map((image) => (
-              <img key={image.id} src={image.src} alt={image.altText} style={{ width: "100%" }} />
+              <img key={image.id} src={image.src} alt={image.altText}/>
             ))}
           </motion.div>
         </div>

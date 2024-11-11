@@ -103,7 +103,7 @@ const Shop: React.FC<PropsType> = (props) => {
               <p>Price</p> {!showRangeBtn && <Plus />}{showRangeBtn && <Minus />}
             </button>
             { showRangeBtn && 
-              <span>
+              <span className="price-slider">
                 <input type="range" name="range-btn" id="range-btn" 
                   min="1" max="10" value={rangeValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeRange(e)}/>
                 <span className="price-range-container">

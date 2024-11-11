@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { ProductType, updateCart } from "../../features/products/productsSlice";
 import "./Product.scss";
+import "../Demo/Demo.scss";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Checked from "../../assets/icons/Checked";
 import Arrow from "../../assets/icons/Arrow";
+import Plus from "../../assets/icons/Plus";
+import Minus from "../../assets/icons/Minus";
+import Wrong from "../../assets/icons/Wrong";
+import { AnimatePresence, motion } from "framer-motion";
 
 type PropsType = {
   setProgress: React.Dispatch<React.SetStateAction<number>>,
@@ -31,6 +36,7 @@ const Product: React.FC<PropsType> = (props) => {
   const [productQuantity, setProductQuantity] = useState<number>(1);
   const [openDetails, setOpenDetails] = useState<number>(1);
   const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [demoWindow, setDemoWindow] = useState<boolean>(false);
   const [animationIdList, setAnimationIdList] = useState<AnimationIdList[]>([]);
   
   useEffect(() => {
@@ -172,28 +178,55 @@ const Product: React.FC<PropsType> = (props) => {
             { animationOn(productDetails.id) && <div className="dot-pulse-2"></div>}
             { tickAnimation(productDetails.id) && <Checked />}
           </button>
-          <button className="product-buy-btn" onClick={() => openThePage("/demo-page")}>Buy Now</button>
+          <button className="product-buy-btn" onClick={() => setDemoWindow(true)}>Buy Now</button>
           <details className='details-tag' open={openDetails === 1 && isOpen} 
-            onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 1)}>
-                <summary>PRODUCT INFO</summary>
-                <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.</p>
-            </details>
-            <details className='details-tag top-bottom-border' open={openDetails === 2 && isOpen} 
-            onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 2)}>
-                <summary>REFUND POLICY</summary>
-                <p>I'm a Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.</p>
-            </details>
-            <details className='details-tag' open={openDetails === 3 && isOpen} 
-            onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 3)}>
-                <summary>SHIPPING INFO</summary>
-                <p>I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.</p>
-            </details>
+          onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 1)}>
+              <summary>
+                <p>PRODUCT INFO</p> 
+                {openDetails !== 1 && <Plus /> }
+                {openDetails === 1 && <Minus /> }
+              </summary>
+              <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.</p>
+          </details>
+          <details className='details-tag top-bottom-border' open={openDetails === 2 && isOpen} 
+          onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 2)}>
+              <summary>
+                <p>REFUND POLICY</p>
+                {openDetails !== 2 && <Plus /> }
+                {openDetails === 2 && <Minus /> }
+              </summary>
+              <p>I'm a Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.</p>
+          </details>
+          <details className='details-tag' open={openDetails === 3 && isOpen} 
+          onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 3)}>
+              <summary>
+                <p>SHIPPING INFO</p>
+                {openDetails !== 3 && <Plus /> }
+                {openDetails === 3 && <Minus /> }
+              </summary>
+              <p>I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.</p>
+          </details>
         </div>
       </main>
       <Footer 
       currentPageHeading={currentPageHeading} 
       setCurrentPageHeading={setCurrentPageHeading} 
       />
+       <AnimatePresence>
+        {demoWindow && 
+        <motion.section 
+          className='demo-page'
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          transition={{ duration: 0.5 }} >
+          <button className='close-btn' onClick={() => setDemoWindow(false)}><Wrong /></button>
+          <h1>Demo Mode</h1>
+          <p>This is just a demo version</p>
+          <button className='ok-btn' onClick={() => setDemoWindow(false)}>OK</button>
+        </motion.section>
+        }
+       </AnimatePresence>
     </section>
   )
 }

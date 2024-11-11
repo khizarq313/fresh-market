@@ -25,6 +25,7 @@ const Header: React.FC<PropsType> = (props) => {
   const [searchedProducts, setSearchedProducts] = useState<ProductType[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+  const [showTrendingProducts, setShowTrendingProducts] = useState<boolean>(false);
 
   useEffect(() => {
     if (searchInput.trim() !== "") {
@@ -88,6 +89,7 @@ const Header: React.FC<PropsType> = (props) => {
 
   const clearSearchInput = function() {
     setSearchInput("");
+    setShowTrendingProducts(false);
   }
 
   return (
@@ -104,21 +106,48 @@ const Header: React.FC<PropsType> = (props) => {
       </nav>
       <div className="search-box">
         <span className="search-input">
-          <input type="text" value={searchInput} placeholder="Search..." onChange={(e: React.ChangeEvent<HTMLInputElement>) => suggestSimilarProducts(e.target.value)}/>
+          <input 
+            className="search-input-feild"
+            type="text" 
+            value={searchInput} 
+            placeholder="Search..." 
+            onFocus={() => setShowTrendingProducts(true)}
+            onBlur={() => clearSearchInput()}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => suggestSimilarProducts(e.target.value)}/>
           {
             showSuggestions && <button className="clear-search-btn" onClick={clearSearchInput}> <Clear /> </button>
           }
           <button className="search-btn" onClick={searchTheProduct}><Search /></button>
         </span>
+        {
+          showTrendingProducts && 
+          <ul className="search-results-list">
+            { searchedProducts.length === 0 && !showSuggestions &&
+              <h1 className="search-heading">Trending Products</h1>
+            }
+            {searchedProducts.length === 0 && !showSuggestions && allProducts.slice(0, 10).map((product: ProductType, index: number) => {
+              return (
+                  <li key={index} onMouseDown={() => openProductPage(product.id)} className="searched-items">
+                      <span className="search-img-container">
+                          <img src={product.image} alt="product-image" draggable={false}/>
+                      </span>
+                      <h1>{product.name}</h1>
+                  </li>
+              );
+            })}
+          </ul>
+        }
         { showSuggestions && 
           <ul className="search-results-list">
             {searchedProducts.length > 0 && 
-              <h1>Products</h1>
+              <h1 className="search-heading">Products</h1>
             }
             {searchedProducts.map((product: ProductType, index: number) => {
               return (
-                <li key={index} onClick={() => openProductPage(product.id)}>
-                  <img src={product.image} alt="product-image" />
+                <li key={index} onMouseDown={() => openProductPage(product.id)} className="searched-items">
+                  <span className="search-img-container">
+                    <img src={product.image} alt="product-image" draggable={false}/>
+                  </span>
                   <h1>{product.name}</h1>
                 </li>
               )
@@ -126,12 +155,10 @@ const Header: React.FC<PropsType> = (props) => {
           </ul>
         }
       </div>
-      <div>
       <button className="login-btn" onClick={() => openThePage("/demo-page")}>
         <Profile />
         Log in
       </button>
-      </div>
       <button className="cart-btn"  onClick={() => setShowCartPage(true)}>
         <CartIcon />
       </button>

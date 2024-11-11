@@ -6,7 +6,7 @@
 }
 
 .quick-deals {
-	padding: 5rem;
+	padding: 5rem 9rem 15rem 9rem;
 	background-color: #FFFFFF;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .discount-products-heading, .quick-deals-heading {
-	font-size: 3rem;
+	font-size: 2.8rem;
 	margin: 1rem;
 }
 
@@ -25,13 +25,13 @@
 }
 
 .discount-products-list {
-	max-width: 80rem;
+	max-width: 92rem;
 	display: flex;
 	overflow: hidden;
 }
 
 .quick-deals-list {
-	max-width: 80rem;
+	max-width: 92rem;
 	display: flex;
   	flex-wrap: wrap; 
 }
@@ -45,8 +45,8 @@
 	align-items: center;
 
 	img {
-		height: 18rem;
-		width: 18rem;
+		height: 21rem;
+		width: 21rem;
 		object-position: center;
 		object-fit: contain;
 		background-color: #FFFFFF;
@@ -64,10 +64,10 @@
 	}
 
 	button {
-		padding: 0.5rem 3rem;
+		padding: 2rem;
 		font-size: 14px;
 		font-weight: 100;
-		width: 18rem;
+		width: 21rem;
 		background-color: #FFFFFF;
 		border: 1px solid #000000;
 		transition: ease 0.4s;
@@ -75,11 +75,11 @@
 }
 
 .animate-left {
-	animation: scrollLeft 0.4s linear;
+	animation: scrollLeft 0.3s ease-in-out;
 }
 
 .animate-right {
-	animation: scrollRight 0.4s linear;
+	animation: scrollRight 0.3s ease-in-out;
 }
 
 .left-arrow-btn, .right-arrow-btn {
@@ -129,10 +129,12 @@
 
 .quantity-btn {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
+	background-color: #FFFFFF;
 	border: 1px solid #000000;
-	width: 18rem;
+	width: 21rem;
 	margin: 0.8rem 0;
+	padding: 0.5rem 0;
 
 	button {
 		border: none;
@@ -142,7 +144,6 @@
 	}
 
 	input {
-		width: 9rem;
 		font-size: 1.8rem;
 		text-align: center;
 		border: none;
@@ -222,6 +223,7 @@
 	justify-content: center;
 	align-items: center;
 	height: 2.8rem;
+	transition: ease 0.4s;
 }
 
 .product-list {

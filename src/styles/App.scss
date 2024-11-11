@@ -8,20 +8,21 @@
     src: url("../assets/fonts/helvatica/helvetica-light.ttf");
 }
 
-@font-face {
-    font-family: "futura";
-    src: url("../assets/fonts/futura/Futura.ttf");
-}
+// @font-face {
+//     font-family: "futura";
+//     src: url("../assets/fonts/futura/Futura.ttf");
+// }
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Helvetica;
 }
 
 html {
     font-size: 62.5%;
-    font-family: Helvetica, sans-serif, Arial;
+    font-family: Helvetica;
     // font-family: Helvetica-light, sans-serif;
 }
 
