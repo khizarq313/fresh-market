@@ -131,7 +131,10 @@ const Header: React.FC<PropsType> = (props) => {
                       <span className="search-img-container">
                           <img src={product.image} alt="product-image" draggable={false}/>
                       </span>
-                      <h1>{product.name}</h1>
+                      <span className="search-text-container">
+                        <h1>{product.name}</h1>
+                        <h2>{product.description}</h2>
+                      </span>
                   </li>
               );
             })}
@@ -139,6 +142,12 @@ const Header: React.FC<PropsType> = (props) => {
         }
         { showSuggestions && 
           <ul className="search-results-list">
+            {searchedProducts.length === 0 && 
+              <div>
+                <h3 className="search-not-found">Product not found.</h3>
+                <button className="clear-search-txt" onClick={clearSearchInput}>Clear Search <Clear /></button>
+              </div>  
+            }
             {searchedProducts.length > 0 && 
               <h1 className="search-heading">Products</h1>
             }
@@ -148,7 +157,10 @@ const Header: React.FC<PropsType> = (props) => {
                   <span className="search-img-container">
                     <img src={product.image} alt="product-image" draggable={false}/>
                   </span>
-                  <h1>{product.name}</h1>
+                    <span className="search-text-container">
+                        <h1>{product.name}</h1>
+                        <h2>{product.description}</h2>
+                    </span>
                 </li>
               )
             })}

@@ -26,16 +26,16 @@ header {
     }
 
     h1 {
-        font-size: 2.4rem;
-        margin: 0 3rem 0 0.5rem;
+        font-size: 2.5rem;
+        margin: 0 4rem 0 0.5rem;
     }
 }
 
 nav {
-    margin-right: 2rem;
+    margin-right: 5rem;
 
     button {
-        margin-right: 2rem;
+        margin-right: 3rem;
         transition: .4s ease;
     }
 
@@ -122,7 +122,13 @@ nav {
     h1 {
         font-size: 1.4rem;
         font-weight: 100;
-        padding: 1rem;
+        margin-bottom: .5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        font-weight: 100;
+        color: grey;
     }
 
     li {
@@ -150,8 +156,36 @@ nav {
     }
 }
 
+.search-text-container {
+    padding-left: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+        width:18rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
+
 .search-heading {
     padding: 1rem 1rem 1rem 0;
+}
+
+.search-not-found {
+    padding: 1rem;
+    font-size: 1.4rem;
+    color: grey;
+    font-weight: 100;
+}
+
+.clear-search-txt {
+    width: 100%;
+    padding: 1rem;
+    padding-top: 0;
+    text-align: end;
 }
 
 .searched-items:hover {

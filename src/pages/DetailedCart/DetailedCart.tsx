@@ -10,6 +10,8 @@ import Footer from '../../components/Footer/Footer';
 import Delete from '../../assets/icons/Delete';
 import Tag from '../../assets/icons/Tag';
 import Note from '../../assets/icons/Note';
+import Minus from '../../assets/icons/Minus';
+import Plus from '../../assets/icons/Plus';
 
 type PropsType = {
     setProgress: React.Dispatch<React.SetStateAction<number>>,
@@ -79,7 +81,6 @@ const DetailedCart: React.FC<PropsType> = (props) => {
       const openThePage = function(pageName: string) {
         if(pageName === "/demo-version") {
           navigate(pageName);
-          setCurrentPageHeading(pageName);
         } else if(pageName !== currentPageHeading) {
           navigate(pageName);
           setCurrentPageHeading(pageName);
@@ -108,16 +109,16 @@ const DetailedCart: React.FC<PropsType> = (props) => {
                         src={product.image}
                         alt={product.name}
                         className="product-image"
-                        onClick={() => openThePage(`/shop/${product.id}`)}/>
+                        onClick={() => openThePage(`/shop/product-${product.id}`)}/>
                       <span>
                           <h3
                             className="product-name"
-                            onClick={() => openThePage(`/shop/${product.id}`)}>
+                            onClick={() => openThePage(`/shop/product-${product.id}`)}>
                             {product.name}
                           </h3>
                           <p
                             className="discount-price"
-                            onClick={() => openThePage(`/shop/${product.id}`)}>
+                            onClick={() => openThePage(`/shop/product-${product.id}`)}>
                             {product.discount > 0 && <del> ₹{product.price}</del>} ₹
                             {product.price - product.discount}
                           </p>
@@ -126,20 +127,20 @@ const DetailedCart: React.FC<PropsType> = (props) => {
                       <span className='product-control-btns'>
                         <span className="cart-quantity-btn no-margin">
                           <button className="decrement-btn" disabled={cartProducts[tempIndex].quantity === 1}
-                          onClick={() => decrementCartItem(tempIndex)}>-</button>
+                          onClick={() => decrementCartItem(tempIndex)}><Minus /></button>
                           { cartProducts.length > 0 && 
                           <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
                           value={cartProducts[tempIndex].quantity} min="1" max="20" className='cart-quantity-input'
                           onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
                           onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
                           onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/> }
-                          <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}>+</button>
+                          <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}><Plus /></button>
                         </span>
-                        <p
-                          className="discount-price"
-                          onClick={() => openThePage(`/shop/${product.id}`)}>
-                          ₹{product.price - product.discount}
-                        </p>
+                        <h4
+                          className="item-final-price"
+                          onClick={() => openThePage(`/shop/product-${product.id}`)}>
+                          ₹{(product.price - product.discount)*product.quantity}
+                        </h4>
                         <button className="cart-delete-btn">
                           <span onClick={() => deleteCartItem(tempIndex)}>
                             <Delete />

@@ -19,14 +19,18 @@
     margin-right: 9rem;
 
     h1 {
-        font-size: 3rem;
-        font-weight: 100;
+        font-size: 2rem;
+        font-weight: 900;
     }
 
     button {
         background-color: transparent;
         border: none;
     }
+}
+
+.clear-filter-btn {
+    margin-top: .5rem;
 }
 
 .horizontal-line {
@@ -41,6 +45,11 @@
     flex-direction: column;
     align-items: start;
     margin: 1rem 0;
+
+    button {
+        font-size: 1.6rem;
+        margin-bottom: .5rem;
+    }
 }
 
 .all-items, .produce-items, .dairy-items, .bread-items, .household-items {
@@ -54,7 +63,7 @@
 }
 
 .heading-btn {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 100;
     width: 80%;
     display: flex;
@@ -116,4 +125,5 @@ input[type='range'] {
 .price-slider {
     display: inline-block;
     margin-top: 1rem;
+    width: 100%;
 }

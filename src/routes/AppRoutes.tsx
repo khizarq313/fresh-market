@@ -180,7 +180,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/demo-page"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="demo-container">
               <Demo 
               setProgress={setProgress} 
               type="normal" 
@@ -192,7 +192,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/demo-version"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="demo-container">
               <Demo 
               setProgress={setProgress} 
               type="checkout" 

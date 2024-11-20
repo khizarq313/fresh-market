@@ -53,25 +53,32 @@
 	}
 
 	h3 {
-		font-size: 1.4rem;
+		font-size: 1.6rem;
 		font-weight: 100;
 		margin-top: 1.5rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
 	}
 
 	p {
-		font-size: 14px;
+		font-size: 1.6rem;
 		font-weight: 100;
 	}
 
 	button {
 		padding: 2rem;
-		font-size: 14px;
+		font-size: 1.6rem;
 		font-weight: 100;
 		width: 21rem;
 		background-color: #FFFFFF;
 		border: 1px solid #000000;
 		transition: ease 0.4s;
 	}
+}
+
+.shop-product {
+	width: 14rem;
 }
 
 .animate-left {

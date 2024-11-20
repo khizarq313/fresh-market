@@ -71,7 +71,9 @@ const Contact: React.FC<PropsType> = (props) => {
             <input type="text" id="contact-email" required/>
             <input type="text" id="subject" />
           </span>
-          <label htmlFor="message">Type your message here...</label>
+          <span>
+            <label htmlFor="message">Type your message here...</label>
+          </span>
           <textarea id="message"/>
           <span className="submit-btn">
             <button type="submit">Submit</button>

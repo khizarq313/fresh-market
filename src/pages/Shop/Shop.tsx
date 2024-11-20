@@ -113,7 +113,7 @@ const Shop: React.FC<PropsType> = (props) => {
               </span>
             }
             { showClearBtn && 
-              <button onClick={removeFilter}>Clear Filters X</button>
+              <button className="clear-filter-btn" onClick={removeFilter}>Clear Filters X</button>
             }
           </div>
           <ProductsList ListName={currentShopItems} PriceRange={Number(rangeValue)*100} Page={currentPage} setCurrentPageHeading={setCurrentPageHeading}/>
