@@ -20,9 +20,9 @@ footer {
         margin-bottom: 3rem;
     }
 
-    h1, p, label {
+    h1, p, label, button {
         font-size: 1.4rem;
-        font-weight: 100;
+        font-weight: 400;
     }
 }
 
@@ -58,7 +58,7 @@ footer {
     border: none;
     background-color: transparent;
     line-height: 0;
-    margin: 0.5rem;
+    margin: 0.8rem;
 
     svg {
         height: 2.4rem;
@@ -128,4 +128,8 @@ footer {
     padding-top: 1rem;
     font-size: 1.6rem;
     font-weight: 500;
+}
+
+.facebook-icon {
+    margin: 0 !important;
 }

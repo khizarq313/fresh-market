@@ -97,7 +97,7 @@ const Home: React.FC<PropsType> = (props) => {
     }
   }
   }
-
+//img-container
   return (
     <section className="app-container">
       <Header 

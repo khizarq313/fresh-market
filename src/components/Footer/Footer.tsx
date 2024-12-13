@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import facebookIcon from "../../assets/icons/facebook-icon.webp";
-import instagramIcon from "../../assets/icons/instagram-icon.webp";
-import youtubeIcon from "../../assets/icons/youtube-icon.webp";
 import Checked from "../../assets/icons/Checked";
 import "./Footer.scss"
 import { useNavigate } from "react-router-dom";
+import Youtube from "../../assets/icons/Youtube";
+import Instagram from "../../assets/icons/Instagram";
+import FacebookWhite from "../../assets/icons/FacebookWhite";
 
 type PropsType = {
   currentPageHeading: string,
@@ -62,13 +62,13 @@ const Footer: React.FC<PropsType> = (props) => {
       </section>
       <div className="contact-links">
         <button className="contact-btn">
-            <img src={youtubeIcon} alt="" />
+          <Youtube />
         </button>
         <button className="contact-btn">
-          <img src={instagramIcon} alt="" />
+          <Instagram />
         </button>
-        <button className="contact-btn">
-          <img src={facebookIcon} alt="" />
+        <button className="contact-btn facebook-icon">
+          <FacebookWhite />
         </button>
       </div>
       <h1 className="watermark">@Khizar Qureshi</h1>

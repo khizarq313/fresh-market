@@ -151,26 +151,32 @@ const Product: React.FC<PropsType> = (props) => {
             <p className="product-description">{productDetails.description}</p>
           </div>
           <div className="product-additionals">
-            <h1
-              className="product-name">
-              {productDetails.name}
-            </h1>
-            <p
-              className="product-price">
-              {productDetails.discount > 0 && <del> ₹{productDetails.price}</del>} ₹
-              {productDetails.price - productDetails.discount}
-            </p>
-            <h2 className="quantity-label">Quantity</h2>
-            <span className="product-quantity-container">
-              <input type="number" min={1} max={20} className="product-quantity" id={productDetails.id.toString()}
-              value={productQuantity} onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e)}
-              onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlurEvent(e)}
-              onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value))}/>
-              <span className="quantity-btns">
-                <button className="quantity-increment-btn" disabled={animationIdList.length === 1 || productQuantity === 20} 
-                  onClick={() => setProductQuantity(productQuantity + 1)}><Arrow /></button>
-                <button className="quantity-decrement-btn"  disabled={animationIdList.length === 1 || productQuantity === 1}
-                  onClick={() => setProductQuantity(productQuantity - 1)}><Arrow /></button>
+            <span className="product-main-info">
+              <span className="product-info-wrapper">
+                <h1
+                  className="product-name">
+                  {productDetails.name}
+                </h1>
+                <p
+                  className="product-price">
+                  {productDetails.discount > 0 && <del> ₹{productDetails.price}</del>} ₹
+                  {productDetails.price - productDetails.discount}
+                </p>
+              </span>
+              <span className="product-info-wrapper">
+                <h2 className="quantity-label">Quantity</h2>
+                <span className="product-quantity-container">
+                  <input type="number" min={1} max={20} className="product-quantity" id={productDetails.id.toString()}
+                  value={productQuantity} onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e)}
+                  onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlurEvent(e)}
+                  onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value))}/>
+                  <span className="quantity-btns">
+                    <button className="quantity-increment-btn" disabled={animationIdList.length === 1 || productQuantity === 20} 
+                      onClick={() => setProductQuantity(productQuantity + 1)}><Arrow /></button>
+                    <button className="quantity-decrement-btn"  disabled={animationIdList.length === 1 || productQuantity === 1}
+                      onClick={() => setProductQuantity(productQuantity - 1)}><Arrow /></button>
+                  </span>
+                </span>
               </span>
             </span>
             <button
@@ -190,7 +196,7 @@ const Product: React.FC<PropsType> = (props) => {
                   {(openDetails !== 1 || !isOpen) && <Plus /> }
                   {openDetails === 1 && isOpen && <Minus /> }
                 </summary>
-                <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.</p>
+                <p>{productDetails.info}</p>
             </details>
             <details className='details-tag top-bottom-border' open={openDetails === 2 && isOpen} 
             onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 2)}>

@@ -318,7 +318,7 @@ body::-webkit-scrollbar-thumb {
     }
 
     .faq-content {
-        margin-top: 0;
+        margin-top: 3rem;
         h1 {
             margin: 0;
             margin-bottom: 2rem;
@@ -390,6 +390,22 @@ body::-webkit-scrollbar-thumb {
         padding: 0;
         text-align: center;
     }
+
+    .product-main-info {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .quantity-label {
+        margin-top: 0;
+    }
+
+    .product-cart-btn, .product-buy-btn {
+        padding: 2.5rem 0;
+        font-size: 1.6rem;
+    }
 }
 
 
@@ -428,6 +444,18 @@ body::-webkit-scrollbar-thumb {
         height: 25rem;
         object-fit: cover;
     }
+
+    .option-login-btn {
+        font-size: 2rem;
+    }
+
+    .option-nav {
+        padding-top: 5rem;
+
+        button {
+            font-size: 2.5rem;
+        }
+    }
 }
 
 @media (max-width: 550px) {
@@ -443,13 +471,15 @@ body::-webkit-scrollbar-thumb {
         }
     }
 
-    .welcome-shop-btn {
-        width: 16rem;
-        margin-top: 2rem;
+    .welcome-bg {
+        img {
+            aspect-ratio: 4 / 3;
+        }
     }
 
-    .img-carousel-btns {
-        height: 55%;
+    .welcome-shop-btn {
+        width: 20rem;
+        margin-top: 2rem;
     }
 
     .discount-products-list {
@@ -541,7 +571,6 @@ body::-webkit-scrollbar-thumb {
 
     .option-nav {
         padding: 3rem;
-        padding-top: 2rem;
     }
 
     .faq-content {
