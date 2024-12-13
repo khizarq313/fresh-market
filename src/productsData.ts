@@ -5,8 +5,8 @@ export const products: ProductType[] = [
   {
     id: 1,
     name: "Apple",
-    price: 250,
-    discount: 100,
+    price: 88,
+    discount: 30,
     quantity: 1,
     image: Apple,
     category: "produce",
@@ -30,7 +30,7 @@ export const products: ProductType[] = [
     id: 3,
     name: "Black Seeds",
     price: 120,
-    discount: 0,
+    discount: 20,
     quantity: 1,
     image: BlackSeeds,
     category: "bread-grains",
@@ -40,8 +40,8 @@ export const products: ProductType[] = [
   },
   {
     id: 4,
-    name: "Bread1",
-    price: 60,
+    name: "Bread",
+    price: 40,
     discount: 0,
     quantity: 1,
     image: Bread1,
@@ -52,7 +52,7 @@ export const products: ProductType[] = [
   },
   {
     id: 5,
-    name: "Bread2",
+    name: "Toast Bread",
     price: 70,
     discount: 10,
     quantity: 1,
@@ -64,7 +64,7 @@ export const products: ProductType[] = [
   },
   {
     id: 6,
-    name: "Bread3",
+    name: "Sesame Kaiser",
     price: 75,
     discount: 10,
     quantity: 1,
@@ -76,7 +76,7 @@ export const products: ProductType[] = [
   },
   {
     id: 7,
-    name: "Bread4",
+    name: "Baguette",
     price: 80,
     discount: 10,
     quantity: 1,
@@ -100,8 +100,8 @@ export const products: ProductType[] = [
   },
   {
     id: 9,
-    name: "Cheese1",
-    price: 200,
+    name: "Cheese Slice",
+    price: 120,
     discount: 0,
     quantity: 1,
     image: Cheese1,
@@ -112,7 +112,7 @@ export const products: ProductType[] = [
   },
   {
     id: 10,
-    name: "Cheese2",
+    name: "Cheddar Cheese",
     price: 220,
     discount: 10,
     quantity: 1,
@@ -124,7 +124,7 @@ export const products: ProductType[] = [
   },
   {
     id: 11,
-    name: "Cheese3",
+    name: "Cheddar Cheese Slice",
     price: 240,
     discount: 10,
     quantity: 1,
@@ -172,7 +172,7 @@ export const products: ProductType[] = [
   },
   {
     id: 15,
-    name: "Eggs1",
+    name: "Organic Eggs",
     price: 60,
     discount: 0,
     quantity: 1,
@@ -184,7 +184,7 @@ export const products: ProductType[] = [
   },
   {
     id: 16,
-    name: "Eggs2",
+    name: "Brown Eggs",
     price: 70,
     discount: 0,
     quantity: 1,
@@ -208,8 +208,8 @@ export const products: ProductType[] = [
   },
   {
     id: 18,
-    name: "Paneer1",
-    price: 180,
+    name: "Cheese Wheel",
+    price: 800,
     discount: 0,
     quantity: 1,
     image: Paneer1,
@@ -220,7 +220,7 @@ export const products: ProductType[] = [
   },
   {
     id: 19,
-    name: "Paneer2",
+    name: "Feta Cheese",
     price: 200,
     discount: 0,
     quantity: 1,
@@ -316,8 +316,8 @@ export const products: ProductType[] = [
   },
   {
     id: 27,
-    name: "Toilet Paper1",
-    price: 60,
+    name: "ComfortCare Toilet Paper",
+    price: 160,
     discount: 0,
     quantity: 1,
     image: ToiletPaper1,
@@ -328,7 +328,7 @@ export const products: ProductType[] = [
   },
   {
     id: 28,
-    name: "Toilet Paper2",
+    name: "Toilet Paper",
     price: 70,
     discount: 0,
     quantity: 1,
