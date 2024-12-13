@@ -10,8 +10,6 @@
     justify-content: space-between;
     background-color: #FFFFFF;
     color: #000000;
-    padding: 5rem;
-    width: 110rem;
     position: relative;
 
     h1 {
@@ -107,12 +105,12 @@
         height: 9rem;
 		width: 9rem;
         padding: 0.5rem;
-		object-position: center;
-		object-fit: contain;
 		background-color: #FFFFFF;
         margin-right: 1rem;
+        object-position: center;
+		aspect-ratio: 1/1;
+		object-fit: contain;
     }
-
     h3 {
         font-size: 1.6rem;
         font-weight: 100;
@@ -232,4 +230,12 @@
         border-left: 1px solid #000000;
         padding: 1rem;
     }
+}
+
+.desktop-quantity-btn ,.desktop-final-price{
+    display: block;
+}
+
+.mobile-cart-item-footer {
+    display: none !important;
 }

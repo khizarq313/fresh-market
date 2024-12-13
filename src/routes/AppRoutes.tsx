@@ -48,7 +48,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="*"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <Home 
               setProgress={setProgress} 
               currentPageHeading={currentPageHeading} 
@@ -61,7 +61,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <Home 
               setProgress={setProgress}  
               currentPageHeading={currentPageHeading} 
@@ -74,7 +74,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/shop"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <Shop 
               setProgress={setProgress} 
               type="shop" 
@@ -88,7 +88,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/search-results"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <Shop 
               setProgress={setProgress} 
               type="search-results" 
@@ -102,7 +102,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/about"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <About 
               setProgress={setProgress} 
               currentPageHeading={currentPageHeading} 
@@ -115,7 +115,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/contact"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <Contact 
               setProgress={setProgress} 
               currentPageHeading={currentPageHeading} 
@@ -128,7 +128,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/shipping-and-returns"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <ShippingAndReturns 
               setProgress={setProgress} 
               currentPageHeading={currentPageHeading} 
@@ -141,7 +141,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/store-policy"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <StorePolicy 
               setProgress={setProgress} 
               currentPageHeading={currentPageHeading} 
@@ -154,7 +154,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/faq"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <FAQ 
               setProgress={setProgress} 
               currentPageHeading={currentPageHeading} 
@@ -167,7 +167,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/cart"
           element={
-            <motion.div {...pageTransition}>
+            <motion.div {...pageTransition} className="motion-div">
               <DetailedCart 
               setProgress={setProgress} 
               currentPageHeading={currentPageHeading} 
@@ -180,7 +180,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/demo-page"
           element={
-            <motion.div {...pageTransition} className="demo-container">
+            <motion.div {...pageTransition} className="motion-div demo-container">
               <Demo 
               setProgress={setProgress} 
               type="normal" 
@@ -192,7 +192,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
         <Route
           path="/demo-version"
           element={
-            <motion.div {...pageTransition} className="demo-container">
+            <motion.div {...pageTransition} className="motion-div demo-container">
               <Demo 
               setProgress={setProgress} 
               type="checkout" 
@@ -206,7 +206,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
             key={`home-${index}`}
             path={`/product-${product.id}`}
             element={
-              <motion.div {...pageTransition}>
+              <motion.div {...pageTransition} className="motion-div">
                 <Product 
                 setProgress={setProgress} 
                 currentPageHeading={currentPageHeading} 
@@ -224,7 +224,7 @@ const AppRoutes: React.FC<PropsType> = (props) => {
             key={`shop-${index}`}
             path={`/shop/product-${product.id}`}
             element={
-              <motion.div {...pageTransition}>
+              <motion.div {...pageTransition} className="motion-div">
                 <Product
                   setProgress={setProgress}
                   currentPageHeading={currentPageHeading} 

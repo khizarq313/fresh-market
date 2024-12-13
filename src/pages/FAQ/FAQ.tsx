@@ -63,7 +63,7 @@ const FAQ: React.FC<PropsType>  = (props) => {
                 <button onClick={openSettingUpFAQs}  className={!isGeneral? "current-faq-btn" : "normal-faq-btn"}>Setting up FAQs</button>
             </span>
             {isGeneral &&
-                <div>
+                <div className='faq-container'>
                     <details className='styled' open={openDetails === 1 && isOpen} 
                     onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 1)}>
                         <summary>What is an FAQ section?</summary>
@@ -103,7 +103,7 @@ const FAQ: React.FC<PropsType>  = (props) => {
                 </div>
             }
             {!isGeneral &&
-                <div>
+                <div className='faq-container'>
                     <details className='styled' open={openDetails === 4 && isOpen} 
                     onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 4)}>
                         <summary>How do I add a new question & answer?</summary>

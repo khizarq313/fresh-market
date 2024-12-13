@@ -24,6 +24,7 @@ const Home: React.FC<PropsType> = (props) => {
   const controls = useAnimation();
   const [currentImage, setCurrentImage] = useState(1);
   const [isManualScroll, setIsManualScroll] = useState(false);
+  const [showFilterPage, setShowFilterPage] = useState<boolean>(false);
   const images = [
     { id: 1, src: Banner1, altText: "Banner 1" },
     { id: 2, src: Banner2, altText: "Banner 2" },
@@ -132,8 +133,26 @@ const Home: React.FC<PropsType> = (props) => {
           </motion.div>
         </div>
         </section>
-        <ProductsList ListName="discount-products" PriceRange={Infinity} Page="home" setCurrentPageHeading={setCurrentPageHeading}/>
-        <ProductsList ListName="quick-deals" PriceRange={Infinity} Page="home" setCurrentPageHeading={setCurrentPageHeading}/>
+        <ProductsList 
+          ListName="discount-products" 
+          PriceRange={Infinity} 
+          setPriceRange={setCurrentPageHeading}
+          Page="home" 
+          setCurrentPageHeading={setCurrentPageHeading}
+          showFilterPage={showFilterPage}
+          setShowFilterPage={setShowFilterPage}
+          setCategory={setCurrentPageHeading}
+          setCurrentShopItems={setCurrentPageHeading}/>
+        <ProductsList 
+          ListName="quick-deals" 
+          PriceRange={Infinity} 
+          setPriceRange={setCurrentPageHeading}
+          Page="home" 
+          setCurrentPageHeading={setCurrentPageHeading}
+          showFilterPage={showFilterPage}
+          setShowFilterPage={setShowFilterPage}
+          setCategory={setCurrentPageHeading}
+          setCurrentShopItems={setCurrentPageHeading}/>
         <section className="benifits-section">
           <div>
             <Bag />

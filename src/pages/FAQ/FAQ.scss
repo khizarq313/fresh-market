@@ -12,13 +12,13 @@
     text-align: left;
     background-color: transparent;
     color: #000000;
-    width: 90rem;
     margin: 5rem;
+    padding: 0;
 
     h1 {
         color: #2A6049;
         font-size: 2.5rem;
-        margin: 2rem;
+        margin: 2rem 0;
     }
     
     p, summary {
@@ -68,6 +68,7 @@ details[open].styled > summary::after {
     width: 100%;
     display: flex;
     justify-content: left;
+    padding-left: 10rem;
 }
    
 .faq-horizontal-line {

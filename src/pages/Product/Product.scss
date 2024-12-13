@@ -2,7 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 110rem;
+}
+
+.product-page-main {
+  width: auto !important;
 }
 
 .product-page-content {
@@ -10,10 +13,10 @@
     align-items: center;
     justify-content: space-between;
     text-align: center;
-    background-color: #FFFFFF;
+    background-color: transparent;
     color: #000000;
-    padding: 5rem 10rem 15rem 10rem;
-    width: 100%;
+    padding-top: 1rem;
+    column-gap: 4rem;
 
     div {
         display: flex;
@@ -23,17 +26,43 @@
 
 .nav-btns-container {
     display: flex;
+    align-items: center;
 }
 
 .nav-btns {
     background-color: transparent;
     border: none;
+    font-size: 1.6rem !important;
+    display: flex;
+    align-items: center;
+
+    svg {
+      height: 1.6rem;
+      transform: rotateY(180deg);
+    }
+}
+
+.product-container {
+    width: 45rem;
+    text-align: left;
+    font-size: 1.6rem;
 }
 
 .img-container {
-    width: 50rem;
-    text-align: left;
-    font-size: 1.4rem;
+  overflow: hidden;
+  height: 45rem;
+  background-color: #FFFFFF;
+
+  img {
+    height: 100%;
+    object-position: center;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+  }
+}
+
+.product-description {
+    margin-top: 2rem;
 }
 
 .product-additionals {
@@ -44,21 +73,18 @@
     width: 35rem;
 }
 
-.product-image {
-    width: 50rem;
-}
-
 .product-name {
-    font-size: 1.8rem;
+    font-size: 2.6rem;
+    font-weight: 100;
 }
 
 .product-price {
-    font-size: 1.4rem;
+    font-size: 2rem;
     margin-top: 1rem;
 }
 
 .quantity-label {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 100;
     margin-top: 1.5rem;
 }
@@ -71,6 +97,7 @@
     align-items: center;
     width: 7rem;
     height: 4rem;
+    background-color: #FFFFFF;
 
     button {
         background-color: transparent;
@@ -137,7 +164,7 @@
     color: #FFFFFF;
     border: none;
     padding: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin-top: 1rem;
     display: flex;
     align-items: center;
@@ -159,7 +186,7 @@
 }
 
 .details-tag {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     width: 100%;
     padding: 1rem 0;
     transition: 0.4s ease-out;
@@ -179,6 +206,7 @@
     align-items: center;
     justify-content: space-between;
     transition: 0.4s ease-out;
+    font-size: 1.4rem;
 }
 
 .top-bottom-border {
@@ -186,6 +214,10 @@
     border-bottom: 1px solid #000000;
 }
 
+.product-description-mobile {
+  display: none;
+  font-size: 1.4rem;
+}
 
 .dot-pulse-2 {
 	position: relative;

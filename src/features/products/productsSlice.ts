@@ -17,6 +17,7 @@ type StoreType = {
   products: ProductType[];
   cart: ProductType[];
   searchProducts: ProductType[];
+  searchInput: string
 }
 
 type UpdateCartType = {
@@ -34,10 +35,15 @@ type UpdateSearchItemsType = {
   searchedProducts: ProductType[]
 }
 
+type UpdateSearchInputType = {
+  searchedInput: string
+}
+
 const initialState: StoreType = {
   products: [],
   cart: [],
-  searchProducts: []
+  searchProducts: [],
+  searchInput: ""
 };
 
 const storeSlice = createSlice({
@@ -75,11 +81,15 @@ const storeSlice = createSlice({
     updateSearchItems: (state, action: PayloadAction<UpdateSearchItemsType>) => {
       const {searchedProducts} = action.payload;
       state.searchProducts = searchedProducts;
+    },
+    updateSearchInput: (state, action: PayloadAction<UpdateSearchInputType>) => {
+      const {searchedInput} = action.payload;
+      state.searchInput = searchedInput;
     }
   },
 });
 
-export const { setProducts, updateCart, handleCartItems, updateSearchItems } = storeSlice.actions;
+export const { setProducts, updateCart, handleCartItems, updateSearchItems, updateSearchInput } = storeSlice.actions;
 
 export default storeSlice.reducer;
 export type { StoreType, ProductType };

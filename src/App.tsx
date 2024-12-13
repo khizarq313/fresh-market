@@ -7,7 +7,7 @@ import Cart from "./pages/Cart/Cart";
 import ScrollToTopWrapper from "./features/ScrollToTopWrapper/ScrollToTopWrapper";
 import { store } from "./store";
 import { setProducts } from "./features/products/productsSlice";
-import { products, cartProducts, searchProducts } from "./productsData";
+import { products, cartProducts, searchProducts, searchInput } from "./productsData";
 import "./styles/App.scss";
 
 const AppContent: React.FC = () => {
@@ -17,7 +17,7 @@ const AppContent: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setProducts({products:products, cart: cartProducts, searchProducts: searchProducts}));
+    dispatch(setProducts({products:products, cart: cartProducts, searchProducts: searchProducts, searchInput: searchInput}));
   }, [dispatch]);
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import Banner1 from "./Banner-1.webp";
 import Banner2 from "./Banner-2.webp";
 import Banner3 from "./Banner-3.webp";
 import Banner4 from "./Banner-4.webp";
+import ShopBanner from "./Shop-Banner.webp"
 import Apple from "./Apple.webp";
 import Banana from "./Banana.webp";
 import BlackSeeds from "./Black-seeds.webp";
@@ -40,6 +41,7 @@ export {
   Banner2,
   Banner3,
   Banner4,
+  ShopBanner,
   Apple,
   Banana,
   BlackSeeds,

@@ -5,14 +5,14 @@ header {
     padding: 4rem;
     position: sticky;
     top: 0;
-    width: 100vw;
+    width: 100%;
     z-index: 50;
     background-color: #FBF9F1;
 
     button {
         border: none;
         background-color: transparent;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
 }
 
@@ -31,7 +31,7 @@ header {
     }
 }
 
-nav {
+.nav-btn-container {
     margin-right: 5rem;
 
     button {
@@ -62,15 +62,24 @@ nav {
     }
 }
 
-.search-box:focus-within ~ .login-btn {
+.hide-login {
     display: none;
 }
 
-.search-box:focus-within .search-input {
-    border: none;
-    width: 27rem;
+.expand-search-input {
+    display: inline-block;
+    border-bottom: 1px solid transparent;
+    margin-left: 6rem;
+    margin-right: 1rem;
+    width: 28rem;
 
     input {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        min-width: 14.8rem;
+        padding: 1.2rem 0;
+        font-size: 1.4rem;
         width: 25.5rem;
     }
 }
@@ -97,7 +106,7 @@ nav {
 .login-btn {
     display: flex;
     align-items: center;
-    width: 7rem;
+    width: 8rem;
     margin: 0 1.5rem;
 
     svg {
@@ -107,7 +116,7 @@ nav {
 }
 
 .current-panel {
-    color: rgb(71, 158, 121);
+    color: #65DBA9;
 }
 
 .search-results-list {
@@ -182,10 +191,12 @@ nav {
 }
 
 .clear-search-txt {
+    display: inline-flex;
     width: 100%;
     padding: 1rem;
     padding-top: 0;
-    text-align: end;
+    justify-content: end;
+    align-items: baseline;
 }
 
 .searched-items:hover {
@@ -195,10 +206,17 @@ nav {
 .clear-search-btn {
     background-color: #dad7d7;
     border-radius: 100%;
-    height: 1.6rem;
-    width: 1.6rem;
+    height: 1.8rem;
+    width: 1.8rem;
     position: absolute;
-    transform: translate(-2.4rem, 11px);
+    transform: translate(-3rem, 1.1rem);
+}
+
+.mobile-clear-search-btn {
+    background-color: #dad7d7;
+    border-radius: 100%;
+    height: 1.8rem;
+    width: 1.8rem;
 }
 
 .search-results-list::-webkit-scrollbar,.note-content::-webkit-scrollbar {
@@ -213,4 +231,232 @@ nav {
     background-color: transparent;
     outline: solid 0px transparent;
     border-radius: 1rem;
+}
+
+.more-options-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 4rem;
+    right: 4rem;
+    z-index: 600;
+  
+    .menu-icon {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+  
+      .line {
+        width: 25px;
+        height: 2px;
+        background-color: #000;
+        border-radius: 3px;
+      }
+    }
+}
+
+.nav-btn-page, .search-page {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+}
+
+.nav-btn-page {
+    background-color: #FBF9F1;
+    z-index: 500;
+    flex-direction: column;
+    padding-left: 10rem;
+    padding-top: 10rem;
+}
+
+.search-page {
+    background-color: #FFFFFF;
+    z-index: 700;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+}
+
+.option-login-btn {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+
+    svg {
+        width: 2.4rem;
+        margin-right: 1rem;
+    }
+}
+
+.option-nav {
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+
+    button {
+        font-size: 2rem;
+        font-weight: 900;
+    }
+}
+
+.mobile-search-input {
+    width: 100%;
+    display: none;
+    border-bottom: 1px solid #000000;
+    margin-top: 2rem;
+
+    input {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        min-width: calc(100% - 1.2rem);
+        padding: 1.2rem 0;
+        font-size: 1.4rem;
+    }
+}
+
+.search-input-box {
+    border: 1px solid #000000;
+    width: calc(100% - 3rem);
+    height: 4rem;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+
+    button {
+        border: none;
+        background-color: transparent;
+        font-size: 0;
+    }
+
+    input {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        margin-left: 1rem;
+        width: calc(100% - 4rem);
+        font-size: 1.5rem;
+    }
+}
+
+.search-page-back-btn {
+    transform: rotate(180deg);
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+    svg {
+        height: 2rem;
+        width: 2rem;
+    }
+}
+
+.mobile-search-results-list {
+    list-style-type: none;
+    padding-top: 2rem;
+    height: 100%;
+    width: 100%;
+
+    h1 {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #000000;
+    }
+
+    h2 {
+        margin-bottom: .5rem;
+        color: #000000;
+        font-weight: 100;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+        font-weight: 100;
+        color: grey;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        padding: 0.2rem 1rem;
+        width: calc(100%);
+    }
+}
+
+.mobile-search-text-container {
+    padding-left: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h3 {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
+
+.mobile-search-page-btn {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+  
+@media (max-width: 1000px) {
+    header {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .nav-btn-container {
+        display: none;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .login-btn {
+        display: none;
+    }
+
+    .cart-btn {
+        margin-right: 4rem;
+    }
+
+    .more-options-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            display: block;
+        }
+    }
+
+    .mobile-search-input{
+        display: inline-block;
+    }
 }

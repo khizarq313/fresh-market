@@ -133,79 +133,84 @@ const Product: React.FC<PropsType> = (props) => {
       setCurrentPageHeading={setCurrentPageHeading} 
       setShowCartPage={setShowCartPage} 
       />
-      <main className="product-page-content">
-        <div className="img-container">
-          <span className="nav-btns-container">
-            <button className="nav-btns" onClick={() => openThePage("/home")}>Home/</button>
-            {parentLocation === "shop" && 
+      <main className="product-page-main">
+        <span className="nav-btns-container">
+          <button className="nav-btns" onClick={() => openThePage("/home")}><Arrow />Back to Home</button>
+          {/* {parentLocation === "shop" && 
             <button className="nav-btns" onClick={() => openThePage("/shop")}>Shop/</button>}
-            <button className="nav-btns">{productDetails.name}</button>
-          </span>
-          <img
-              src={productDetails.image}
-              alt={productDetails.name}
-              className="product-image"/>
-          <p>I'm a product description. I'm a great place to add more details about your product such as sizing, material, care instructions and cleaning instructions.</p>
-        </div>
-        <div className="product-additionals">
-          <h1
-            className="product-name">
-            {productDetails.name}
-          </h1>
-          <p
-            className="product-price">
-            {productDetails.discount > 0 && <del> ₹{productDetails.price}</del>} ₹
-            {productDetails.price - productDetails.discount}
-          </p>
-          <h2 className="quantity-label">Quantity</h2>
-          <span className="product-quantity-container">
-            <input type="number" min={1} max={20} className="product-quantity" 
-            value={productQuantity} onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e)}
-            onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlurEvent(e)}
-            onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value))}/>
-            <span className="quantity-btns">
-              <button className="quantity-increment-btn" disabled={animationIdList.length === 1 || productQuantity === 20} 
-                onClick={() => setProductQuantity(productQuantity + 1)}><Arrow /></button>
-              <button className="quantity-decrement-btn"  disabled={animationIdList.length === 1 || productQuantity === 1}
-                onClick={() => setProductQuantity(productQuantity - 1)}><Arrow /></button>
+          <button className="nav-btns">{productDetails.name}</button> */}
+        </span>
+        <div className="product-page-content">
+          <div className="product-container">
+            <span className="img-container">
+              <img
+                src={productDetails.image}
+                alt={productDetails.name}
+                className="product-image"/>
             </span>
-          </span>
-          <button
-            className="product-cart-btn"
-            disabled={disableBtn()}
-            onClick={() => handleCart(productDetails.id, productQuantity)}>
-            { animationOff(productDetails.id) && <>Add to Cart</>}
-            { animationOn(productDetails.id) && <div className="dot-pulse-2"></div>}
-            { tickAnimation(productDetails.id) && <Checked />}
-          </button>
-          <button className="product-buy-btn" onClick={() => setDemoWindow(true)}>Buy Now</button>
-          <details className='details-tag' open={openDetails === 1 && isOpen} 
-          onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 1)}>
-              <summary>
-                <p>PRODUCT INFO</p> 
-                {openDetails !== 1 && <Plus /> }
-                {openDetails === 1 && <Minus /> }
-              </summary>
-              <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.</p>
-          </details>
-          <details className='details-tag top-bottom-border' open={openDetails === 2 && isOpen} 
-          onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 2)}>
-              <summary>
-                <p>REFUND POLICY</p>
-                {openDetails !== 2 && <Plus /> }
-                {openDetails === 2 && <Minus /> }
-              </summary>
-              <p>I'm a Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.</p>
-          </details>
-          <details className='details-tag' open={openDetails === 3 && isOpen} 
-          onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 3)}>
-              <summary>
-                <p>SHIPPING INFO</p>
-                {openDetails !== 3 && <Plus /> }
-                {openDetails === 3 && <Minus /> }
-              </summary>
-              <p>I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.</p>
-          </details>
+            <p className="product-description">{productDetails.description}</p>
+          </div>
+          <div className="product-additionals">
+            <h1
+              className="product-name">
+              {productDetails.name}
+            </h1>
+            <p
+              className="product-price">
+              {productDetails.discount > 0 && <del> ₹{productDetails.price}</del>} ₹
+              {productDetails.price - productDetails.discount}
+            </p>
+            <h2 className="quantity-label">Quantity</h2>
+            <span className="product-quantity-container">
+              <input type="number" min={1} max={20} className="product-quantity" id={productDetails.id.toString()}
+              value={productQuantity} onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e)}
+              onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlurEvent(e)}
+              onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value))}/>
+              <span className="quantity-btns">
+                <button className="quantity-increment-btn" disabled={animationIdList.length === 1 || productQuantity === 20} 
+                  onClick={() => setProductQuantity(productQuantity + 1)}><Arrow /></button>
+                <button className="quantity-decrement-btn"  disabled={animationIdList.length === 1 || productQuantity === 1}
+                  onClick={() => setProductQuantity(productQuantity - 1)}><Arrow /></button>
+              </span>
+            </span>
+            <button
+              className="product-cart-btn"
+              disabled={disableBtn()}
+              onClick={() => handleCart(productDetails.id, productQuantity)}>
+              { animationOff(productDetails.id) && <>Add to Cart</>}
+              { animationOn(productDetails.id) && <div className="dot-pulse-2"></div>}
+              { tickAnimation(productDetails.id) && <Checked />}
+            </button>
+            <button className="product-buy-btn" onClick={() => setDemoWindow(true)}>Buy Now</button>
+            <p className="product-description-mobile">{productDetails.description}</p>
+            <details className='details-tag' open={openDetails === 1 && isOpen} 
+            onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 1)}>
+                <summary>
+                  <p>PRODUCT INFO</p> 
+                  {(openDetails !== 1 || !isOpen) && <Plus /> }
+                  {openDetails === 1 && isOpen && <Minus /> }
+                </summary>
+                <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.</p>
+            </details>
+            <details className='details-tag top-bottom-border' open={openDetails === 2 && isOpen} 
+            onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 2)}>
+                <summary>
+                  <p>REFUND POLICY</p>
+                  {(openDetails !== 2 || !isOpen) && <Plus /> }
+                  {openDetails === 2 && isOpen && <Minus /> }
+                </summary>
+                <p>I'm a Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.</p>
+            </details>
+            <details className='details-tag' open={openDetails === 3 && isOpen} 
+            onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 3)}>
+                <summary>
+                  <p>SHIPPING INFO</p>
+                  {(openDetails !== 3 || !isOpen) && <Plus /> }
+                  {openDetails === 3 && isOpen && <Minus /> }
+                </summary>
+                <p>I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.</p>
+            </details>
+          </div>
         </div>
       </main>
       <Footer 

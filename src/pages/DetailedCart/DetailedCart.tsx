@@ -110,7 +110,7 @@ const DetailedCart: React.FC<PropsType> = (props) => {
                         alt={product.name}
                         className="product-image"
                         onClick={() => openThePage(`/shop/product-${product.id}`)}/>
-                      <span>
+                      <span className='product-additional-details'>
                           <h3
                             className="product-name"
                             onClick={() => openThePage(`/shop/product-${product.id}`)}>
@@ -122,10 +122,24 @@ const DetailedCart: React.FC<PropsType> = (props) => {
                             {product.discount > 0 && <del> ₹{product.price}</del>} ₹
                             {product.price - product.discount}
                           </p>
+                          <span className="cart-item-footer mobile-cart-item-footer">
+                            <span className="cart-quantity-btn">
+                              <button className="decrement-btn" disabled={cartProducts[tempIndex].quantity === 1}
+                              onClick={() => decrementCartItem(tempIndex)}><Minus /></button>
+                              { cartProducts.length > 0 && 
+                              <input name={`product-${product.id+index}`} key={product.id + index} type="number" 
+                              value={cartProducts[tempIndex].quantity} min="1" max="20" className="quantity-input"
+                              onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) => handleBackspaceKey(e, tempIndex)}
+                              onBlur={(e: React.FocusEvent<HTMLInputElement>) => handleBlueEvent(e, tempIndex)}
+                              onChange={(e:React.ChangeEvent<HTMLInputElement>) => updateItemQuantity(Number(e.target.value),tempIndex)}/> }
+                              <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}><Plus /></button>
+                            </span>
+                            <h2 className="item-total-price">₹{(product.price - product.discount)*product.quantity}</h2>
+                          </span>
                         </span>
                       </span>
                       <span className='product-control-btns'>
-                        <span className="cart-quantity-btn no-margin">
+                        <span className="cart-quantity-btn desktop-quantity-btn no-margin">
                           <button className="decrement-btn" disabled={cartProducts[tempIndex].quantity === 1}
                           onClick={() => decrementCartItem(tempIndex)}><Minus /></button>
                           { cartProducts.length > 0 && 
@@ -137,7 +151,7 @@ const DetailedCart: React.FC<PropsType> = (props) => {
                           <button className="increment-btn" onClick={() => incrementCartItem(tempIndex)}><Plus /></button>
                         </span>
                         <h4
-                          className="item-final-price"
+                          className="item-final-price desktop-final-price"
                           onClick={() => openThePage(`/shop/product-${product.id}`)}>
                           ₹{(product.price - product.discount)*product.quantity}
                         </h4>

@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding: 0;
 }
 
 .welcome-section {
@@ -20,10 +21,7 @@
 	padding-left: 6rem;
 	font-size: 3rem;
     z-index: 30;
-	// top: 50%;
 	height: 100%;
-	// transform: translate(0, -50%);
-	// backdrop-filter: blur(1rem);
 
 	h1 {
 		font-size: 5rem;
@@ -42,7 +40,7 @@
 	padding: 1rem 2.5rem;
 	margin-top: 2.5rem;
 	transition: .4s ease;
-	width: 14rem;
+	width: 18rem;
 }
 
 .welcome-shop-btn:hover {
@@ -87,7 +85,7 @@
 .welcome-bg {
 	overflow: hidden;
 	white-space: nowrap;
-	width: 110rem;
+	width: 100%;
 	height: 60rem;
 
     img {
@@ -101,7 +99,6 @@
 
 .benifits-section {
 	display: flex;
-	max-width: 100rem;
 	margin: 5rem;
 
 	hr {

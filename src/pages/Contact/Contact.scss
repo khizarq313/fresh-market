@@ -11,13 +11,11 @@
     justify-content: center;
     background-color: #FFFFFF;
     color: #000000;
-    padding: 5rem;
-    width: 110rem;
 
     h1 {
         color: #2A6049;
         font-size: 2.5rem;
-        margin: 2rem;
+        margin: 2rem 0;
     }
 }
 
@@ -25,13 +23,9 @@
     font-size: 1.5rem;
     text-align: center;
     padding: 1rem 22rem;
-}
-
-.contact-hr {
-    display: inline-block;
-    border-top: 1px solid rgba(0, 0, 0, 0.6);
-    width: 60rem;
-    margin: 5rem;
+    padding-bottom: 5rem;
+    margin-bottom: 5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
 }
 
 .contact-details {
@@ -113,4 +107,8 @@
         border: 1px solid #000000;
         transition: 0.2s ease-in;
     }
+}
+
+.last-name-mobile ,.subject-mobile {
+    display: none;
 }

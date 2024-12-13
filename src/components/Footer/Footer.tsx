@@ -71,6 +71,7 @@ const Footer: React.FC<PropsType> = (props) => {
           <img src={facebookIcon} alt="" />
         </button>
       </div>
+      <h1 className="watermark">@Khizar Qureshi</h1>
     </footer>
   )
 }

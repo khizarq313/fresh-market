@@ -2,7 +2,7 @@ footer {
     background-color: #2A6049;
     color: #FFFFFF;
     padding: 4rem;
-    margin: 5rem;
+    margin: 5rem 0;
     width: 110rem;
 }
 
@@ -11,6 +11,7 @@ footer {
 
     div {
         display: flex;
+        width: 24rem;
         flex-direction: column;
         margin: 5rem;
     }
@@ -38,10 +39,12 @@ footer {
 
 .subscribe-toggle {
     display: flex;
+    align-items: center;
 }
 
 .subscribe-txt {
     font-size: 1.3rem !important;
+    padding-left: 1rem;
 }
 
 .contact-links {
@@ -76,7 +79,7 @@ footer {
 }
 
 .footer-form {
-    width: 24rem;
+    width: 42rem;
     display: flex;
     flex-direction: column;
     margin: 5rem 3rem;
@@ -116,5 +119,13 @@ footer {
     height: 1.5rem;
     width: 1.5rem;
     border: 1px solid #FFFFFF;
-    margin-right: 1rem;
+}
+
+.watermark {
+    width: 100%;
+    text-align: end;
+    padding-right: 4rem;
+    padding-top: 1rem;
+    font-size: 1.6rem;
+    font-weight: 500;
 }

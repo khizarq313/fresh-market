@@ -6,12 +6,20 @@ import { ProductType, updateCart } from "../../features/products/productsSlice";
 import Arrow from "../../assets/icons/Arrow";
 import "./ProductsList.scss";
 import Checked from "../../assets/icons/Checked";
+import Cross from "../../assets/icons/Cross";
+import Plus from "../../assets/icons/Plus";
+import Minus from "../../assets/icons/Minus";
 
 type PropsType = {
     ListName: string,
     PriceRange: number,
+    setPriceRange: React.Dispatch<React.SetStateAction<string>>,
     Page: string,
     setCurrentPageHeading: React.Dispatch<React.SetStateAction<string>>,
+    showFilterPage: boolean,
+    setShowFilterPage: React.Dispatch<React.SetStateAction<boolean>>,
+    setCategory: React.Dispatch<React.SetStateAction<string>>,
+    setCurrentShopItems: React.Dispatch<React.SetStateAction<string>>,
 }
 
 type TempQuantitiesType = {
@@ -26,7 +34,15 @@ type AnimationIdList = {
 }
 
 const ProductsList: React.FC<PropsType> = (props) => {
-    const {ListName, PriceRange, Page, setCurrentPageHeading} = props;
+    const {ListName, 
+      PriceRange, 
+      setPriceRange, 
+      Page, 
+      setCurrentPageHeading, 
+      showFilterPage, 
+      setShowFilterPage, 
+      setCategory, 
+      setCurrentShopItems} = props;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const allProducts = useSelector((state: RootState) => state.products);
@@ -42,9 +58,16 @@ const ProductsList: React.FC<PropsType> = (props) => {
     const [startLimit, setStartLimit] = useState<number>(0);
     const [lastLimit, setLastLimit] = useState<number>(0);
     const [pageNumber, setPageNumber] = useState<number>(1);
-    const [sortingOrder, setSortingOrder] = useState<string>("Sort by");
+    const [sortingOrder, setSortingOrder] = useState<string>("Recommended");
+    const [sortingClass, setSortingClass] = useState<string>("recommended-order");
     const [productPath, setProductPath] = useState<string>("");
     const [animationIdList, setAnimationIdList] = useState<AnimationIdList[]>([]);
+    const totalItems = currentList.reduce((total, product) => total + product.quantity, 0);
+    const [closeFilterPageAnimation, setCloseFilterPageAnimation] = useState<boolean>(false);
+    const [openDetails, setOpenDetails] = useState<number[]>([1]);
+    const [filterPageSort, setFilterPageSort] = useState<string>("Recommended");
+    const [filterPageCategory, setFilterPageCategory] = useState<string>("all-items");
+    const [rangeValue, setRangeValue] = useState<string>("10");
 
     useEffect(() => {
       if(Page === "search-results") {
@@ -62,7 +85,11 @@ const ProductsList: React.FC<PropsType> = (props) => {
 
     useEffect(() => {
       const filterFunction = function(product: ProductType, category: string) {
-        return (product.category === category && product.price-product.discount < PriceRange)
+        if(category === "weekly") {
+          return (product.discount > 0 && product.price-product.discount < PriceRange)
+        } else {
+          return (product.category === category && product.price-product.discount < PriceRange)
+        }
       }
       let tempArray: ProductType[] = [];
       switch(ListName) {
@@ -102,6 +129,12 @@ const ProductsList: React.FC<PropsType> = (props) => {
             break;
           case "household-items":
             tempArray = currentListProducts.filter((product: ProductType) => filterFunction(product, "household"));
+            setLastLimit(startLimit+15);
+            setShopPage(true);
+            setProductPath("shop/");
+            break;
+          case "weekly-items":
+            tempArray = currentListProducts.filter((product: ProductType) => filterFunction(product, "weekly"));
             setLastLimit(startLimit+15);
             setShopPage(true);
             setProductPath("shop/");
@@ -278,7 +311,35 @@ const ProductsList: React.FC<PropsType> = (props) => {
 
     const sortTheList = function(e: React.FormEvent<HTMLSelectElement>) {
       const type: string = e.currentTarget.value;
+      sortingSwitch(type);
+    }
+
+    const sortingSwitch = function(type: string) {
       setSortingOrder(type);
+      switch (type) {
+        case "Recommended":
+          setSortingClass("recommended-order");
+          break;
+        case "Newest":
+          setSortingClass("newest-order");
+          break;
+        case "Price (low to high)":
+          setSortingClass("low-to-high-order");
+          break;
+        case "Price (high to low)":
+          setSortingClass("high-to-low-order");
+          break;
+        case "Name A-Z":
+          setSortingClass("a-to-z-order");
+          break;
+        case "Name Z-A":
+          setSortingClass("z-to-a-order");
+          break;
+      
+        default:
+          setSortingClass("recommended");
+          break;
+      }
       setStartLimit(0);
       setLastLimit(15);
       setPageNumber(1);
@@ -295,6 +356,65 @@ const ProductsList: React.FC<PropsType> = (props) => {
     const tickAnimation = (id: number) => {
       return animationIdList.some((tempProduct) => tempProduct.id === id && tempProduct.tick);
     };
+
+    const closeFilterPage = function() {
+      setCloseFilterPageAnimation(true);
+      setTimeout(() => {
+        setCloseFilterPageAnimation(false);
+        setShowFilterPage(false);
+        setOpenDetails([1]);
+      }, 400)
+    }
+
+    const toggleDetailsTag = function(e: React.MouseEvent<HTMLDetailsElement>, n: number) {
+      e.preventDefault();
+      if(openDetails.includes(n)) {
+        setOpenDetails(openDetails.filter((arrItems: number) => n !== arrItems));
+      } else {
+        setOpenDetails([n, ...openDetails]);
+      }
+    }
+
+    const applyFilters = function() {
+      sortingSwitch(filterPageSort);
+      setCurrentShopItems(filterPageCategory);
+      switch (filterPageCategory) {
+        case "all-items":
+          setCategory("All Products");
+          break;
+        case "bread-items":
+          setCategory("Bread & Grains");
+          break;
+        case "dairy-items":
+          setCategory("Dairy & Eggs");
+          break;
+        case "household-items":
+          setCategory("Household Goods");
+          break;
+        case "produce-items":
+          setCategory("Produce");
+          break;
+        case "weekly-items":
+          setCategory("Weekly Deals");
+          break;
+        default:
+          setCategory("All Products");
+          break;
+      }
+      setPriceRange(rangeValue);
+      closeFilterPage();
+    }
+
+    const clearFilter = function() {
+      setFilterPageSort("Recommended");
+      sortingSwitch("Recommended");
+      setCategory("All Products");
+      setFilterPageCategory("all-items");
+      setCurrentShopItems("all-items");
+      setRangeValue("10");
+      setPriceRange("10");
+      closeFilterPage();
+    }
 
     return (
       <section className={ListName}>
@@ -317,9 +437,14 @@ const ProductsList: React.FC<PropsType> = (props) => {
         }
         { shopPage &&
           <div className="sorting-list">
-            <select id="sorting-options" value={sortingOrder} onChange={(e: React.FormEvent<HTMLSelectElement>) => sortTheList(e)}>
-              <option className={sortingOrder === "Sort by" ? "checked-option" : "options"} 
-                value="Sort by">Sort by</option>
+            <h1>Sort by: </h1>
+            <select 
+              id="sorting-options" 
+              className={sortingClass}
+              value={sortingOrder} 
+              onChange={(e: React.FormEvent<HTMLSelectElement>) => sortTheList(e)}>
+              <option className={sortingOrder === "Recommended" ? "checked-option" : "options"} 
+                value="Recommended">Recommended</option>
               <option className={sortingOrder === "Newest" ? "checked-option" : "options"} 
                 value="Newest">Newest</option>
               <option className={sortingOrder === "Price (low to high)" ? "checked-option" : "options"} 
@@ -439,9 +564,103 @@ const ProductsList: React.FC<PropsType> = (props) => {
               className="next-arrow-btn"><Arrow /></button>
           </div>
         }
-        {
-          ListName === "discount-products" &&
-          <span className="end-line"> </span>
+        {showFilterPage &&
+          <section className={closeFilterPageAnimation? "filter-sort-page filter-sort-page-closed": "filter-sort-page"}>
+            <div>
+              <div className="filter-page-header">
+                <span>
+                  <h1>Filter & Sort</h1>
+                  <p>({totalItems} items)</p>
+                </span>
+                <button className="cart-close-btn" onClick={closeFilterPage}><Cross /></button>
+              </div>
+              <details className='filter-details-tag' open={openDetails.includes(1)}>
+                <summary onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetailsTag(e, 1)}>
+                  <p>Sort by:</p> 
+                  {!openDetails.includes(1) && <Plus /> }
+                  {openDetails.includes(1) && <Minus /> }
+                </summary>
+                <input type="radio" id="Recommended" name="Recommended" value="Recommended" 
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageSort(e.currentTarget.value)}
+                  checked={filterPageSort === "Recommended"}/>
+                <label className="margin-top" htmlFor="Recommended">Recommended</label> <br />
+                <input type="radio" id="Newest" name="Newest" value="Newest"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageSort(e.currentTarget.value)}
+                  checked={filterPageSort === "Newest"}/>
+                <label className="margin-top" htmlFor="Newest">Newest</label> <br />
+                <input type="radio" id="Price (low to high)" name="Price (low to high)" value="Price (low to high)"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageSort(e.currentTarget.value)}
+                  checked={filterPageSort === "Price (low to high)"}/>
+                <label className="margin-top" htmlFor="Price (low to high)">Price (low to high)</label> <br />
+                <input type="radio" id="Price (high to low)" name="Price (high to low)" value="Price (high to low)"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageSort(e.currentTarget.value)}
+                  checked={filterPageSort === "Price (high to low)"}/>
+                <label className="margin-top" htmlFor="Price (high to low)">Price (high to low)</label> <br />
+                <input type="radio" id="Name A-Z" name="Name A-Z" value="Name A-Z"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageSort(e.currentTarget.value)}
+                  checked={filterPageSort === "Name A-Z"}/>
+                <label className="margin-top" htmlFor="Name A-Z">Name A-Z</label> <br />
+                <input type="radio" id="Name Z-A" name="Name Z-A" value="Name Z-A"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageSort(e.currentTarget.value)}
+                  checked={filterPageSort === "Name Z-A"}/>
+                <label className="margin-top" htmlFor="Name Z-A">Name Z-A</label> <br />
+              </details>
+              <details className='filter-details-tag' open={openDetails.includes(2)}>
+                <summary onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetailsTag(e, 2)}>
+                  <p>Category:</p> 
+                  {!openDetails.includes(2) && <Plus /> }
+                  {openDetails.includes(2) && <Minus /> }
+                </summary>
+                <input  type="radio" id="all-items" name="all-items" value="all-items"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageCategory(e.currentTarget.value)}
+                  checked={filterPageCategory === "all-items"}/>
+                <label className="margin-top" htmlFor="all-items">All Products</label> <br />
+                <input type="radio" id="bread-items" name="bread-items" value="bread-items"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageCategory(e.currentTarget.value)}
+                  checked={filterPageCategory === "bread-items"}/>
+                <label className="margin-top" htmlFor="bread-items">Bread & Grains</label> <br />
+                <input type="radio" id="dairy-items" name="dairy-items" value="dairy-items"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageCategory(e.currentTarget.value)}
+                  checked={filterPageCategory === "dairy-items"}/>
+                <label className="margin-top" htmlFor="dairy-items">Dairy & Eggs</label> <br />
+                <input type="radio" id="household-items" name="household-items" value="household-items"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageCategory(e.currentTarget.value)}
+                  checked={filterPageCategory === "household-items"}/>
+                <label className="margin-top" htmlFor="household-items">Household Goods</label> <br />
+                <input type="radio" id="produce-items" name="produce-items" value="produce-items"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageCategory(e.currentTarget.value)}
+                  checked={filterPageCategory === "produce-items"}/>
+                <label className="margin-top" htmlFor="produce-items">Produce</label> <br />
+                <input type="radio" id="weekly-items" name="weekly-items" value="weekly-items"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterPageCategory(e.currentTarget.value)}
+                  checked={filterPageCategory === "weekly-items"}/>
+                <label className="margin-top" htmlFor="weekly-items">Weekly Deals</label> <br />
+              </details>
+              <details className='filter-price-slider' open={openDetails.includes(3)}>
+                <summary onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetailsTag(e, 3)}>
+                  <p>Price:</p> 
+                  {!openDetails.includes(3) && <Plus /> }
+                  {openDetails.includes(3) && <Minus /> }
+                </summary>
+                <span className="price-slider margin-top">
+                  <input type="range" name="range-btn" id="range-btn" 
+                    min="1" max="10" value={rangeValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRangeValue(e.currentTarget.value)}/>
+                  <span className="price-range-container">
+                    <p>100₹</p>
+                    <p>{Number(rangeValue)*100}₹</p>
+                  </span>
+                </span>
+              </details>
+            </div>
+            <div className="filter-page-footer">
+              <button 
+                onClick={clearFilter}
+                disabled={filterPageSort === "Recommended" && filterPageCategory === "all-items" && rangeValue === "10"}>
+                  Clear Filters
+              </button>
+              <button className="filter-apply-btn" onClick={() => applyFilters()}>Apply</button>
+            </div>
+          </section>
         }
       </section>
     )

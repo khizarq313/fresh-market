@@ -35,7 +35,6 @@ const Contact: React.FC<PropsType> = (props) => {
       <main className="contact-content">
         <h1>Contact Us</h1>
         <p className="contact-description">I'm a paragraph. Click here to add your own text and edit me. It's easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. </p>
-        <span className="contact-hr"></span>
         <div className="contact-details">
           <span>
             <h2>CONTACT</h2>
@@ -57,18 +56,20 @@ const Contact: React.FC<PropsType> = (props) => {
         <form onSubmit={submitUserMessage} className="contact-form">
           <span>
             <label htmlFor="first-name">First name*</label>
-            <label htmlFor="last-name">Last name*</label>
+            <label htmlFor="last-name" className="last-name">Last name*</label>
           </span>
           <span>
             <input type="text" id="first-name" required/>
+            <label htmlFor="last-name" className="last-name-mobile">Last name*</label>
             <input type="text" id="last-name" required/>
           </span>
           <span>
             <label htmlFor="contact-email">Email*</label>
-            <label htmlFor="subject">Subject</label>
+            <label htmlFor="subject" className="subject">Subject</label>
           </span>
           <span>
             <input type="text" id="contact-email" required/>
+            <label htmlFor="subject" className="subject-mobile">Subject</label>
             <input type="text" id="subject" />
           </span>
           <span>

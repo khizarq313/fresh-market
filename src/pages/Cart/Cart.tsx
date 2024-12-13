@@ -84,6 +84,7 @@ const Cart: React.FC<PropsType> = (props) => {
         if(pageName !== "/demo-page"){
           setCurrentPageHeading(pageName);
           navigate(pageName);
+          closeCart();
         } else {
           setCurrentPageHeading(currentPageHeading);
           navigate(pageName);

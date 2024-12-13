@@ -1,5 +1,5 @@
 .cart-page {
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     left: 0;
@@ -10,7 +10,7 @@
 }
 
 .cart-content {
-    position: absolute;
+    position: fixed;
     z-index: 200;
     top: 0;
     right: 0;
@@ -100,7 +100,7 @@
     justify-content: space-between;
     align-items: baseline;
 
-    h1 {
+    h1, h2 {
         font-size: 1.6rem;
         font-weight: 300;
     }

@@ -391,3 +391,5 @@ export const products: ProductType[] = [
 export const cartProducts: ProductType[] = [];
 
 export const searchProducts: ProductType[] = [];
+
+export const searchInput: string = "";
