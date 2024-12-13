@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/fresh-market/static/css/main.b32af02f.css",
-    "main.js": "/fresh-market/static/js/main.4c0d6f81.js",
+    "main.js": "/fresh-market/static/js/main.3866ade9.js",
     "static/media/Banner-1.webp": "/fresh-market/static/media/Banner-1.2700b1b9f11391cd062f.webp",
     "static/media/Banner-3.webp": "/fresh-market/static/media/Banner-3.b9e3e4f717f9025ee055.webp",
     "static/media/Banner-2.webp": "/fresh-market/static/media/Banner-2.0d977880bf62e0cf646c.webp",
@@ -41,10 +41,10 @@
     "static/media/Tissue.webp": "/fresh-market/static/media/Tissue.0c8099160740bc04fddf.webp",
     "index.html": "/fresh-market/index.html",
     "main.b32af02f.css.map": "/fresh-market/static/css/main.b32af02f.css.map",
-    "main.4c0d6f81.js.map": "/fresh-market/static/js/main.4c0d6f81.js.map"
+    "main.3866ade9.js.map": "/fresh-market/static/js/main.3866ade9.js.map"
   },
   "entrypoints": [
     "static/css/main.b32af02f.css",
-    "static/js/main.4c0d6f81.js"
+    "static/js/main.3866ade9.js"
   ]
 }
