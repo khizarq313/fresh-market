@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/fresh-market/static/css/main.74e2563c.css",
-    "main.js": "/fresh-market/static/js/main.19769aeb.js",
+    "main.css": "/fresh-market/static/css/main.b32af02f.css",
+    "main.js": "/fresh-market/static/js/main.4c0d6f81.js",
     "static/media/Banner-1.webp": "/fresh-market/static/media/Banner-1.2700b1b9f11391cd062f.webp",
     "static/media/Banner-3.webp": "/fresh-market/static/media/Banner-3.b9e3e4f717f9025ee055.webp",
     "static/media/Banner-2.webp": "/fresh-market/static/media/Banner-2.0d977880bf62e0cf646c.webp",
@@ -40,14 +40,11 @@
     "static/media/Paneer-2.webp": "/fresh-market/static/media/Paneer-2.4e8a66c45cea4ba72a00.webp",
     "static/media/Tissue.webp": "/fresh-market/static/media/Tissue.0c8099160740bc04fddf.webp",
     "index.html": "/fresh-market/index.html",
-    "static/media/youtube-icon.webp": "/fresh-market/static/media/youtube-icon.af0eb91c1ce77ae974d4.webp",
-    "static/media/instagram-icon.webp": "/fresh-market/static/media/instagram-icon.b0ce6487fccb24ba5d24.webp",
-    "static/media/facebook-icon.webp": "/fresh-market/static/media/facebook-icon.81e8c288b75d29661cdc.webp",
-    "main.74e2563c.css.map": "/fresh-market/static/css/main.74e2563c.css.map",
-    "main.19769aeb.js.map": "/fresh-market/static/js/main.19769aeb.js.map"
+    "main.b32af02f.css.map": "/fresh-market/static/css/main.b32af02f.css.map",
+    "main.4c0d6f81.js.map": "/fresh-market/static/js/main.4c0d6f81.js.map"
   },
   "entrypoints": [
-    "static/css/main.74e2563c.css",
-    "static/js/main.19769aeb.js"
+    "static/css/main.b32af02f.css",
+    "static/js/main.4c0d6f81.js"
   ]
 }
