@@ -115,8 +115,51 @@ body::-webkit-scrollbar-thumb {
         width: 100%;
     }
 
+    input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none; 
+        width: 100%;
+        cursor: pointer;
+        outline: none;
+        overflow: hidden;
+        border-radius: 16px;
+      }
+      
+      input[type="range"]::-webkit-slider-runnable-track {
+        height: 15px;
+        background: #ccc;
+        border-radius: 16px;
+      }
+      
+      input[type="range"]::-moz-range-track {
+        height: 15px;
+        background: #ccc;
+        border-radius: 16px;
+      }
+      
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none; 
+        height: 15px;
+        width: 15px;
+        background-color: #fff;
+        border-radius: 50%;
+        border: 2px solid #2A6049;
+        box-shadow: -407px 0 0 400px #2A6049;
+      }
+      
+      
+      input[type="range"]::-moz-range-thumb {
+        height: 15px;
+        width: 15px;
+        background-color: #fff;
+        border-radius: 50%;
+        border: 1px solid #2A6049;
+        box-shadow: -407px 0 0 400px #2A6049;
+      }
+
     .shop {
-        padding: 3rem 0;
+        padding: 0;
     }
 
     .shop-heading, .shop-txt, .filter-sort-btn-container {
@@ -190,12 +233,12 @@ body::-webkit-scrollbar-thumb {
         display: none;
     }
 
-    .all-items, .produce-items, .dairy-items, .bread-items, .household-items {
+    .all-items, .produce-items, .dairy-items, .bread-items, .household-items, .weekly-items {
         width: 100%;
         margin: 0;
     }
 
-    .all-items-list, .produce-items-list, .dairy-items-list, .bread-items-list, .household-items-list {
+    .all-items-list, .produce-items-list, .dairy-items-list, .bread-items-list, .household-items-list, .weekly-items-list {
         justify-content: center;
     }
 
@@ -259,13 +302,18 @@ body::-webkit-scrollbar-thumb {
         padding: 4rem;
 
         p {
-            padding: 0;
+            padding: 0 0 1rem 0;
         }
     }
 
     .about-content {
+        h1 {
+            margin-bottom: 2rem;
+        }
+
         img {
             width: 100%;
+            margin-bottom: 3rem;
         }
     }
 
@@ -592,50 +640,7 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none; 
-    width: 100%;
-    cursor: pointer;
-    outline: none;
-    overflow: hidden;
-    border-radius: 16px;
-  }
-  
-  input[type="range"]::-webkit-slider-runnable-track {
-    height: 15px;
-    background: #ccc;
-    border-radius: 16px;
-  }
-  
-  input[type="range"]::-moz-range-track {
-    height: 15px;
-    background: #ccc;
-    border-radius: 16px;
-  }
-  
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none; 
-    height: 15px;
-    width: 15px;
-    background-color: #fff;
-    border-radius: 50%;
-    border: 2px solid #2A6049;
-    box-shadow: -407px 0 0 400px #2A6049;
-  }
-  
-  
-  input[type="range"]::-moz-range-thumb {
-    height: 15px;
-    width: 15px;
-    background-color: #fff;
-    border-radius: 50%;
-    border: 1px solid #2A6049;
-    box-shadow: -407px 0 0 400px #2A6049;
-  }
-
-  input[type="radio"] {
+input[type="radio"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -645,9 +650,9 @@ input[type="range"] {
     border-radius:50%;
     background-color:#fff;
     transition:all ease-in 0.2s;
-  }
+}
 
-  input[type="radio"]:checked {
+input[type="radio"]:checked {
     background-color: #2A6049;
     box-shadow:0 0 0 1px #2A6049;
-  }
+}

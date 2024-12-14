@@ -32,8 +32,8 @@ const About: React.FC<PropsType> = (props) => {
       <main className="about-content">
         <h1>About Our Market</h1>
         <img src={Banner4} alt="store-img" draggable={false}/>
-        <p>I'm a paragraph. Click here to add your own text and edit me. It's easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. I'm a great place for you to tell a story and let your users know a little more about you.</p>
-        <p>This is a great space to write long text about your company and your services. You can use this space to go into a little more detail about your company. Talk about your team and what services you provide. Tell your visitors the story of how you came up with the idea for your business and what makes you different from your competitors. Make your company stand out and show your visitors who you are.</p>
+        <p>Fresh Market is your trusted destination for the finest quality fruits, vegetables, and household essentials. Our mission is to bring fresh, healthy, and affordable products straight to your home, ensuring convenience and care every step of the way.</p>
+        <p>We take pride in our dedicated team and our commitment to exceptional service. Fresh Market was founded with a passion for making fresh and wholesome food accessible to everyone. What sets us apart is our focus on quality, sustainability, and customer satisfaction. Welcome to a market that truly cares about you and your family!</p>
       </main>
       <Footer 
       currentPageHeading={currentPageHeading} 

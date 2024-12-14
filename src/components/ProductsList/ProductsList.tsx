@@ -301,12 +301,14 @@ const ProductsList: React.FC<PropsType> = (props) => {
       setStartLimit(startLimit+16);
       setLastLimit(lastLimit+16);
       setPageNumber(pageNumber+1);
+      smoothScrollToTop();
     }
 
     const openPreviousPage = function() {
       setStartLimit(startLimit-16);
       setLastLimit(lastLimit-16);
       setPageNumber(pageNumber-1);
+      smoothScrollToTop();
     }
 
     const sortTheList = function(e: React.FormEvent<HTMLSelectElement>) {
@@ -403,6 +405,7 @@ const ProductsList: React.FC<PropsType> = (props) => {
       }
       setPriceRange(rangeValue);
       closeFilterPage();
+      smoothScrollToTop();
     }
 
     const clearFilter = function() {
@@ -414,7 +417,18 @@ const ProductsList: React.FC<PropsType> = (props) => {
       setRangeValue("10");
       setPriceRange("10");
       closeFilterPage();
+      smoothScrollToTop();
     }
+
+    const smoothScrollToTop = () => {
+      let scrollInterval = setInterval(() => {
+        if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+          window.scrollBy(0, -50);
+        } else {
+          clearInterval(scrollInterval);
+        }
+      }, 10);
+    };
 
     return (
       <section className={ListName}>
@@ -429,7 +443,7 @@ const ProductsList: React.FC<PropsType> = (props) => {
 
         { !shopPage && ListName === "quick-deals" &&
           <>
-            <h1 className="quick-deals-heading">Exciting Offers</h1>
+            <h1 className="quick-deals-heading">Grab 'N Go</h1>
             <h2  className="quick-deals-txt">
               Find amazing deals on a variety of products. Discover new favorites and save on your essentials.
             </h2>

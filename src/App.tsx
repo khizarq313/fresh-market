@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { Provider, useDispatch } from "react-redux";
 import LoadingBar from 'react-top-loading-bar';
 import AppRoutes from "./routes/AppRoutes";

@@ -34,7 +34,7 @@ const Contact: React.FC<PropsType> = (props) => {
       />
       <main className="contact-content">
         <h1>Contact Us</h1>
-        <p className="contact-description">I'm a paragraph. Click here to add your own text and edit me. It's easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. </p>
+        <p className="contact-description">Have questions or need assistance? We'’'re here to help! Reach out to us for any inquiries about your orders, products, or services. Our team is dedicated to providing you with quick and reliable support. Let'’'s connect!</p>
         <div className="contact-details">
           <span>
             <h2>CONTACT</h2>

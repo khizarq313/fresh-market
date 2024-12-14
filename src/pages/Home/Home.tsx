@@ -97,7 +97,7 @@ const Home: React.FC<PropsType> = (props) => {
     }
   }
   }
-//img-container
+  
   return (
     <section className="app-container">
       <Header 
@@ -157,19 +157,19 @@ const Home: React.FC<PropsType> = (props) => {
           <div>
             <Bag />
             <h2>Pick Up Options</h2>
-            <p>I'm a paragraph. Click here to add your own text and edit me. Let your users get to know you.</p>
+            <p>Choose a convenient pick-up time for your Fresh Market order and collect it hassle-free at our designated location.</p>
           </div>
           <hr />
           <div>
             <Van />
             <h2>Same Day Delivery</h2>
-            <p>I'm a paragraph. Click here to add your own text and edit me. Let your users get to know you.</p>
+            <p>Enjoy same-day delivery for your Fresh Market orders. Shop now and get fresh products delivered to your doorstep quickly!</p>
           </div>
           <hr />
           <div>
             <Man />
             <h2>Health & Safety Rules</h2>
-            <p>I'm a paragraph. Click here to add your own text and edit me. Let your users get to know you.</p>
+            <p>We follow strict health and safety standards to ensure your Fresh Market orders are fresh, clean, and handled with care.</p>
           </div>
         </section>
       </main>      

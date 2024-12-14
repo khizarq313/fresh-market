@@ -35,6 +35,8 @@ const FAQ: React.FC<PropsType>  = (props) => {
         } else {
             setOpenDetails(n);
             setIsOpen(true);
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
         }
     }
 
@@ -42,12 +44,18 @@ const FAQ: React.FC<PropsType>  = (props) => {
         setIsGeneral(true);
         setIsOpen(true);
         setOpenDetails(1);
+
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     }
 
     const openSettingUpFAQs = function() {
         setIsGeneral(false);
         setIsOpen(true);
         setOpenDetails(4);
+
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     }
 
   return (
@@ -60,14 +68,14 @@ const FAQ: React.FC<PropsType>  = (props) => {
             <h1>Frequently Asked Questions</h1>
             <span className='faq-nav-btns'>
                 <button onClick={openGeneral} className={isGeneral? "current-faq-btn" : "normal-faq-btn"}>General</button>
-                <button onClick={openSettingUpFAQs}  className={!isGeneral? "current-faq-btn" : "normal-faq-btn"}>Setting up FAQs</button>
+                <button onClick={openSettingUpFAQs}  className={!isGeneral? "current-faq-btn" : "normal-faq-btn"}>Order & Support</button>
             </span>
             {isGeneral &&
                 <div className='faq-container'>
                     <details className='styled' open={openDetails === 1 && isOpen} 
                     onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 1)}>
-                        <summary>What is an FAQ section?</summary>
-                        <p>An FAQ section can be used to quickly answer common questions about your business like "Where do you ship to?", "What are your opening hours?", or "How can I book a service?".</p>
+                        <summary>What is Fresh Market?</summary>
+                        <p>Fresh Market is an online grocery store offering a wide variety of fresh fruits, vegetables, and household essentials, delivered directly to your door.</p>
                         <span>
                             <Facebook />
                             <Twitter /> 
@@ -78,8 +86,8 @@ const FAQ: React.FC<PropsType>  = (props) => {
                     <span className='faq-horizontal-line'></span>
                     <details className='styled' open={openDetails === 2 && isOpen} 
                     onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 2)}>
-                        <summary>Why do FAQs matter?</summary>
-                        <p>FAQs are a great way to help site visitors find quick answers to common questions about your business and create a better navigation experience.</p>
+                        <summary>What delivery options do you offer?</summary>
+                        <p>We offer same-day delivery and scheduled delivery options, ensuring your orders arrive when it's most convenient for you.</p>
                         <span>
                             <Facebook />
                             <Twitter /> 
@@ -90,8 +98,8 @@ const FAQ: React.FC<PropsType>  = (props) => {
                     <span className='faq-horizontal-line'></span>
                     <details className='styled' open={openDetails === 3 && isOpen} 
                     onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 3)}>
-                        <summary>Where can I add my FAQs?</summary>
-                        <p>FAQs can be added to any page on your site or to your Wix mobile app, giving access to members on the go.</p>
+                        <summary>Do you offer returns or exchanges?</summary>
+                        <p>Yes, we offer returns and exchanges for damaged or incorrect items. Please refer to our Return & Exchange policy for further instructions.</p>
                         <span>
                             <Facebook />
                             <Twitter /> 
@@ -106,13 +114,14 @@ const FAQ: React.FC<PropsType>  = (props) => {
                 <div className='faq-container'>
                     <details className='styled' open={openDetails === 4 && isOpen} 
                     onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 4)}>
-                        <summary>How do I add a new question & answer?</summary>
-                        <p>To add a new FAQ follow these steps: <br />
-                            1. Manage FAQs from your site dashboard or in the Editor <br />
-                            2. Add a new question & answer <br />
-                            3. Assign your FAQ to a category <br />
-                            4. Save and publish. </p>
-                            <p>You can always come back and edit your FAQs.</p>
+                        <summary>How do I place an order?</summary>
+                        <p>To place an order, follow these steps: <br />
+                            1. Browse our product categories or use the search bar to find what you need. <br />
+                            2. Add your desired items to the cart by clicking "Add to Cart". <br />
+                            3. Review your cart and make sure everything is correct. <br />
+                            4. Proceed to checkout, enter your shipping details, and choose a payment method. <br />
+                            5. Complete your purchase by clicking "Place Order".</p>
+                        <p>Your order will be processed, and you'll receive a confirmation email with details.</p>
                         <span>
                             <Facebook />
                             <Twitter /> 
@@ -123,12 +132,13 @@ const FAQ: React.FC<PropsType>  = (props) => {
                     <span className='faq-horizontal-line'></span>
                     <details className='styled' open={openDetails === 5 && isOpen} 
                     onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 5)}>
-                        <summary>Can I insert an image, video, or GIF in my FAQ?</summary>
-                        <p>Yes. To add media follow these steps:    <br />
-                            1. Manage FAQs from your site dashboard or in the Editor    <br />
-                            2. Create a new FAQ or edit an existing one <br />
-                            3. From the answer text box click on the video, image or GIF icon   <br />
-                            4. Add media from your library and save.</p>
+                        <summary>How do I track my order?</summary>
+                        <p>To track your order, follow these steps: <br />
+                            1. Once your order is shipped, you will receive a tracking number via email. <br />
+                            2. Go to the courier's website or use the provided tracking link. <br />
+                            3. Enter the tracking number to view the status of your delivery. <br />
+                            4. You can also check the delivery status in your Fresh Market account under "Order History".</p>
+                        <p>Feel free to reach out to our support team if you need assistance with tracking your order.</p>
                         <span>
                             <Facebook />
                             <Twitter /> 
@@ -139,8 +149,24 @@ const FAQ: React.FC<PropsType>  = (props) => {
                     <span className='faq-horizontal-line'></span>
                     <details className='styled' open={openDetails === 6 && isOpen} 
                     onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 6)}>
-                        <summary>How do I edit or remove the 'Frequently Asked Questions' title?</summary>
-                        <p>You can edit the title from the FAQ 'Settings' tab in the Editor. <br />To remove the title from your mobile app go to the 'Site & App' tab in your Owner's app and customize.</p>
+                        <summary>Can I modify or cancel my order after placing it?</summary>
+                        <p>Once an order is shipped, it cannot be modified or canceled. <br />
+                        If you have an urgent issue or need assistance, please contact our customer support team as soon as possible, and we will do our best to assist you.</p>
+                        <span>
+                            <Facebook />
+                            <Twitter /> 
+                            <LinkedIn />
+                            <Link />
+                        </span>
+                    </details>
+                    <span className='faq-horizontal-line'></span>
+                    <details className='styled' open={openDetails === 7 && isOpen} 
+                    onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 7)}>
+                        <summary>What should I do if I receive a damaged or expired item?</summary>
+                        <p>If you receive a damaged or expired item, follow these steps: <br />
+                            1. Contact our customer support immediately with your order details. <br />
+                            2. Provide a photo of the damaged or expired item. <br />
+                            3. Our support team will assist you with a quick resolution, such as a refund or replacement.</p>
                         <span>
                             <Facebook />
                             <Twitter /> 

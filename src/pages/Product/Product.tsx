@@ -205,7 +205,7 @@ const Product: React.FC<PropsType> = (props) => {
                   {(openDetails !== 2 || !isOpen) && <Plus /> }
                   {openDetails === 2 && isOpen && <Minus /> }
                 </summary>
-                <p>I'm a Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.</p>
+                <p>If you're not satisfied with your purchase, contact our customer support for a quick return or exchange. We make the process easy to ensure your satisfaction.</p>
             </details>
             <details className='details-tag' open={openDetails === 3 && isOpen} 
             onClick={(e: React.MouseEvent<HTMLDetailsElement>) => toggleDetails(e, 3)}>
@@ -214,7 +214,7 @@ const Product: React.FC<PropsType> = (props) => {
                   {(openDetails !== 3 || !isOpen) && <Plus /> }
                   {openDetails === 3 && isOpen && <Minus /> }
                 </summary>
-                <p>I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.</p>
+                <p>We offer reliable and timely shipping options with transparent pricing. Rest assured, your order will be carefully packaged and delivered to you efficiently.</p>
             </details>
           </div>
         </div>

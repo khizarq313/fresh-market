@@ -30,6 +30,7 @@ const Shop: React.FC<PropsType> = (props) => {
   const [pageHeading, setPageHeading] = useState<string>("All Products");
   const [currentPage, setCurrentPage] = useState<string>("shop");
   const [rangeValue, setRangeValue] = useState<string>("10");
+  const [sliderValue, setSliderValue] = useState<number>(100);
   const [showFilterPage, setShowFilterPage] = useState<boolean>(false);
   
   useEffect(() => {
@@ -53,6 +54,7 @@ const Shop: React.FC<PropsType> = (props) => {
   }, [currentShopItems, rangeValue]);
 
   const addFilter = function(filterType: string) {
+    smoothScrollToTop();
     setCurrentShopItems(`${filterType}-items`);
     switch (filterType) {
       case "all":
@@ -81,13 +83,27 @@ const Shop: React.FC<PropsType> = (props) => {
 
   const changeRange = function(e: React.ChangeEvent<HTMLInputElement>) {
     setRangeValue(e.currentTarget.value);
+    setSliderValue(Number(e.currentTarget.value)*10);
+    smoothScrollToTop();
   }
 
   const removeFilter = function() {
     setCurrentShopItems("all-items");
     setRangeValue("10");
+    setSliderValue(100);
     setShowClearBtn(false);
+    smoothScrollToTop();
   }
+
+  const smoothScrollToTop = () => {
+    let scrollInterval = setInterval(() => {
+      if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+        window.scrollBy(0, -50);
+      } else {
+        clearInterval(scrollInterval);
+      }
+    }, 10);
+  };
   
   return (
     <section className="app-container">
@@ -138,7 +154,8 @@ const Shop: React.FC<PropsType> = (props) => {
           </button>
           { showRangeBtn && 
             <span className="price-slider">
-              <input type="range" name="range-btn" id="range-btn" 
+              <input type="range" name="range-btn" id="range-btn" className="slider-range"
+                style={{'--slider-value': `${sliderValue}%` as string,} as React.CSSProperties}
                 min="1" max="10" value={rangeValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeRange(e)}/>
               <span className="price-range-container">
                 <p>100₹</p>
@@ -174,7 +191,7 @@ const Shop: React.FC<PropsType> = (props) => {
               <img src={ShopBanner} alt="banner-1" className="shop-banner"/>
           }
           <h1 className="shop-heading">{pageHeading}</h1>
-          <p className="shop-txt">This is your category description. It's a great place to tell customers what this category is about, connect with your audience and draw attention to your products.</p>
+          <p className="shop-txt">Explore our wide range of fresh and high-quality products in this category, carefully selected to meet your daily needs and ensure the best for your family.</p>
           <span className="filter-sort-btn-container">
             <button className="filter-sort-btn" onClick={() => setShowFilterPage(true)}><u>Filter & Sort</u></button>
           </span>

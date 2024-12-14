@@ -26,7 +26,6 @@ const AppRoutes: React.FC<PropsType> = (props) => {
   const { setProgress, currentPageHeading, setCurrentPageHeading, setShowCartPage } = props;
   const allProducts = useSelector((state: RootState) => state.products);
   const products: ProductType[] = allProducts.products;
-
   const location = useLocation();
   const navigate = useNavigate();
 
