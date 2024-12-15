@@ -117,13 +117,6 @@
     transition: 0.4s ease-out;
 }
 
-.product-quantity-container:hover {
-    span {
-        opacity: 1;
-        transition: 0.4s ease-out;
-    }
-}
-
 .quantity-increment-btn {
     padding: .2rem;
     padding-left: .4rem;
@@ -174,11 +167,6 @@
     svg {
         height: 3rem;
     }
-}
-
-.product-cart-btn:hover, .product-buy-btn:hover {
-  background-color: rgba(42, 96, 73, 0.6);
-  transition: 0.5s ease;
 }
 
 .product-buy-btn {

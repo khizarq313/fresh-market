@@ -55,6 +55,23 @@ button {
     opacity: 0;
 }
 
+input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border:2px solid #fff;
+    box-shadow:0 0 0 1px #000000;
+    appearance:none;
+    border-radius:50%;
+    background-color:#fff;
+    transition:all ease-in 0.2s;
+}
+
+input[type="radio"]:checked {
+    background-color: #2A6049;
+    box-shadow:0 0 0 1px #2A6049;
+}
+
 body::-webkit-scrollbar {
     width: 4px;
 }
@@ -640,19 +657,122 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-input[type="radio"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border:2px solid #fff;
-    box-shadow:0 0 0 1px #000000;
-    appearance:none;
-    border-radius:50%;
-    background-color:#fff;
-    transition:all ease-in 0.2s;
+@media (hover: hover) {
+    .footer-submit-btn:hover {
+        background-color: transparent;
+        color: #FFFFFF;
+        transition: 0.1s ease-in;
+    }
+
+    .footer-email:hover {
+        border: 1px solid #ffffff80;
+        transition: 0.1s ease-in;
+    }
+    
+    .add-to-cart-btn:hover {
+        transition: ease 0.4s;
+        opacity: 0.6;
+    }
+    
+    .view-cart-btn:hover {
+        background-color: #2A6049;
+        color: #FFFFFF;
+        border: 1px solid #2A6049;
+        transition: 0.2s ease-in;
+    }
+    
+    .cart-checkout-btn:hover {
+        background-color: #FFFFFF;
+        color: #000000;
+        border: 1px solid #000000;
+        transition: 0.2s ease-in;
+    }
+
+    .submit-btn {
+        button:hover {
+            background-color: #FFFFFF;
+            border: 1px solid #000000;
+            transition: 0.2s ease-in;
+        }
+    }
+
+    .checkout-btn {
+        button:hover {
+            opacity: 0.8;
+            transition: 0.2s ease-in;
+        }
+    }
+    
+    .welcome-shop-btn:hover {
+        background-color: #FFFFFF;
+        border: 1px solid #000000;
+        transition: .4s ease;
+    }
+
+    .product-quantity-container:hover {
+        span {
+            opacity: 1;
+            transition: 0.4s ease-out;
+        }
+    }
+    
+    .product-cart-btn:hover, .product-buy-btn:hover {
+      background-color: rgba(42, 96, 73, 0.6);
+      transition: 0.5s ease;
+    }    
 }
 
-input[type="radio"]:checked {
-    background-color: #2A6049;
-    box-shadow:0 0 0 1px #2A6049;
+@media (max-width: 1000px) {
+    .footer-submit-btn:hover {
+        color: #000;
+        background-color: #fff;
+    }
+
+    .footer-email:hover {
+        border: 1px solid #FFFFFF;
+    }
+
+    .add-to-cart-btn:hover {
+        opacity: 1;
+    }
+
+    .view-cart-btn:hover {
+        background-color: #FFFFFF;
+        color: #000000;
+        border: 1px solid #000000;
+    }
+
+    .cart-checkout-btn:hover {
+        background-color: #2A6049;
+        color: #FFFFFF;
+        border: 1px solid #2A6049;
+    }
+    
+    .submit-btn {
+        button:hover {
+            background-color: #6aac56;
+            border: 1px solid #6aac56;
+        }
+    }
+
+    .checkout-btn {    
+        button {
+            opacity: 1;
+        }
+    }
+
+    .welcome-shop-btn {
+        background-color: #6aac56;
+        border: 1px solid #6aac56;
+    }
+
+    .product-quantity-container:hover {
+        span {
+            opacity: 1;
+        }
+    }
+
+    .product-cart-btn:hover, .product-buy-btn:hover {
+        background-color: #2A6049;
+    }
 }
