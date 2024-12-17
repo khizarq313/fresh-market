@@ -93,6 +93,7 @@
     display: flex;
     justify-content: space-between;
     padding: 2rem 0;
+    column-gap: 2rem;
     width: 100%;
     border-bottom: 1px solid #000000;
 
@@ -170,19 +171,20 @@
 
 .product-info {
     display: flex;
+    flex-basis: 55%;
 }
 
 .product-control-btns {
     display: flex;
     justify-content: space-between;
-    width: 50%;
+    flex-basis: 45%;
 }
 
 .no-margin {
     margin: 0 !important;
 }
 
-.additional-details {
+.additional-checkout-details {
     margin-top: 2rem;
     cursor: pointer;
 

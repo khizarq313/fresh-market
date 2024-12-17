@@ -165,7 +165,7 @@ const DetailedCart: React.FC<PropsType> = (props) => {
                   )
                 })}
               </div>
-              <div className='additional-details'>
+              <div className='additional-checkout-details'>
                 <span onClick={() => setPromoCode(!promoCode)}>
                   <Tag /> 
                   <p>Enter a promo code</p>

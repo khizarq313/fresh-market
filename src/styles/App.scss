@@ -2,12 +2,12 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Helvetica;
+    font-family: "Inter", sans-serif;
 }
 
 html {
     font-size: 62.5%;
-    font-family: Helvetica;
+    font-family: "Inter", sans-serif;
 }
 
 body {
@@ -106,12 +106,19 @@ body::-webkit-scrollbar-thumb {
         column-gap: 6rem;
     }
 
-    .additional-links div {
-        margin: 3rem;
+    .additional-links div, .footer-form {
+        margin: 2.5rem;
     }
 
     .faq-nav-btns {
         padding-left: 5rem;
+    }
+
+
+    .additional-checkout-details {
+        textarea {
+            width: 33rem;
+        }
     }
     
 }
@@ -177,6 +184,11 @@ body::-webkit-scrollbar-thumb {
 
     .shop {
         padding: 0;
+        padding-bottom: 3rem;
+    }
+
+    .shop-search-heading, .no-results {
+        margin-top: 3rem;
     }
 
     .shop-heading, .shop-txt, .filter-sort-btn-container {
@@ -404,9 +416,13 @@ body::-webkit-scrollbar-thumb {
         position: static;
     }
 
-    .additional-details {
+    .additional-checkout-details {
         textarea {
             margin-bottom: 2rem;
+        }
+
+        textarea, .promo-code {
+            width: 30rem;
         }
     }
 
@@ -471,6 +487,10 @@ body::-webkit-scrollbar-thumb {
         padding: 2.5rem 0;
         font-size: 1.6rem;
     }
+
+    .subscribe-txt {
+        text-align: start !important;
+    }
 }
 
 
@@ -523,6 +543,18 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
+@media (max-width: 600px) {
+    .additional-checkout-details {
+        textarea, .promo-code {
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+        }
+    }    
+}
+
 @media (max-width: 550px) {
     .welcome-txt {
         position: static;
@@ -551,10 +583,22 @@ body::-webkit-scrollbar-thumb {
         max-width: 23rem;
     }
 
-    .product-info, .product-additional-details {
+    .product-additional-details {
         width: 100%;
     }
 
+    .detailed-cart-item {
+        column-gap: 0;
+    }
+
+    .product-info {
+        flex-basis: 95%;
+    }
+    
+    .product-control-btns {
+        flex-basis: 5%;
+    }
+    
     .product-control-btns {
         width: auto;
     }
@@ -717,8 +761,8 @@ body::-webkit-scrollbar-thumb {
     }
     
     .product-cart-btn:hover, .product-buy-btn:hover {
-      background-color: rgba(42, 96, 73, 0.6);
-      transition: 0.5s ease;
+        background-color: rgba(42, 96, 73, 0.6);
+        transition: 0.5s ease;
     }    
 }
 

@@ -89,6 +89,7 @@ const Shop: React.FC<PropsType> = (props) => {
 
   const removeFilter = function() {
     setCurrentShopItems("all-items");
+    setPageHeading("All Products");
     setRangeValue("10");
     setSliderValue(100);
     setShowClearBtn(false);

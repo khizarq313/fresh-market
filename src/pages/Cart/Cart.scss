@@ -102,7 +102,7 @@
 
     h1, h2 {
         font-size: 1.6rem;
-        font-weight: 300;
+        font-weight: 400;
     }
 }
 
@@ -221,13 +221,14 @@
     input {
         outline: none;
         border: none;
-        margin: 0 1rem;
+        width: 3.5rem;
         text-align: center;
     }
 
     button {
         background-color: transparent;
         border: none;
+        line-height: 0;
     }
 }
 
