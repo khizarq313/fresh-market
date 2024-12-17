@@ -103,8 +103,12 @@ const Product: React.FC<PropsType> = (props) => {
 
   const openThePage = function(pageName: string) {
     if(pageName !== currentPageHeading) {
+      if(pageName === "/home") {
+        setCurrentPageHeading("/");
+      } else {
+        setCurrentPageHeading(pageName);
+      }
       navigate(pageName);
-      setCurrentPageHeading(pageName);
     }
   }
 

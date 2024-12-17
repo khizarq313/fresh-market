@@ -147,7 +147,7 @@ const Header: React.FC<PropsType> = (props) => {
             value={searchInput} 
             placeholder="Search..." 
             onFocus={() => setShowTrendingProducts(true)}
-            onBlur={() => searchTheProduct("onBlur")}
+            // onBlur={() => searchTheProduct("onBlur")}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => suggestSimilarProducts(e.target.value)}
             onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => checkTheKey(e)}/>
           {
